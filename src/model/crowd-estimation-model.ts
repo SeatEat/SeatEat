@@ -1,3 +1,6 @@
+/** A period should only be 1, 2, 3 or 4 */
+type period = 1 | 2 | 3 | 4;
+
 class Lecture {
     constructor(
         /** When the lecture starts */
@@ -24,23 +27,34 @@ class CourseSchedule {
     ){}
 }
 
-class Period {
+class ProgramCohort {
     constructor(
         /** E.g CMETE */
         public code: string,
 
-        /** E.g 2017  */
-        public beginYear: number,
-
-        /** E.g what period this is */
-        public period: 1 | 2 | 3 | 4,
+        /** E.g vt17 */
+        public yearCode: string,
 
         /** All the courses for a given period */
         public courses: Array<CourseSchedule>
     ){}
 }
 
-export default class CrowdEstimation {
-    
+class CrowdEstimationData {
+    constructor(
+        private programCohorts: Array<ProgramCohort>,
+        private periodOfEstimation: period,
+    ){}
 }
 
+
+export default class CrowdEstimationModel {
+
+    /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
+    public async estimateChapterCrowdedness(): Promise<CrowdEstimationData> {
+
+        // This is just a tmp code to prevent error
+        const r = await fetch('');
+        return new CrowdEstimationData([], 1);
+    }
+}
