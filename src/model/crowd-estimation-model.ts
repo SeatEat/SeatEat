@@ -9,7 +9,7 @@ class Lecture {
         /** When the lectures ends */
         public end: Date,
 
-        /** If the lectures is an lab */
+        /** If the lectures is a lab */
         public isLab: boolean
     ){}
 }
@@ -45,6 +45,30 @@ class CrowdEstimationData {
         private programCohorts: Array<ProgramCohort>,
         private periodOfEstimation: period,
     ){}
+
+    /**
+     * Get how crowded it is right now
+     */
+    public getCurrentCrowdedness() {
+
+    }
+
+    /** 
+     * Get how crowded it is for every hour starting
+     * from dateStart
+     * */
+    public getCrowdednessHourly(dateStart: Date) {
+
+    }
+
+    /** 
+     * Get how crowded it is every day at a specific
+     * time starting from dateStart.
+     * @param hourToCheck Must be between 0 and 24
+     */
+    public getCrowdednessDaily(dateStart: Date, hourToCheck: number) {
+
+    }
 }
 
 
