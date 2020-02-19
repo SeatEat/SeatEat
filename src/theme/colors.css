@@ -1,0 +1,12 @@
+:root {
+    --theme-primary-color: #fbdc4c;
+    --theme-accent-color: #1b2e63;
+    --theme-color-light: #fef3ca;
+    --theme-secondary-color:  #90cdb1;
+    --theme-pop-color-dark: #db001e;
+    --theme-pop-color-light: #fb98ae;
+
+   /* Add these?? */
+    --theme-text-bright: #ffffff; 
+    --theme-text-dark: #000000;
+}
