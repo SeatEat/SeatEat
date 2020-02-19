@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
 
 type MainProps = {
-    info: string, //temp, will probably be replaced with components
+    //todo
 }
 
 const MainContent: FC<MainProps> = (props) => {
+    const { nameOfChapter } = useParams();
     return (
         <div className="main-content-container">
             <div className="main-content">
-                {props.info}
+                {nameOfChapter ? nameOfChapter : "this is the main content"} 
             </div>
             <ViewNavbar/>
         </div>

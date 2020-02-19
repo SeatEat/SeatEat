@@ -3,27 +3,25 @@ import './App.css';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
 } from "react-router-dom";
 
-import Sidebar from './pages/sidebar/sidebar'
 import MainContent from './pages/main-content/main-content'
+import Navbar from './components/navbar/navbar'
 
 function App() {
     return (
         <Router>
             <div className="App flex-container">
-              <Sidebar/>
-              <Switch>
-                    <header className="App-header">
+                <Navbar/>
+                <Switch>
                         <Route exact path="/">
-                            <MainContent info="This is the main content"/>
+                            <MainContent/>
                         </Route>
                         <Route path="/chapter/:nameOfChapter">
-                            <MainContent info="This is the chapter content"/>
+                            <MainContent/>
                         </Route>
-                    </header>
-              </Switch>
+                </Switch>
             </div>
         </Router>
     );
