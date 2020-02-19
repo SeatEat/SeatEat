@@ -6,25 +6,25 @@ import {
     Route
 } from "react-router-dom";
 
+import Sidebar from './pages/sidebar/sidebar'
+import MainContent from './pages/main-content/main-content'
+
 function App() {
     return (
         <Router>
-            <Switch>
-                <div className="App">
+            <div className="App flex-container">
+              <Sidebar/>
+              <Switch>
                     <header className="App-header">
                         <Route exact path="/">
-                            <p>
-                                Here is the startpage
-                            </p>
+                            <MainContent info="This is the main content"/>
                         </Route>
                         <Route path="/chapter/:nameOfChapter">
-                            <p>
-                                Here is the chapter route!
-                            </p>
+                            <MainContent info="This is the chapter content"/>
                         </Route>
                     </header>
-                </div>
-            </Switch>
+              </Switch>
+            </div>
         </Router>
     );
 }
