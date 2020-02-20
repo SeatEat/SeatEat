@@ -9,17 +9,17 @@ import {
 
 import MainContent from './pages/main-content/main-content'
 import Navbar from './components/navbar/navbar'
-import {defaultRoute} from './routes/routes'
+
+import ChapterData from './data/chapter-data.json';
 
 function App() {
-    console.log(defaultRoute)
     return (
         <Router>
             <div className="App flex-container">
                 <Navbar/>
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={defaultRoute.path}/>;
+                        <Redirect to={"/chapter/" + ChapterData[0].name}/>;
                     </Route>
                     <Route path="/chapter/:nameOfChapter">
                         <MainContent/>
