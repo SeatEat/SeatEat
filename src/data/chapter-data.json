@@ -8,130 +8,7 @@
                 "name": "Architecture",
                 "avarageAmount": 100,
                 "code": "ARKIT"
-            }
-        ]
-    },
-    {
-        "name": "Hardox",
-        "address": "Brinellvägen 23",
-        "contact": "isb-loka@ths.kth.se",
-        "chapters": [
-            {
-                "name": "Materials Design and Engineering",
-                "avarageAmount": 100,
-                "code": "CMATD"
-            }
-        ]
-    },
-    {
-        "name": "Gråttan",
-        "address": "Osquars backe 8",
-        "contact": "gr8n@cl-sektionen.se",
-        "chapters": [
-            {
-                "name": "Engineering and Teacher Education",
-                "avarageAmount": 100,
-                "code": "CLGYM"
             },
-            {
-                "name": "Energy and Environment",
-                "avarageAmount": 100,
-                "code": "CENMI"
-            }
-        ]
-    },
-    {
-        "name": "META",
-        "address": "Osquars backe 21",
-        "contact": "lokalchef@d.kth.se",
-        "chapters": [
-            {
-                "name": "Media Technology",
-                "avarageAmount": 100,
-                "code": "CMETE"
-            },
-            {
-                "name": "Computer Science and Technology",
-                "avarageAmount": 100,
-                "code": "CDATE"
-            }
-        ]
-    },
-    {
-        "name": "T-centralen",
-        "address": "Drottning Kristinas väg 29",
-        "contact": "lokal@t.kth.se",
-        "chapters": [
-            {
-                "name": "Vehicle Engineering",
-                "avarageAmount": 100,
-                "code": "CFATE"
-            }
-        ]
-    },
-    {
-        "name": "Tolvan",
-        "address": "Osquars backe 12",
-        "contact": "kallarmastare@e.kth.se",
-        "chapters": [
-            {
-                "name": "Medical Engineering",
-                "avarageAmount": 100,
-                "code": "CMEDT"
-            },
-            {
-                "name": "Electrical Engineering",
-                "avarageAmount": 100,
-                "code": "CELTE"
-            }
-        ]
-    },
-    {
-        "name": "Konsulatet",
-        "address": "Brinellvägen 89",
-        "contact": "gk@f.kth.se",
-        "chapters": [
-            {
-                "name": "Engineering Physics",
-                "avarageAmount": 100,
-                "code": "CTFYS"
-            }
-        ]
-    },
-    {
-        "name": "I-stället",
-        "address": "Brinellvägen 22",
-        "contact": "logistik@iare.nu",
-        "chapters": [
-            {
-                "name": "Industrial Engineering and Management",
-                "avarageAmount": 100,
-                "code": "CINEK"
-            }
-        ]
-    },
-    {
-        "name": "Kistan",
-        "address": "Kistagången 16",
-        "contact": "studiesocialt@insektionen.se",
-        "chapters": [
-            {
-                "name": "Information and Communication Technology",
-                "avarageAmount": 100,
-                "code": "CINTE"
-            },
-            {
-                "name": "Information and Communication Technology",
-                "avarageAmount": 100,
-                "code": "CINTE"
-            }
-        ]
-    },
-    {
-        "name": "Byggeriet",
-        "address": "Teknikringen 22A",
-        "contact": "isb-loka@ths.kth.se",
-        "chapters": [
             {
                 "name": "Byggteknik och design",
                 "avarageAmount": 100,
@@ -167,6 +44,93 @@
         ]
     },
     {
+        "name": "Gråttan",
+        "address": "Osquars backe 8",
+        "contact": "gr8n@cl-sektionen.se",
+        "chapters": [
+            {
+                "name": "Engineering and Teacher Education",
+                "avarageAmount": 100,
+                "code": "CLGYM"
+            },
+            {
+                "name": "Energy and Environment",
+                "avarageAmount": 100,
+                "code": "CENMI"
+            }
+        ]
+    },
+    {
+        "name": "Hardox",
+        "address": "Brinellvägen 23",
+        "contact": "isb-loka@ths.kth.se",
+        "chapters": [
+            {
+                "name": "Materials Design and Engineering",
+                "avarageAmount": 100,
+                "code": "CMATD"
+            }
+        ]
+    },
+    {
+        "name": "I-stället",
+        "address": "Brinellvägen 22",
+        "contact": "logistik@iare.nu",
+        "chapters": [
+            {
+                "name": "Industrial Engineering and Management",
+                "avarageAmount": 100,
+                "code": "CINEK"
+            }
+        ]
+    },
+    {
+        "name": "Kistan",
+        "address": "Kistagången 16",
+        "contact": "studiesocialt@insektionen.se",
+        "chapters": [
+            {
+                "name": "Information and Communication Technology",
+                "avarageAmount": 100,
+                "code": "CINTE"
+            },
+            {
+                "name": "Information and Communication Technology",
+                "avarageAmount": 100,
+                "code": "CINTE"
+            }
+        ]
+    },
+    {
+        "name": "Konsulatet",
+        "address": "Brinellvägen 89",
+        "contact": "gk@f.kth.se",
+        "chapters": [
+            {
+                "name": "Engineering Physics",
+                "avarageAmount": 100,
+                "code": "CTFYS"
+            }
+        ]
+    },
+    {
+        "name": "META",
+        "address": "Osquars backe 21",
+        "contact": "lokalchef@d.kth.se",
+        "chapters": [
+            {
+                "name": "Media Technology",
+                "avarageAmount": 100,
+                "code": "CMETE"
+            },
+            {
+                "name": "Computer Science and Technology",
+                "avarageAmount": 100,
+                "code": "CDATE"
+            }
+        ]
+    },
+    {
         "name": "Smörjkammaren",
         "address": "Brinellvägen 28",
         "contact": "sko@m.kth.se",
@@ -180,6 +144,35 @@
                 "name": "Maskinteknik",
                 "avarageAmount": 100,
                 "code": "CMAST"
+            }
+        ]
+    },
+    {
+        "name": "T-centralen",
+        "address": "Drottning Kristinas väg 29",
+        "contact": "lokal@t.kth.se",
+        "chapters": [
+            {
+                "name": "Vehicle Engineering",
+                "avarageAmount": 100,
+                "code": "CFATE"
+            }
+        ]
+    },
+    {
+        "name": "Tolvan",
+        "address": "Osquars backe 12",
+        "contact": "kallarmastare@e.kth.se",
+        "chapters": [
+            {
+                "name": "Medical Engineering",
+                "avarageAmount": 100,
+                "code": "CMEDT"
+            },
+            {
+                "name": "Electrical Engineering",
+                "avarageAmount": 100,
+                "code": "CELTE"
             }
         ]
     }
