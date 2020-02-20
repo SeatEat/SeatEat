@@ -1,0 +1,4 @@
+.view-navbar {
+    flex: 1;
+    background-color: var(--theme-secondary-color);
+}
