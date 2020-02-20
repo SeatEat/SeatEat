@@ -13,4 +13,6 @@ const Routes = [
     new Route('/chapter/test', "test"),
 ];
 
+export const defaultRoute = Routes[0];
+
 export default Routes;
