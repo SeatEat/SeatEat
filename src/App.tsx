@@ -15,12 +15,12 @@ function App() {
             <div className="App flex-container">
                 <Navbar/>
                 <Switch>
-                        <Route exact path="/">
-                            <MainContent/>
-                        </Route>
-                        <Route path="/chapter/:nameOfChapter">
-                            <MainContent/>
-                        </Route>
+                    <Route exact path="/">
+                        <MainContent/>
+                    </Route>
+                    <Route path="/chapter/:nameOfChapter">
+                        <MainContent/>
+                    </Route>
                 </Switch>
             </div>
         </Router>
