@@ -3,28 +3,29 @@ import './App.css';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 
+import MainContent from './pages/main-content/main-content'
+import Navbar from './components/navbar/navbar'
+import {defaultRoute} from './routes/routes'
+
 function App() {
+    console.log(defaultRoute)
     return (
         <Router>
-            <Switch>
-                <div className="App">
-                    <header className="App-header">
-                        <Route exact path="/">
-                            <p>
-                                Here is the startpage
-                            </p>
-                        </Route>
-                        <Route path="/chapter/:nameOfChapter">
-                            <p>
-                                Here is the chapter route!
-                            </p>
-                        </Route>
-                    </header>
-                </div>
-            </Switch>
+            <div className="App flex-container">
+                <Navbar/>
+                <Switch>
+                    <Route exact path="/">
+                        <Redirect to={defaultRoute.path}/>;
+                    </Route>
+                    <Route path="/chapter/:nameOfChapter">
+                        <MainContent/>
+                    </Route>
+                </Switch>
+            </div>
         </Router>
     );
 }
