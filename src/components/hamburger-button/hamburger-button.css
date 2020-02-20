@@ -9,16 +9,16 @@
     position: absolute;
     height: 6px;
     width: 100%;
-    background-color: var(--theme-primary-color);
+    background-color: var(--theme-color-yellow);
     border-radius: 10px;
     transition: all 0.7s ease;
     opacity: 1;
-    box-shadow: -2px 2px 0px 0px var(--theme-accent-color);
+    box-shadow: -2px 2px 0px 0px var(--theme-color-blue-dark);
 }
 
 .hamburger-button.active div {
     box-shadow: none;
-    background-color: var(--theme-accent-color);
+    background-color: var(--theme-color-yellow-light);
 }
 
 .hamburger-button div:nth-child(1) {
