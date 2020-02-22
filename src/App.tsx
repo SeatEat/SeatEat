@@ -4,8 +4,6 @@ import './App.css';
 import CrowdEstimationModel from './model/crowd-estimation-model'
 
 function App() {
-    const hej = new CrowdEstimationModel;
-    hej.estimateChapterCrowdedness();
   return (
     <div className="App">
       <header className="App-header">

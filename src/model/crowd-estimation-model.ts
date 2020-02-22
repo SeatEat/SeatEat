@@ -1,5 +1,5 @@
 /** A period should only be 1, 2, 3 or 4 */
-type period = 1 | 2 | 3 | 4;
+type period = 1 | 2 | 3 | 4;
 const corsEndpoint = "https://cors-anywhere.herokuapp.com/";
 
 class Lecture {
@@ -12,7 +12,7 @@ class Lecture {
 
         /** If the lectures is a lab */
         public isLab: boolean
-    ){}
+    ) {}
 }
 
 class CourseSchedule {
@@ -24,8 +24,8 @@ class CourseSchedule {
         public name: string,
 
         /** An array of the lectures */
-        public lectures: Array<Lecture>
-    ){}
+        public lectures: Array < Lecture >
+    ) {}
 }
 
 class ProgramCohort {
@@ -37,15 +37,15 @@ class ProgramCohort {
         public yearCode: string,
 
         /** All the courses for a given period */
-        public courses: Array<CourseSchedule>
-    ){}
+        public courses: Array < CourseSchedule >
+    ) {}
 }
 
 class CrowdEstimationData {
     constructor(
-        private programCohorts: Array<ProgramCohort>,
+        private programCohorts: Array < ProgramCohort > ,
         private periodOfEstimation: period,
-    ){}
+    ) {}
 
     /**
      * Get how crowded it is right now
@@ -72,27 +72,30 @@ class CrowdEstimationData {
     }
 }
 
-
 export default class CrowdEstimationModel {
-    
+
+    programme: string;
+    yearCode: string;
+
+    public constructor(programme: string, yearCode: string) {
+        this.programme = programme;
+        this.yearCode = yearCode;
+    }
+
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
     public async estimateChapterCrowdedness(): Promise<CrowdEstimationData> {
-
-        const yearCode = "HT19"
-        const b = (await Promise.all(
-                            await fetch(corsEndpoint+'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/CMETE/'+yearCode)
-                            .then(r =>r.json())
-                            .then(r=>r.Specs[0].Electivity[0].Courses.map(async (course: any)=>
-                                new CourseSchedule(course.Code, course.Name,
-                                await fetch(corsEndpoint+'https://www.kth.se/api/schema/v2/course/'+course.Code
-                                +'?startTime='+course.ConnectedRound.periodInfos[0].startsAt
-                                +'&endTime='+course.ConnectedRound.periodInfos[0].endsAt)
-                                .then(r =>r.json())
-                                .then(r=>r.entries.map((lecture: any) =>
-                                    new Lecture(lecture.start, lecture.end, (lecture.type === 'OVR') ? true : false)))
-                                ))
-                        )));
-        console.log(b)
-        return new CrowdEstimationData([], 1);
+        return new CrowdEstimationData(await Promise.all(
+            await fetch(corsEndpoint + 'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + this.programme + '/' + this.yearCode)
+            .then(r => r.json())
+            .then(r => r.Specs.map(async (spec: any) =>
+                new ProgramCohort(spec.ProgrammeCode, this.yearCode,
+                    await Promise.all(spec.Electivity[0].Courses.map(async (course: any) =>
+                        new CourseSchedule(course.Code, course.Name,
+                            await fetch(corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + course.Code)
+                            .then(r => r.json())
+                            .then(r => r.entries.map((lecture: any) =>
+                                new Lecture(lecture.start, lecture.end, (lecture.type === 'OVR') ? true : false)
+                            ))
+                        ))))))), 1)
     }
 }
