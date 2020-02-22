@@ -1,3 +1,7 @@
+import {
+    Socket
+} from "dgram";
+
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
 
@@ -120,6 +124,10 @@ export class CourseSchedule {
 
         /** E.g Envariabelsanalys */
         public name: string,
+
+        /** If it is an elective */
+
+        public isElective: boolean,
 
         /** An array of the lectures */
         public lectures: Array < Lecture >
@@ -300,6 +308,19 @@ export default class CrowdEstimationModel {
         this.corsEndpoint = "https://cors-anywhere.herokuapp.com/"
     }
 
+    private async getCourseSchedule(code: string, name: string, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
+        return new CourseSchedule(code, name, isElective,
+            await fetch(this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + code +
+                '?startTime=' + startDate.toISOString().split('T')[0] +
+                '&endTime=' + endDate.toISOString().split('T')[0]
+            )
+            .then(r => r.json())
+            .then(r => r.entries.map((lecture: any) =>
+                new Lecture(new Date(lecture.start), new Date(lecture.end), (lecture.type === 'OVR') ? true : false)
+            ))
+        )
+    }
+
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
     public async estimateChapterCrowdedness(): Promise < CrowdEstimationData > {
 
@@ -315,18 +336,25 @@ export default class CrowdEstimationModel {
             yearCodes.map(async yearCode =>
                 await fetch(this.corsEndpoint + 'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + this.programme + '/' + yearCode)
                 .then(r => r.json())
-                .then(async r =>
-                    new ProgramCohort(r.ProgramCode, yearCode, 10,
-                        await Promise.all(r.Specs[yearCodes.indexOf(yearCode)].Electivity[0].Courses.map(async (course: any) =>
-                            new CourseSchedule(course.Code, course.Name,
-                                await fetch(this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + course.Code +
-                                    '?startTime=' + startDate.toISOString().split('T')[0] +
-                                    '&endTime=' + endDate.toISOString().split('T')[0]
-                                )
-                                .then(r => r.json())
-                                .then(r => r.entries.map((lecture: any) =>
-                                    new Lecture(new Date(lecture.start), new Date(lecture.end), (lecture.type === 'OVR') ? true : false)
-                                ))
-                            ))))))), startDate)
+                .then(async r => {
+                    var courseSchedules: Array < CourseSchedule > = []
+                    await Promise.all(r.Specs.map(async (spec: any, i: number) => {
+                        var schedules: Array < CourseSchedule > = [];
+                        var add: boolean = false;
+                        var isElective: boolean = false;
+                        if (spec.SpecCode) {
+                            add = true;
+                            isElective = true;
+                        } else if (i === yearCodes.indexOf(yearCode)) {
+                            add = true;
+                        }
+                        if (add) {
+                            schedules = await Promise.all(spec.Electivity[0].Courses.map(async (course: any) => this.getCourseSchedule(course.Code, course.Name, isElective, startDate, endDate)))
+                            courseSchedules = courseSchedules.concat(schedules)
+                        }
+
+                    }));
+                    return new ProgramCohort(r.ProgramCode, yearCode, 10, courseSchedules)
+                }))), startDate)
     }
 }
