@@ -296,15 +296,21 @@ export class CrowdEstimationData {
     }
 }
 
+interface ChapterData {
+    name: string;
+    averageAmount: number;
+    code: string;
+}
+
 export default class CrowdEstimationModel {
 
     startDateOfEstimation: Date;
-    programme: string;
+    chapterData: ChapterData;
     corsEndpoint: string;
 
-    public constructor(startDateOfEstimation: Date, programme: string, yearCode: string) {
+    public constructor(startDateOfEstimation: Date, chapterData: ChapterData, yearCode: string) {
         this.startDateOfEstimation = startDateOfEstimation;
-        this.programme = programme;
+        this.chapterData = chapterData;
         this.corsEndpoint = "https://cors-anywhere.herokuapp.com/"
     }
 
@@ -334,7 +340,7 @@ export default class CrowdEstimationModel {
 
         return new CrowdEstimationData(await Promise.all(
             yearCodes.map(async yearCode =>
-                await fetch(this.corsEndpoint + 'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + this.programme + '/' + yearCode)
+                await fetch(this.corsEndpoint + 'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + this.chapterData.code + '/' + yearCode)
                 .then(r => r.json())
                 .then(async r => {
                     var courseSchedules: Array < CourseSchedule > = []
@@ -354,7 +360,7 @@ export default class CrowdEstimationModel {
                         }
 
                     }));
-                    return new ProgramCohort(r.ProgramCode, yearCode, 10, courseSchedules)
+                    return new ProgramCohort(r.ProgramCode, yearCode, this.chapterData.averageAmount, courseSchedules)
                 }))), startDate)
     }
 }
