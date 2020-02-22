@@ -1,5 +1,6 @@
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
+const corsEndpoint = "https://cors-anywhere.herokuapp.com/";
 
 class Lecture {
     constructor(
@@ -73,12 +74,25 @@ class CrowdEstimationData {
 
 
 export default class CrowdEstimationModel {
-
+    
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
     public async estimateChapterCrowdedness(): Promise<CrowdEstimationData> {
 
-        // This is just a tmp code to prevent error
-        const r = await fetch('');
+        const yearCode = "HT19"
+        const b = (await Promise.all(
+                            await fetch(corsEndpoint+'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/CMETE/'+yearCode)
+                            .then(r =>r.json())
+                            .then(r=>r.Specs[0].Electivity[0].Courses.map(async (course: any)=>
+                                new CourseSchedule(course.Code, course.Name,
+                                await fetch(corsEndpoint+'https://www.kth.se/api/schema/v2/course/'+course.Code
+                                +'?startTime='+course.ConnectedRound.periodInfos[0].startsAt
+                                +'&endTime='+course.ConnectedRound.periodInfos[0].endsAt)
+                                .then(r =>r.json())
+                                .then(r=>r.entries.map((lecture: any) =>
+                                    new Lecture(lecture.start, lecture.end, (lecture.type === 'OVR') ? true : false)))
+                                ))
+                        )));
+        console.log(b)
         return new CrowdEstimationData([], 1);
     }
 }
