@@ -314,9 +314,25 @@ export default class CrowdEstimationModel {
         this.corsEndpoint = "https://cors-anywhere.herokuapp.com/"
     }
 
-    private async getCourseSchedule(code: string, name: string, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
-        return new CourseSchedule(code, name, isElective,
-            await fetch(this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + code +
+    private async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
+        var endpoint: string = this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + course.Code
+        if(course.ConnectedRound) {
+            var lastEndsAt: Date = new Date(course.ConnectedRound.periodInfos[0].endsAt);
+            course.ConnectedRound.periodInfos.map((periodInfo: any) =>
+                (new Date(periodInfo.endsAt) > lastEndsAt) ? lastEndsAt = new Date(periodInfo.endsAt) : false
+            )
+            if(lastEndsAt < startDate) {
+                return new CourseSchedule(course.Code, course.Name, isElective, [])
+            }
+            const roundId: string = course.ConnectedRound.Id
+            const roundYear: string = '20' + roundId.substr(roundId.length - 3, 2)
+            const courseRoundCode: string = roundId.substr(roundId.length - 1)
+            const roundTerm: string = roundId.substr(roundId.length - 4, 1) === 'V' ? 'VT' : 'HT'
+            const startTerm: string = roundYear + roundTerm
+            endpoint += '/' + startTerm + '/' + courseRoundCode
+        }
+        return new CourseSchedule(course.Code, course.Name, isElective,
+            await fetch(endpoint +
                 '?startTime=' + startDate.toISOString().split('T')[0] +
                 '&endTime=' + endDate.toISOString().split('T')[0]
             )
@@ -355,7 +371,7 @@ export default class CrowdEstimationModel {
                             add = true;
                         }
                         if (add) {
-                            schedules = await Promise.all(spec.Electivity[0].Courses.map(async (course: any) => this.getCourseSchedule(course.Code, course.Name, isElective, startDate, endDate)))
+                            schedules = await Promise.all(spec.Electivity[0].Courses.map(async (course: any) => this.getCourseSchedule(course, isElective, startDate, endDate)))
                             courseSchedules = courseSchedules.concat(schedules)
                         }
 
