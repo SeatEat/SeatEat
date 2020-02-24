@@ -6,17 +6,17 @@
         "chapters": [
             {
                 "name": "Architecture",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "ARKIT"
             },
             {
                 "name": "Byggteknik och design",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "TIBYH"
             },
             {
                 "name": "Teknik och ekonomi, inriktning Byggteknik & Design",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "TITEH_TIBY"
             }
         ]
@@ -28,17 +28,17 @@
         "chapters": [
             {
                 "name": "Bioteknik",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CBIOT"
             },
             {
                 "name": "Teknisk kemi",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CTKEM"
             },
             {
                 "name": "Kemiteknik",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "TIKED"
             }
         ]
@@ -50,12 +50,12 @@
         "chapters": [
             {
                 "name": "Engineering and Teacher Education",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CLGYM"
             },
             {
                 "name": "Energy and Environment",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CENMI"
             }
         ]
@@ -67,7 +67,7 @@
         "chapters": [
             {
                 "name": "Materials Design and Engineering",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CMATD"
             }
         ]
@@ -79,7 +79,7 @@
         "chapters": [
             {
                 "name": "Industrial Engineering and Management",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CINEK"
             }
         ]
@@ -91,12 +91,12 @@
         "chapters": [
             {
                 "name": "Information and Communication Technology",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CINTE"
             },
             {
                 "name": "Information and Communication Technology",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CINTE"
             }
         ]
@@ -108,7 +108,7 @@
         "chapters": [
             {
                 "name": "Engineering Physics",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CTFYS"
             }
         ]
@@ -120,12 +120,12 @@
         "chapters": [
             {
                 "name": "Media Technology",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CMETE"
             },
             {
                 "name": "Computer Science and Technology",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CDATE"
             }
         ]
@@ -137,12 +137,12 @@
         "chapters": [
             {
                 "name": "Design och produktframtagning",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CDEPR"
             },
             {
                 "name": "Maskinteknik",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CMAST"
             }
         ]
@@ -154,7 +154,7 @@
         "chapters": [
             {
                 "name": "Vehicle Engineering",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CFATE"
             }
         ]
@@ -166,12 +166,12 @@
         "chapters": [
             {
                 "name": "Medical Engineering",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CMEDT"
             },
             {
                 "name": "Electrical Engineering",
-                "avarageAmount": 100,
+                "averageStudentAmount": 100,
                 "code": "CELTE"
             }
         ]

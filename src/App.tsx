@@ -10,7 +10,7 @@ import {
 import MainContent from './pages/main-content/main-content'
 import Navbar from './components/navbar/navbar'
 
-import ChapterData from './data/chapter-data.json';
+import ChapterHallData from './data/chapter-data.json';
 
 function App() {
     return (
@@ -19,7 +19,7 @@ function App() {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={"/chapter/" + ChapterData[0].name}/>;
+                        <Redirect to={"/chapter/" + ChapterHallData[0].name}/>;
                     </Route>
                     <Route path="/chapter/:nameOfChapter">
                         <MainContent/>
