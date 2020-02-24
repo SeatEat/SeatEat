@@ -1,5 +1,5 @@
 import React from 'react';
-import { CrowdEstimationData, ProgramCohort, CourseSchedule, Lecture } from '../model/crowd-estimation-model';
+import CrowdEstimationModel, { CrowdEstimationData, ProgramCohort, CourseSchedule, Lecture } from '../model/crowd-estimation-model';
 import { render } from '@testing-library/react';
 
 // See following calendar:
@@ -14,6 +14,7 @@ const crowdEstimation = new CrowdEstimationData(
                 new CourseSchedule(
                     'Course A',
                     'CA',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 1, 8),
@@ -30,6 +31,7 @@ const crowdEstimation = new CrowdEstimationData(
                 new CourseSchedule(
                     'Course B',
                     'CB',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 1, 11),
@@ -46,6 +48,7 @@ const crowdEstimation = new CrowdEstimationData(
                 new CourseSchedule(
                     'Course C',
                     'CC',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 1, 13),
@@ -63,12 +66,13 @@ const crowdEstimation = new CrowdEstimationData(
         ),
         new ProgramCohort(
             'CDATE',
-            'HT17',
+            'HT18',
             180,
             [
                 new CourseSchedule(
                     'Course A',
                     'CA',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 2, 8),
@@ -85,6 +89,7 @@ const crowdEstimation = new CrowdEstimationData(
                 new CourseSchedule(
                     'Course B',
                     'CB',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 2, 11),
@@ -101,6 +106,7 @@ const crowdEstimation = new CrowdEstimationData(
                 new CourseSchedule(
                     'Course C',
                     'CC',
+                    false,
                     [
                         new Lecture(
                             new Date(2020, 3, 2, 13),
@@ -158,3 +164,25 @@ test('Estimation of amount merged correctly', () => {
         crowdEstimation.getCrowdedness(1, 10)
     );
 });
+
+test('Estimation of amount merged correctly', () => {
+    expect(
+        crowdEstimation.getCrowdedness(2, 10)
+    ).toEqual(
+        crowdEstimation.getCrowdedness(0, 10) +
+        crowdEstimation.getCrowdedness(1, 10)
+    );
+});
+
+test('API call', async () => {
+    console.log(CrowdEstimationModel.getActiveYearCodes());
+    console.log( await CrowdEstimationModel.estimateChapterCrowdedness(
+        new Date(2020, 1, 23, 0, 0),
+        [
+            {
+                averageAmount: 80,
+                code: 'CMETE',
+            },
+        ],
+    ));
+}, 20000);

@@ -4,8 +4,19 @@ import './App.css';
 import CrowdEstimationModel from './model/crowd-estimation-model'
 
 function App() {
-    const hej = new CrowdEstimationModel(new Date("2020-03-16"), {name: 'Media', code: 'CMETE', averageAmount: 100}, 'HT19');
-    console.log(hej.estimateChapterCrowdedness());
+  CrowdEstimationModel.estimateChapterCrowdedness(
+    new Date(2020, 1, 4, 0, 0),
+    [
+        {
+            averageAmount: 80,
+            code: 'CMETE',
+        },
+        {
+            averageAmount: 180,
+            code: 'CDATE',
+        }
+    ],
+  ).then(console.log);
   return (
     <div className="App">
       <header className="App-header">

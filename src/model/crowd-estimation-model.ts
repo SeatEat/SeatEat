@@ -26,17 +26,17 @@ class EstimationFactors {
         {
             hourStart: 8,
             hourEnd: 12,
-            estimationFactor: 0.2
+            estimationFactor: 0.4
         },
         {
             hourStart: 12,
             hourEnd: 13,
-            estimationFactor: 0.4
+            estimationFactor: 0.6
         },
         {
             hourStart: 13,
             hourEnd: 16,
-            estimationFactor: 0.2
+            estimationFactor: 0.3
         },
         {
             hourStart: 16,
@@ -51,10 +51,10 @@ class EstimationFactors {
     ]
 
     /** This factor is used when there is no lecture left on a day */
-    static NO_NEXT_LECTURE_FACTOR = 0.05;
+    static NO_NEXT_LECTURE_FACTOR = 0.2;
 
     /** This factor is used when no lecture have yet happened on a day */
-    static NO_LAST_LECTURE_FACTOR = 0.05;
+    static NO_LAST_LECTURE_FACTOR = 0.2;
 
     /** This factor is used when there exist non lecture on a day */
     static NO_LECTURE_FACTOR = 0;
@@ -74,12 +74,13 @@ class EstimationFactors {
         return 0;
     }
 
-    /** Get estimation factor */
+    /** Get estimation factor depending on hours between next and last lectures */
     static getEstimationByTimeInterval(
         hoursUntilNextLecture: number,
         hoursFromLastLecture: number,
     ): number {
         let hoursBetweenLectures = hoursUntilNextLecture + hoursFromLastLecture;
+        console.log(hoursBetweenLectures);
 
         switch (hoursBetweenLectures) {
             case 1:
@@ -323,15 +324,36 @@ export default class CrowdEstimationModel {
         return yearCodes;
     }
 
-    private static async getCourseSchedule(code: string, name: string, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
+    private static async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
         
-        // Get the course schedule
-        const courseSchedule = await fetch(
-            CrowdEstimationModel.corsEndpoint + 
-            'https://www.kth.se/api/schema/v2/course/' + code +
+        // Add inital ednpoint
+        var endpoint: string = this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + course.Code
+
+        // Limit API call to start term and course round code 
+        if(course.ConnectedRound) {
+            var lastEndsAt: Date = new Date(course.ConnectedRound.periodInfos[0].endsAt);
+            course.ConnectedRound.periodInfos.map((periodInfo: any) =>
+                (new Date(periodInfo.endsAt) > lastEndsAt) ? lastEndsAt = new Date(periodInfo.endsAt) : false
+            )
+            if(lastEndsAt < startDate) {
+                return new CourseSchedule(course.Code, course.Name, isElective, [])
+            }
+            const roundId: string = course.ConnectedRound.Id
+            const roundYear: string = '20' + roundId.substr(roundId.length - 3, 2)
+            const courseRoundCode: string = roundId.substr(roundId.length - 1)
+            const roundTerm: string = roundId.substr(roundId.length - 4, 1) === 'V' ? 'VT' : 'HT'
+            const startTerm: string = roundYear + roundTerm
+            endpoint += '/' + startTerm + '/' + courseRoundCode
+        }
+
+        // Add start and endtime getting courses
+        endpoint +=
             '?startTime=' + startDate.toISOString().split('T')[0] +
             '&endTime=' + endDate.toISOString().split('T')[0]
-        ).then(r => r.json());
+            
+
+        // Get the course schedule
+        const courseSchedule = await fetch(endpoint).then(r => r.json());
 
         // Map the response to Lecture objects
         const lectures: Lecture[] = courseSchedule.entries.map((lecture: any) => {
@@ -343,8 +365,8 @@ export default class CrowdEstimationModel {
         });
 
         return new CourseSchedule(
-            code, 
-            name, 
+            course.code, 
+            course.Name, 
             isElective,
             lectures
         );
@@ -379,8 +401,7 @@ export default class CrowdEstimationModel {
                     for (const course of spec.Electivity[0].Courses) {
 
                         courseSchedules.push(await this.getCourseSchedule(
-                            course.Code, 
-                            course.Name, 
+                            course,
                             spec.SpecCode !== undefined ? true : false, 
                             startDate, 
                             endDate)
