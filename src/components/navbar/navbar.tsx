@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './navbar.css';
 import { NavLink } from 'react-router-dom';
 import ChapterData from '../../data/chapter-data.json';
-import seatEatLogo from '../../assets/logo/seateat_logo.png'
+import seatEatLogo from '../../assets/logo/seateat_transparent.png'
 
 import HamburgerButton from '../hamburger-button/hamburger-button';
 
