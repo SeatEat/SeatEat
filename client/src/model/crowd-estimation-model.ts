@@ -80,7 +80,6 @@ class EstimationFactors {
         hoursFromLastLecture: number,
     ): number {
         let hoursBetweenLectures = hoursUntilNextLecture + hoursFromLastLecture;
-        console.log(hoursBetweenLectures);
 
         switch (hoursBetweenLectures) {
             case 1:
@@ -300,8 +299,6 @@ interface ChapterData {
 
 export default class CrowdEstimationModel {
 
-    private static corsEndpoint: string = "https://cors-anywhere.herokuapp.com/";
-
     /** Get active year codes from current date */
     public static getActiveYearCodes(): string[] {
         let yearCodes = [];
@@ -327,7 +324,7 @@ export default class CrowdEstimationModel {
     private static async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
         
         // Add inital ednpoint
-        var endpoint: string = this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + course.Code
+        var endpoint: string = '/kth/schema/course/' + course.Code
 
         // Limit API call to start term and course round code 
         if(course.ConnectedRound) {
@@ -388,8 +385,7 @@ export default class CrowdEstimationModel {
                 let courseSchedules: CourseSchedule[] = [];
 
                 const programCohortResponse = await fetch(
-                    CrowdEstimationModel.corsEndpoint + 
-                    'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + 
+                    '/kth/kopps/programme/academic-year-plan/' + 
                     chapter.code + '/' + yearCode).then(r => r.json());
 
                 await programCohortResponse.Specs.forEach(async (spec: any, i: number) => {

@@ -173,16 +173,3 @@ test('Estimation of amount merged correctly', () => {
         crowdEstimation.getCrowdedness(1, 10)
     );
 });
-
-test('API call', async () => {
-    console.log(CrowdEstimationModel.getActiveYearCodes());
-    console.log( await CrowdEstimationModel.estimateChapterCrowdedness(
-        new Date(2020, 1, 23, 0, 0),
-        [
-            {
-                averageAmount: 80,
-                code: 'CMETE',
-            },
-        ],
-    ));
-}, 20000);
