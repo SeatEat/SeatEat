@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './navbar.css';
-import Routes from '../../routes/routes';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import ChapterData from '../../data/chapter-data.json';
 import seatEatLogo from '../../assets/logo/seateat_logo.png'
 
 import HamburgerButton from '../hamburger-button/hamburger-button';
@@ -23,15 +23,15 @@ const Navbar = () => {
             </div>
             <div className={`navbar-content navbar-padding ${mobileMenuOpen ? 'active' : ''}`}>
                 {
-                    Routes.map((route) => {
+                    ChapterData.map((chapter) => {
                         return <NavLink 
                             exact
                             className="navbar-link"
                             activeClassName="navbar-link active"
                             onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}
-                            to={route.path} 
-                            key={route.path}>
-                            {route.name}
+                            to={'/chapter/' + chapter.name} 
+                            key={chapter.name}>
+                            {chapter.name}
                         </NavLink>
                     })
                 }
