@@ -1,7 +1,3 @@
-import {
-    Socket
-} from "dgram";
-
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
 
@@ -9,11 +5,11 @@ interface EstimationTimeFactor {
     /** When the estimation starts */
     hourStart: number,
 
-        /** When the estimation ends */
-        hourEnd: number,
+    /** When the estimation ends */
+    hourEnd: number,
 
-        /** 0 = Not likely, 1 = Very likely */
-        estimationFactor: number,
+    /** 0 = Not likely, 1 = Very likely */
+    estimationFactor: number,
 }
 
 class EstimationFactors {
@@ -297,70 +293,113 @@ export class CrowdEstimationData {
 }
 
 interface ChapterData {
-    name: string;
     averageAmount: number;
     code: string;
 }
 
 export default class CrowdEstimationModel {
 
-    startDateOfEstimation: Date;
-    chapterData: ChapterData;
-    corsEndpoint: string;
+    private static corsEndpoint: string = "https://cors-anywhere.herokuapp.com/";
 
-    public constructor(startDateOfEstimation: Date, chapterData: ChapterData, yearCode: string) {
-        this.startDateOfEstimation = startDateOfEstimation;
-        this.chapterData = chapterData;
-        this.corsEndpoint = "https://cors-anywhere.herokuapp.com/"
+    /** Get active year codes from current date */
+    public static getActiveYearCodes(): string[] {
+        let yearCodes = [];
+        
+        const schoolStartMonth = 7;
+        const yearToCheck = 3;
+        const currentDate = new Date();
+        
+        // A new year of student begins at schoolStartMonth
+        // Need to take that into account by having a yearOffset
+        let yearOffset = 1;
+        if (currentDate.getMonth() >= schoolStartMonth) {
+            yearOffset = 0;
+        }
+
+        for (let i = 0; i < yearToCheck; i++) {
+            var year = (currentDate.getFullYear() - i - yearOffset).toString().substring(2, 4);
+            yearCodes.push('HT' + year);
+        }
+        return yearCodes;
     }
 
-    private async getCourseSchedule(code: string, name: string, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
-        return new CourseSchedule(code, name, isElective,
-            await fetch(this.corsEndpoint + 'https://www.kth.se/api/schema/v2/course/' + code +
-                '?startTime=' + startDate.toISOString().split('T')[0] +
-                '&endTime=' + endDate.toISOString().split('T')[0]
-            )
-            .then(r => r.json())
-            .then(r => r.entries.map((lecture: any) =>
-                new Lecture(new Date(lecture.start), new Date(lecture.end), (lecture.type === 'OVR') ? true : false)
-            ))
-        )
+    private static async getCourseSchedule(code: string, name: string, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
+        
+        // Get the course schedule
+        const courseSchedule = await fetch(
+            CrowdEstimationModel.corsEndpoint + 
+            'https://www.kth.se/api/schema/v2/course/' + code +
+            '?startTime=' + startDate.toISOString().split('T')[0] +
+            '&endTime=' + endDate.toISOString().split('T')[0]
+        ).then(r => r.json());
+
+        // Map the response to Lecture objects
+        const lectures: Lecture[] = courseSchedule.entries.map((lecture: any) => {
+            return new Lecture(
+                new Date(lecture.start),
+                new Date(lecture.end),
+                (lecture.type === 'OVR') ? true : false
+            );
+        });
+
+        return new CourseSchedule(
+            code, 
+            name, 
+            isElective,
+            lectures
+        );
     }
 
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
-    public async estimateChapterCrowdedness(): Promise < CrowdEstimationData > {
+    public static async estimateChapterCrowdedness(startDateOfEstimation: Date, chapterData: ChapterData[]): Promise < CrowdEstimationData > {
 
-        //Should this be something global for the whole model?
-        const yearCodes = ["HT19", "HT18", "HT17"]
+        const yearCodes = CrowdEstimationModel.getActiveYearCodes();
 
         //Ugly code, want to do this better
-        const startDate = new Date(this.startDateOfEstimation)
+        const startDate = new Date(startDateOfEstimation)
         var endDate = new Date(startDate)
         endDate.setDate(endDate.getDate() + 7);
 
-        return new CrowdEstimationData(await Promise.all(
-            yearCodes.map(async yearCode =>
-                await fetch(this.corsEndpoint + 'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + this.chapterData.code + '/' + yearCode)
-                .then(r => r.json())
-                .then(async r => {
-                    var courseSchedules: Array < CourseSchedule > = []
-                    await Promise.all(r.Specs.map(async (spec: any, i: number) => {
-                        var schedules: Array < CourseSchedule > = [];
-                        var add: boolean = false;
-                        var isElective: boolean = false;
-                        if (spec.SpecCode) {
-                            add = true;
-                            isElective = true;
-                        } else if (i === yearCodes.indexOf(yearCode)) {
-                            add = true;
-                        }
-                        if (add) {
-                            schedules = await Promise.all(spec.Electivity[0].Courses.map(async (course: any) => this.getCourseSchedule(course.Code, course.Name, isElective, startDate, endDate)))
-                            courseSchedules = courseSchedules.concat(schedules)
-                        }
+        let programCohorts: ProgramCohort[] = [];
+        for (const chapter of chapterData) {
+            for (const yearCode of yearCodes) {
+                let courseSchedules: CourseSchedule[] = [];
 
-                    }));
-                    return new ProgramCohort(r.ProgramCode, yearCode, this.chapterData.averageAmount, courseSchedules)
-                }))), startDate)
+                const programCohortResponse = await fetch(
+                    CrowdEstimationModel.corsEndpoint + 
+                    'https://api.kth.se/api/kopps/v2/programme/academic-year-plan/' + 
+                    chapter.code + '/' + yearCode).then(r => r.json());
+
+                await programCohortResponse.Specs.forEach(async (spec: any, i: number) => {
+
+                    if (!spec.SpecCode && i !== yearCodes.indexOf(yearCode) ) {
+                        return;
+                    }
+
+                    for (const course of spec.Electivity[0].Courses) {
+
+                        courseSchedules.push(await this.getCourseSchedule(
+                            course.Code, 
+                            course.Name, 
+                            spec.SpecCode !== undefined ? true : false, 
+                            startDate, 
+                            endDate)
+                        );
+                    }
+                });
+
+                programCohorts.push(new ProgramCohort(
+                    programCohortResponse.ProgramCode, 
+                    yearCode, 
+                    chapter.averageAmount, 
+                    courseSchedules
+                ));
+            }
+        }
+
+        return new CrowdEstimationData(
+            programCohorts,
+            startDateOfEstimation
+        );
     }
 }
