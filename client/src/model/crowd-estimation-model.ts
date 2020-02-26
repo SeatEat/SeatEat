@@ -173,7 +173,9 @@ export class ProgramCohort {
                 lectureListDay[dayNumber] = [];
                 dayDate = this.getDateAfterNumDays(dateStart, dayNumber);
             }
-            lectureListDay[dayNumber].push(lecture);
+            if (lectureListDay[dayNumber] !== undefined) {
+                lectureListDay[dayNumber].push(lecture);
+            }
         });
         lectureListDay.shift();
         return lectureListDay;
@@ -283,7 +285,7 @@ export class CrowdEstimationData {
 
     }
 
-    /** 
+    /**
      * Get how crowded it is for every hour starting
      * from dateStart
      * */
@@ -302,11 +304,11 @@ export default class CrowdEstimationModel {
     /** Get active year codes from current date */
     public static getActiveYearCodes(): string[] {
         let yearCodes = [];
-        
+
         const schoolStartMonth = 7;
         const yearToCheck = 3;
         const currentDate = new Date();
-        
+
         // A new year of student begins at schoolStartMonth
         // Need to take that into account by having a yearOffset
         let yearOffset = 1;
@@ -322,11 +324,11 @@ export default class CrowdEstimationModel {
     }
 
     private static async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
-        
+
         // Add inital ednpoint
         var endpoint: string = '/kth/schema/course/' + course.Code
 
-        // Limit API call to start term and course round code 
+        // Limit API call to start term and course round code
         if(course.ConnectedRound) {
             var lastEndsAt: Date = new Date(course.ConnectedRound.periodInfos[0].endsAt);
             course.ConnectedRound.periodInfos.map((periodInfo: any) =>
@@ -347,7 +349,7 @@ export default class CrowdEstimationModel {
         endpoint +=
             '?startTime=' + startDate.toISOString().split('T')[0] +
             '&endTime=' + endDate.toISOString().split('T')[0]
-            
+
 
         // Get the course schedule
         const courseSchedule = await fetch(endpoint).then(r => r.json());
@@ -362,15 +364,19 @@ export default class CrowdEstimationModel {
         });
 
         return new CourseSchedule(
-            course.code, 
-            course.Name, 
+            course.code,
+            course.Name,
             isElective,
             lectures
         );
     }
 
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
-    public static async estimateChapterCrowdedness(startDateOfEstimation: Date, chapterData: ChapterData[]): Promise < CrowdEstimationData > {
+    public static async estimateChapterCrowdedness(
+        startDateOfEstimation: Date,
+        chapterData: ChapterData[],
+        onProgress: (arg0: number) => void,
+        ): Promise < CrowdEstimationData > {
 
         const yearCodes = CrowdEstimationModel.getActiveYearCodes();
 
@@ -382,33 +388,39 @@ export default class CrowdEstimationModel {
         let programCohorts: ProgramCohort[] = [];
         for (const chapter of chapterData) {
             for (const yearCode of yearCodes) {
+
+                onProgress(
+                    chapterData.indexOf(chapter) / chapterData.length +
+                    yearCodes.indexOf(yearCode) / (yearCodes.length) / chapterData.length
+                );
+
                 let courseSchedules: CourseSchedule[] = [];
 
                 const programCohortResponse = await fetch(
-                    '/kth/kopps/programme/academic-year-plan/' + 
+                    '/kth/kopps/programme/academic-year-plan/' +
                     chapter.code + '/' + yearCode).then(r => r.json());
 
                 await programCohortResponse.Specs.forEach(async (spec: any, i: number) => {
+                    const courses: any[] = spec.Electivity[0].Courses;
 
                     if (!spec.SpecCode && i !== yearCodes.indexOf(yearCode) ) {
                         return;
                     }
 
-                    for (const course of spec.Electivity[0].Courses) {
-
+                    for (const course of courses) {
                         courseSchedules.push(await this.getCourseSchedule(
                             course,
-                            spec.SpecCode !== undefined ? true : false, 
-                            startDate, 
+                            spec.SpecCode !== undefined ? true : false,
+                            startDate,
                             endDate)
                         );
                     }
                 });
-
+                
                 programCohorts.push(new ProgramCohort(
-                    programCohortResponse.ProgramCode, 
-                    yearCode, 
-                    chapter.averageAmount, 
+                    programCohortResponse.ProgramCode,
+                    yearCode,
+                    chapter.averageAmount,
                     courseSchedules
                 ));
             }
