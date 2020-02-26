@@ -425,6 +425,7 @@ export default class CrowdEstimationModel {
                 ));
             }
         }
+        onProgress(1);
 
         return new CrowdEstimationData(
             programCohorts,
