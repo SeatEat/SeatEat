@@ -1,4 +1,9 @@
 
+.circular-progress-indicator {
+    height: 100%;
+    width: 100%;
+}
+
 .circular-progress-indicator-loading {
     position: absolute;
     top: 25px;
@@ -33,6 +38,8 @@
 }
 
 .circular-progress-indicator-done-loading {
+    height: 100%;
+    width: 100%;
     opacity: 0;
     animation-name: content-fade;
     animation-delay: 0.5s;
