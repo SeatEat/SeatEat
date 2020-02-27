@@ -1,0 +1,27 @@
+.chapter-map img {
+    max-width: 700px;
+    position: relative;
+    /* bottom: 100px;
+    right: 50px; */
+}
+
+.occupancy-scale-1 {
+    filter: invert(55%) sepia(71%) saturate(393%) hue-rotate(71deg) brightness(101%) contrast(95%);
+}
+
+.occupancy-scale-2 {
+    filter: invert(82%) sepia(15%) saturate(1470%) hue-rotate(27deg) brightness(90%) contrast(85%);
+}
+
+.occupancy-scale-3 {
+    filter: invert(92%) sepia(81%) saturate(5819%) hue-rotate(318deg) brightness(101%) contrast(100%);
+}
+
+.occupancy-scale-4 {
+    filter: invert(77%) sepia(39%) saturate(5977%) hue-rotate(333deg) brightness(107%) contrast(91%);
+}
+
+.occupancy-scale-5 {
+    filter: invert(63%) sepia(58%) saturate(7442%) hue-rotate(335deg) brightness(94%) contrast(98%);
+}
+
