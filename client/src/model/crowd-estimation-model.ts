@@ -285,6 +285,10 @@ export class CrowdEstimationData {
 
     }
 
+    public getEstimationData(): number[][] {
+        return this.estimation;
+    }
+
     /**
      * Get how crowded it is for every hour starting
      * from dateStart
