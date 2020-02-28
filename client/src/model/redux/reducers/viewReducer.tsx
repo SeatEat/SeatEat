@@ -4,14 +4,14 @@ export const ViewActions = {
 
 export interface ViewPayload {
     view: string,
-  }
+}
 
 export interface ViewAction {
     type: keyof typeof ViewActions,
     payload: ViewPayload
-  }  
+}
 
-export const ViewReducer = (state: ViewPayload = {view: 'current'}, action: ViewAction) => {
+export const ViewReducer = (state: ViewPayload = { view: 'current' }, action: ViewAction) => {
     switch (action.type) {
         case ViewActions.SET_VIEW:
             return action.payload.view;
