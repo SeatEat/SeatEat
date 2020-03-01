@@ -22,22 +22,24 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={`navbar-content navbar-padding ${mobileMenuOpen ? 'active' : ''}`}>
-                {
-                    ChapterData.map((chapter) => {
-                        return <NavLink 
-                            exact
-                            className="navbar-link"
-                            activeClassName="navbar-link active"
-                            onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}
-                            to={'/chapter/' + chapter.name} 
-                            key={chapter.name}>
-                            {chapter.name}
-                        </NavLink>
-                    })
-                }
-            </div>
-            <div className="navbar-footer">
-                this is the navbar footer
+                <div className="navbar-links">
+                    {
+                        ChapterData.map((chapter) => {
+                            return <NavLink 
+                                exact
+                                className="navbar-link"
+                                activeClassName="navbar-link active"
+                                onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}
+                                to={'/chapter/' + chapter.name} 
+                                key={chapter.name}>
+                                {chapter.name}
+                            </NavLink>
+                        })
+                    }
+                </div>
+                <div className="navbar-footer">
+                    this is the navbar footer
+                </div>
             </div>
         </div>
     );

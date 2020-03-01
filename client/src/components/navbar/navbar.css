@@ -26,11 +26,11 @@
     flex: 8;
 }
 
-.navbar-trailing {
+.navbar-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    flex: 8;
 }
 
 .navbar-link {
@@ -50,7 +50,6 @@
 }
 
 .navbar-footer {
-    background-color: var(--theme-color-green);
     width: 100%;
     flex: 1;
 }
@@ -105,10 +104,6 @@
         transform: translateX(0%);
         opacity: 1;
         visibility: visible;
-    }
-
-    .navbar-footer {
-        display: none;
     }
 
     .logo {
