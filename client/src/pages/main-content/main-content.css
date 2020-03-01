@@ -6,11 +6,12 @@
 }
 
 .main-content {
+    position: relative;
     flex: 8;
 }
 
 @media (max-width: 850px) {
     .main-content {
-        padding-top: 55px;
+        margin-top: 55px;
     }
 }

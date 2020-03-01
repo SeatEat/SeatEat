@@ -1,0 +1,65 @@
+
+.circular-progress-indicator {
+    height: 100%;
+    width: 100%;
+}
+
+.circular-progress-indicator-loading {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    left: 25px;
+    bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    animation-name: loading-pulse;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    transition: opacity 0.5s;
+}
+
+.circular-progress-indicator-loading-item {
+    height: 100%;
+    width: 100%;
+    max-width: 75px;
+    max-height: 75px;
+    font-weight: bold;
+}
+
+.circular-progress-indicator-loading.loading-done {
+    opacity: 0;
+}
+
+.circular-progress-indicator-done-loading {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    animation-name: content-fade;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s ;
+}
+
+@keyframes content-fade {
+    from {opacity: 0; }
+    to {opacity: 1;}
+}
+
+@keyframes loading-pulse {
+    0% {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
