@@ -1,13 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
-import CircularProgressIndicator from '../../components/circular-progress-indicator/circular-progress-indicator';
-import CrowdEstimationModel from '../../model/crowd-estimation-model';
 
 type MainProps = {
-    //todo
+    view: string
 }
 
 const MainContent: FC<MainProps> = (props) => {
@@ -16,6 +14,8 @@ const MainContent: FC<MainProps> = (props) => {
         <div className="main-content-container">
             <div className="main-content">
                 {nameOfChapter ? nameOfChapter : "this is the main content"} 
+                <br/>
+                 View: {props.view}
             </div>
             <ViewNavbar/>
         </div>
