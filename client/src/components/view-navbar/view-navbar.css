@@ -1,4 +1,5 @@
 .view-navbar {
+    display: flex;
+    justify-content: space-evenly;
     flex: 1;
-    background-color: var(--theme-color-green);
 }
