@@ -1,0 +1,12 @@
+.view-card img {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.view-card.active img {
+    opacity: 1;
+}
+
+.view-card img {
+    width: 50px;
+}
