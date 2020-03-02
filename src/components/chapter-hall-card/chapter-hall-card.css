@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Changa:700|Jockey+One|Viga&display=swap');
+.chapter-hall-container {
+    display: flex;
+    align-items: center;
+
+    border-radius: 2px;
+    border: 2px solid var(--theme-color-yellow-light);
+    background-color: var(--theme-color-yellow);
+    color: var(--theme-color-blue-dark);   
+    
+}
+
+.chapter-hall-container:hover {
+    background-color: var(--theme-color-yellow-light);
+}
+.chapter-hall-container.active {
+    background-color: var(--theme-color-blue-dark);
+    border: 2px solid var(--theme-color-blue-dark);
+    color:var(--theme-color-yellow-light);
+}
+.chapter-hall-name {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: auto;
+    font-family: 'Jockey One', ;
+    font-size: 14pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chapter-hall-logo {
+   width: 50px;
+   display: flex;
+   align-items: left;
+}
+
+@media (max-width: 850px) {
+    .chapter-hall-container {
+        align-items: center;
+    }
+}
+

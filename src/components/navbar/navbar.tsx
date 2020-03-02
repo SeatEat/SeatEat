@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import seatEatLogo from '../../assets/logo/seateat_logo.png'
 
 import HamburgerButton from '../hamburger-button/hamburger-button';
+import ChapterHallCard from '../chapter-hall-card/chapter-hall-card'
+
 
 const Navbar = () => {
 
@@ -26,12 +28,12 @@ const Navbar = () => {
                     Routes.map((route) => {
                         return <NavLink 
                             exact
-                            className="navbar-link"
-                            activeClassName="navbar-link active"
+                            className="navbar-link chapter-hall-container"
+                            activeClassName="navbar-link chapter-hall-container active"
                             onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}
                             to={route.path} 
                             key={route.path}>
-                            {route.name}
+                            {<ChapterHallCard name={route.name} logo={seatEatLogo}/>}
                         </NavLink>
                     })
                 }
