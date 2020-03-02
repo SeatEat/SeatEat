@@ -1,3 +1,5 @@
+import { ChapterHall, Chapter } from "../data/chapter-data-interfaces";
+
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
 
@@ -378,7 +380,7 @@ export default class CrowdEstimationModel {
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
     public static async estimateChapterCrowdedness(
         startDateOfEstimation: Date,
-        chapterData: ChapterData[],
+        chapterData: Chapter[],
         onProgress: (arg0: number) => void,
         ): Promise < CrowdEstimationData > {
 
@@ -424,7 +426,7 @@ export default class CrowdEstimationModel {
                 programCohorts.push(new ProgramCohort(
                     programCohortResponse.ProgramCode,
                     yearCode,
-                    chapter.averageAmount,
+                    chapter.avarageStudentAmount,
                     courseSchedules
                 ));
             }
