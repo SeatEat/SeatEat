@@ -6,8 +6,8 @@ import { views } from '../../model/views'
 
 const ViewNavbar: FC = (props) => {
     return <div className="view-navbar">
-        {views.map(view =>
-            <ViewCardConnect key={view.name} view={view} />
+        {Object.values(views).map(view =>
+            <ViewCardConnect key={view.name} viewData={view} />
         )}
     </div>
 }

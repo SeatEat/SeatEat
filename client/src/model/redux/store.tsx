@@ -1,14 +1,21 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-import { ViewReducer } from './reducers/viewReducer'
+import { ViewReducer, ViewActions } from './viewState'
 import { estmiationReducer, EstimationActions } from './estimationState';
+import { CrowdDataActions, crowdDataSliderReducer } from './crowdDataSliderState';
 
 const rootReducer = combineReducers({
     viewState: ViewReducer,
-    estimationState: estmiationReducer
+    estimationState: estmiationReducer,
+    crowdDataSlideState: crowdDataSliderReducer,
 });
-export type AppActions = EstimationActions;
+
+export type AppActions = 
+    EstimationActions | 
+    CrowdDataActions |
+    ViewActions;
+
 export type AppState = ReturnType<typeof rootReducer>
 const store = createStore(
     rootReducer,

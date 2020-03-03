@@ -8,17 +8,11 @@ import { Provider } from 'react-redux';
 
 import store from './model/redux/store'
 import { requestEstimation } from './model/redux/estimationState';
-import ChapterHallData from './data/chapter-data.json';
+import ChapterHallData from './data/chapter-hall-data.json';
 
 store.subscribe(() => {
     console.log(store.getState());
 });
-
-setTimeout(() => {
-    store.dispatch(requestEstimation(
-        ChapterHallData[5]
-    ))
-}, 400);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,10 +1,25 @@
 import { connect } from 'react-redux'
-import MainContent from './main-content'
+import { AppState } from '../../model/redux/store';
+import { Dispatch } from '../../model/redux/store';
+import MainContent, { MainContentStateProps, MainContentActionProps } from './main-content';
+import { getChapterHallFromName } from '../../model/chapter-hall-model';
+import { requestEstimation } from '../../model/redux/estimationState';
 
-const mapStateToProps = (state: any) => ({
-    view: state.viewState.view
+const mapStateToProps = (state: AppState): MainContentStateProps => ({
+    view: state.viewState.activeView,
+    isLoading: state.estimationState.isLoading,
+    loadingProgress: Math.round(state.estimationState.loadingProgress * 100),
+});
+const mapDispatchToProps = (dispatch: Dispatch): MainContentActionProps => ({
+    onRequestEstimation: (nameOfChapter) => {
+        let chapterHall = getChapterHallFromName(nameOfChapter);
+        if (chapterHall) {
+            dispatch(requestEstimation(chapterHall));
+        }
+    }
 });
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(MainContent);

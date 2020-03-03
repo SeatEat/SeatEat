@@ -1,7 +1,8 @@
 import CrowdEstimationModel, { CrowdEstimationData } from "../crowd-estimation-model";
-import { ChapterHall } from "../../data/chapter-data-interfaces";
+import { ChapterHall } from "../chapter-hall-model";
 import { Dispatch } from "react";
-import { AppActions } from "./store";
+import { AppActions, AppState } from "./store";
+import { updateSlideValue } from "./crowdDataSliderState";
 
 export interface EstimationState {
     isLoading: boolean,
@@ -19,10 +20,10 @@ const initialState: EstimationState = {
 }
 
 export enum EstimationActionTypes {
-    UPDATE_LOADING_PROGRESS,
-    REQUEST_ESTIMATION,
-    SET_ESTIMATION_ERROR,
-    SET_ESTIMATION_DATA,
+    UPDATE_LOADING_PROGRESS = "UPDATE_LOADING_PROGRESS",
+    REQUEST_ESTIMATION = "REQUEST_ESTIMATION",
+    SET_ESTIMATION_ERROR = "SET_ESTIMATION_ERROR",
+    SET_ESTIMATION_DATA = "SET_ESTIMATION_DATA",
 }
 
 // Start estimation request
@@ -75,6 +76,7 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 
 export function requestEstimation(chapterHall: ChapterHall) {
     return (dispatch: Dispatch<AppActions>) => {
+        dispatch(updateSlideValue(0));
         dispatch(startRequest(chapterHall));
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),
