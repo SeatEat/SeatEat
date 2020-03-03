@@ -10,7 +10,7 @@ import {
 import MainContentConnect from './pages/main-content/main-content-connect'
 import Navbar from './components/navbar/navbar'
 
-import ChapterHallData from './data/chapter-data.json';
+import ChapterHallData from './data/chapter-hall-data.json';
 
 function App() {
     return (

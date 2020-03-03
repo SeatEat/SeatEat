@@ -1,0 +1,27 @@
+.date-slider {
+    width: 100%;
+    padding: 10px 50px 30px 50px;
+    box-sizing: border-box;
+}
+
+.date-slider-text {
+    font-size: 12px;
+    transition: all 0.25s;
+}
+.date-slider-text-active {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--theme-color-blue-dark);
+}
+
+@keyframes pulsing {
+    0% {
+        transform: translateX(-50%) scale(1)
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2)
+    }
+    100% {
+        transform: translateX(-50%) scale(1)
+    }
+}

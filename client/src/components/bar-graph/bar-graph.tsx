@@ -1,10 +1,11 @@
 import React, { FC, useEffect } from 'react';
 import './bar-graph.css';
 
-type BarGraphProps = {
+export type BarGraphProps = {
     values: number[],
     limit: number,
     limitText: string
+    buildGroundValues: (index: number) => string
 }
 
 const BarGraph: FC<BarGraphProps> = (props) => {
@@ -14,9 +15,10 @@ const BarGraph: FC<BarGraphProps> = (props) => {
     }
 
     const createBarItems = () => {
-        return props.values.map(value => {
+        return props.values.map((value, index) => {
             return (
                 <div 
+                    key={`bar-item-${index}`}
                     className="bar-graph-bar-item bar-graph-bar-size"
                     style={{
                         height: `${getSizeRatio(value)}%`,
@@ -34,8 +36,8 @@ const BarGraph: FC<BarGraphProps> = (props) => {
     const createBarGroundItems = () => {
         return props.values.map((_, index) => {
             return (
-                <div className="bar-graph-bar-size bar-graph-bar-ground-unit">
-                    {index}:00
+                <div key={`bar-ground-item¨-${index}`} className="bar-graph-bar-size bar-graph-bar-ground-unit">
+                    {props.buildGroundValues(index)}
                 </div>
             )
         });
@@ -47,7 +49,7 @@ const BarGraph: FC<BarGraphProps> = (props) => {
         let elements = [];
         for(let i = 1; i <= amountOfValues; i++) {
             elements.push(
-                <div className="bar-graph-bar-value-unit">
+                <div key={`bar-value-${i}`} className="bar-graph-bar-value-unit">
                     <div className="bar-graph-bar-value-unit-content">
                         {i % 2 === 1 ? Math.round(valuePerStep * i) : ''}
                         {

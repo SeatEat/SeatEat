@@ -1,22 +1,26 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-import { ViewReducer } from './reducers/viewReducer'
+import { ViewReducer, ViewActions } from './viewState'
+import { estmiationReducer, EstimationActions } from './estimationState';
+import { CrowdDataActions, crowdDataSliderReducer } from './crowdDataSliderState';
 
-/*For debugging*/
-const logger = (store: { getState: () => any; }) => (next: (arg0: any) => any) => (action: { type: any; }) => {
-    console.group(action.type)
-    console.info('dispatching', action)
-    let result = next(action)
-    console.log('next state', store.getState())
-    return result
-}
+const rootReducer = combineReducers({
+    viewState: ViewReducer,
+    estimationState: estmiationReducer,
+    crowdDataSlideState: crowdDataSliderReducer,
+});
 
-const createStoreWithMiddleware = applyMiddleware(logger)(createStore)
-const reducers = combineReducers({
-    viewState: ViewReducer
-})
-const store = createStoreWithMiddleware(reducers)
+export type AppActions = 
+    EstimationActions | 
+    CrowdDataActions |
+    ViewActions;
+
+export type AppState = ReturnType<typeof rootReducer>
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk as ThunkMiddleware<AppState, AppActions>)
+);
   
 export default store;
-
 export type Dispatch = typeof store.dispatch

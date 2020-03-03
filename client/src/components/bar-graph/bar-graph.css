@@ -5,6 +5,9 @@
     display: grid;
     grid-template-columns: 50px auto;
     grid-template-rows: auto 50px;
+
+    box-sizing: border-box;
+    padding-right: 50px;
 }
 
 .bar-graph-limit {

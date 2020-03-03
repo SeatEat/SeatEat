@@ -3,21 +3,62 @@ import { useParams } from 'react-router-dom';
 import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
+import { CrowdEstimationData } from '../../model/crowd-estimation-model';
+import CircularProgressIndicator from '../../components/circular-progress-indicator/circular-progress-indicator';
+import BarGraph from '../../components/bar-graph/bar-graph';
+import CrowdDataSlider from '../../components/crowd-data-slider/crowd-data-slider-connect';
+import ContentPadding from '../../components/content-padding';
+import { useEffect } from 'react';
 
-type MainProps = {
-    view: string
+import 'rc-slider/assets/index.css';
+import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
+import { views } from '../../model/views';
+import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
+
+export interface MainContentStateProps {
+    view: string,
+    isLoading: boolean,
+    loadingProgress: number,
 }
 
-const MainContent: FC<MainProps> = (props) => {
+export interface MainContentActionProps {
+    onRequestEstimation: (nameOfChapter: string) => void
+}
+
+const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) => {
     const { nameOfChapter } = useParams();
+
+    useEffect(() => {
+        if (nameOfChapter) {
+            props.onRequestEstimation(nameOfChapter);
+        }
+    }, [nameOfChapter]);
+
     return (
         <div className="main-content-container">
-            <div className="main-content">
-                {nameOfChapter ? nameOfChapter : "this is the main content"} 
-                <br/>
-                 View: {props.view}
-            </div>
-            <ViewNavbar/>
+                <div className="main-content">
+                    <CircularProgressIndicator
+                        loadingIsDone={!props.isLoading}
+                        progress={props.loadingProgress}>
+                        <ContentPadding>
+                            {
+                                props.view === views.current.name
+                                ?
+                                    <CrowdMapConnect/>
+                                :
+                                    <div className="main-content-content">
+                                        <div className="main-content-graph">
+                                            <CrowdGraphConnect/>
+                                        </div>
+                                        <div className="main-content-slider">
+                                            <CrowdDataSlider/>
+                                        </div>
+                                    </div>
+                            }
+                        </ContentPadding>
+                    </CircularProgressIndicator>
+                </div>
+                <ViewNavbar/>
         </div>
     )
 }

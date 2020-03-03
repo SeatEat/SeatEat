@@ -1,3 +1,5 @@
+import { ChapterHall, Chapter } from "./chapter-hall-model";
+
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
 
@@ -252,7 +254,7 @@ export class ProgramCohort {
 
 export class CrowdEstimationData {
 
-    private estimation: number[][];
+    public estimation: number[][];
     public daysOfEstimation: number;
 
     constructor(
@@ -278,6 +280,10 @@ export class CrowdEstimationData {
         return mergedEstimationData;
     }
 
+    public getDateFromDay(days: number): Date {
+        return new Date(this.startDateOfEstimation.getTime() + days * 1000 * 60 * 60 * 24);
+    }
+
     /**
      * Get how crowded it is right now
      */
@@ -287,6 +293,16 @@ export class CrowdEstimationData {
 
     public getEstimationData(): number[][] {
         return this.estimation;
+    }
+
+    public getEstimationDay(day: number) {
+        return this.estimation[day];
+    }
+
+    public getEstimationWeekly(hour: number) {
+        return this.estimation.map((estimation) => {
+            return estimation[hour];
+        });
     }
 
     /**
@@ -378,7 +394,7 @@ export default class CrowdEstimationModel {
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
     public static async estimateChapterCrowdedness(
         startDateOfEstimation: Date,
-        chapterData: ChapterData[],
+        chapterData: Chapter[],
         onProgress: (arg0: number) => void,
         ): Promise < CrowdEstimationData > {
 
@@ -424,7 +440,7 @@ export default class CrowdEstimationModel {
                 programCohorts.push(new ProgramCohort(
                     programCohortResponse.ProgramCode,
                     yearCode,
-                    chapter.averageAmount,
+                    chapter.averageStudentAmount,
                     courseSchedules
                 ));
             }

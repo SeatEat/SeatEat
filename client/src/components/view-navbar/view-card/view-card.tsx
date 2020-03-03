@@ -1,16 +1,23 @@
 import React, { FC } from "react";
 import './view-card.css';
-import { ViewInterface } from '../../../model/views'
+import { ViewData } from "../../../model/views";
 
-type ViewCardProps = {
-    view: ViewInterface,
+export type ViewCardStateProps = {
+    view: ViewData,
     viewState: string,
-    onClick: Function
 }
 
-const ViewCard: FC<ViewCardProps> = (props) => {
+export type ViewCardActionProps = {
+    onClick: (activeView: string) => void
+}
+
+const ViewCard: FC<ViewCardStateProps & ViewCardActionProps> = (props) => {
     return(
-        <div className={`view-card ${props.viewState === props.view.name ? ' active' : ''}`} key={props.view.name} onClick={() => props.onClick(props.view.name)}>
+        <div className={
+                `view-card ${props.viewState === props.view.name ? ' active' : ''}`
+            } 
+            key={props.view.name} 
+            onClick={() => props.onClick(props.view.name)}>
             <img src={props.view.img} alt={props.view.name}/>
         </div>
     )
