@@ -32,6 +32,12 @@ Used to wrap content in a div that centers it.
 Returns a chapter-map, indicating its crowdedness by its color. The crowdedness level and blueprint image is provided by props.
 * **circular-progress-indicator**  
 A circular "spinner", used to track loading progress.
+* **crowd-data-slider**  
+Slider to be used with the bar graph.
+* **crowd-graph**  
+Uses bar-graph to display a graph of the crowdedness.
+* **date-slider**  
+Slider to be used with the bar graph for dates.
 * **hamburger-button**  
 Returns a hamburger button used to show the navbar on mobile.
 * **navbar**  
