@@ -1,7 +1,6 @@
 const express = require( "express" );
 const path = require( "path" );
 var request = require('request');
-var proxy = require('express-http-proxy');
  
 const app = express();
 const port = process.env.PORT || 5000;
