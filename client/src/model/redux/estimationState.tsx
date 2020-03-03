@@ -81,7 +81,9 @@ export function requestEstimation(chapterHall: ChapterHall) {
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),
             chapterHall.chapters,
-            (prog) => dispatch(updateProgress(prog))
+            (prog) => {
+                dispatch(updateProgress(prog))
+            }
         ).then((data) => {
             dispatch(setEstimationData(data));
         }).catch((response: Response) => {
