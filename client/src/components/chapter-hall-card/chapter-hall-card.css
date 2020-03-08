@@ -38,20 +38,35 @@
 
 .chapter-hall-logo-container {
     height: 43px;
-    display: flex;
-}
-.chapter-hall-logo {
+    padding: 10px 0;
     display: flex;
     align-items: center;
-    width: 43px;
-    padding: 10px;
+    justify-self: center;
     box-sizing: border-box;
+}
+.chapter-hall-logo {
+    width: 43px;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.chapter-hall-logo-split {
+    height: 60%;
+    width: 1px;
+    background-color: var(--theme-color-blue-dark);
+    opacity: 0.5;
+}
+.chapter-hall-container.active .chapter-hall-logo-split {
+    background-color: var(--theme-color-yellow);
+}
 
-    border-left: 1px solid var(--theme-color-yellow);
-    background-color:var(--theme-color-blue-dark);
-    background-size: auto 55%;
-    background-position: center;
-    background-repeat: no-repeat;
+.chapter-hall-logo img { 
+    margin: auto;
+    height: 100%;
+}
+.chapter-hall-container.active .chapter-hall-logo img {
+    filter: invert()
 }
 
 @media (max-width: 850px) {

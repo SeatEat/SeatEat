@@ -20,11 +20,14 @@ const ChapterHallCard: FC<{chapterHall: ChapterHall, onClick: Function}> = (prop
                 </div>
                 <div className="chapter-hall-logo-container">
                     {props.chapterHall.logos.map(logo => {
-                        return <div 
-                            key={logo}
-                            className="chapter-hall-logo"
-                            style={{backgroundImage: `url(/assets/chapter-logos/${logo})`}}>
-                        </div>
+                        return <>
+                            <div className="chapter-hall-logo-split"></div>
+                            <div 
+                                key={logo}
+                                className="chapter-hall-logo">
+                                <img src={`/assets/chapter-logos/${logo}`} alt=""/>
+                            </div>
+                        </>
                     })}
                 </div>
         </NavLink>
