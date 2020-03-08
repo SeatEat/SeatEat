@@ -1,0 +1,62 @@
+.chapter-hall-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
+    transition: color 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: var(--theme-color-yellow);
+    color: var(--theme-color-blue-dark); 
+}
+
+.chapter-hall-container:hover {
+    background-color: var(--theme-color-yellow-light);
+}
+.chapter-hall-container.active {
+    background-color: var(--theme-color-blue-dark);
+    color: var(--theme-color-yellow-light);
+}
+
+.chapter-hall-name {
+    flex: 1;
+    margin-left: 15px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.chapter-hall-name a {
+    text-decoration: none;
+}
+
+.chapter-hall-logo-container {
+    height: 43px;
+    display: flex;
+}
+.chapter-hall-logo {
+    display: flex;
+    align-items: center;
+    width: 43px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    border-left: 1px solid var(--theme-color-yellow);
+    background-color:var(--theme-color-blue-dark);
+    background-size: auto 55%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 850px) {
+    .chapter-hall-container {
+        align-items: center;
+    }
+}
+

@@ -1,18 +1,13 @@
 .navbar {
     z-index: 1;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 300px;
-
+    width: 275px;
     color: var(--theme-text-dark);
     background-color: var(--theme-color-green);
 }
 
 .navbar-padding {
     box-sizing: border-box;
-    padding: 12px;
+    padding: 15px;
 }
 
 .navbar-leading {
@@ -20,10 +15,9 @@
 }
 
 .navbar-content {
+    overflow: scroll;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 8;
+    flex-direction: column;  
 }
 
 .navbar-links {
@@ -31,18 +25,6 @@
     flex-direction: column;
     align-items: center;
     flex: 8;
-}
-
-.navbar-link {
-    padding: 10px;
-    font-weight: bold;
-    transition: color 0.5s;
-    cursor: pointer;
-}
-
-.navbar-link.active,
-.navbar-link:hover {
-    color: var(--theme-color-yellow);
 }
 
 .navbar-mobile-menu-button {
@@ -54,8 +36,8 @@
     flex: 1;
 }
 
-.logo {
-    width: 200px;
+.navbar-logo {
+    width: 100%;
 }
 
 @media (max-width: 850px) {
@@ -63,10 +45,24 @@
         left: 0;
         right: 0;
         top: 0;
+        width: unset;
         flex-direction: row;
         position: fixed;
         justify-content: space-between;
         height: 55px;
+    }
+
+    .navbar-leading {
+        height: 100%;
+    }
+
+    .navbar-logo {
+        width: unset;
+        height: 100%;
+    }
+
+    .navbar-padding {
+        padding: 5px 15px;
     }
     
     .navbar-mobile-menu-button {
@@ -85,29 +81,16 @@
         right: 0;
         z-index: -1;
 
-        flex-direction: column;
-        justify-content: space-around;
-
         background-color: var(--theme-color-green);
 
         opacity: 0;
-        visibility: hidden;
         transform: translateX(25%);
         transition: transform 0.5s, opacity 0.5s, visibility 0.5s;
-    }
-
-    .navbar-link {
-        font-size: 20px;
     }
 
     .navbar-content.active {
         transform: translateX(0%);
         opacity: 1;
         visibility: visible;
-    }
-
-    .logo {
-        height: 50px;
-        width: auto;
     }
 }
