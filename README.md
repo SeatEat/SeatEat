@@ -1,44 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SeatEat
 
-## Available Scripts
+<h4>App: <a href='http://gilau.fr:5000/'>http://gilau.fr:5000/</a></h4>
+<h4>Git Repository: <a href='https://gits-15.sys.kth.se/adajon/SeatEat/'>https://gits-15.sys.kth.se/adajon/SeatEat/</a></h4>
 
-In the project directory, you can run:
+SeatEat is an app that provides estimation of crowdedness at KTH’s different chapter halls. It fetches data about different programmes' schedules to estimate the number of people at a time. KTH students can view the current crowdedness of their respective chapter halls as well as daily and weekly. With SeatEat you'll never have to step unprepared into a crowded hall again.
 
-### `npm start`
+## Current features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Fetches schedules for respective chapter halls at KTH from the <a href='https://www.kth.se/en/api/anvand-data-fran-kth-1.57059'>KTH API</a>.
+* Displays the crowdedness estimation in three different views; current, daily and weekly.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Planned features
 
-### `npm test`
+* Allow users to change the average student amount of each programme and class.
+* Store average student amount in a firebase db.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Structure
+The app is built with react and redux. The store is provided with react-redux which is also used to map state and dispatch to components. The app also uses react-router-dom for routing. It is written using TypeScript.
 
-### `npm run build`
+The app files are split into six folders described below.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### assets
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Assets contain images such as blueprints for the chapter halls and the logotype.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### components
 
-### `npm run eject`
+Here we have functional components that can be used in different parts of the app. 
+* **bar-graph**  
+The bar graph that can be used for both the daily and weekly views by providing it with different props. 
+* **center-content**  
+Used to wrap content in a div that centers it.
+* **chapter-map**  
+Returns a chapter-map, indicating its crowdedness by its color. The crowdedness level and blueprint image is provided by props.
+* **circular-progress-indicator**  
+A circular "spinner", used to track loading progress.
+* **crowd-data-slider**  
+Slider to be used with the bar graph.
+* **crowd-graph**  
+Uses bar-graph to display a graph of the crowdedness.
+* **date-slider**  
+Slider to be used with the bar graph for dates.
+* **hamburger-button**  
+Returns a hamburger button used to show the navbar on mobile.
+* **navbar**  
+The navbar provides links to each chapter hall. Uses `NavLink` from `react-router-dom`.
+* **view-navbar**  
+A navbar to switch between different chapter hall views. The view cards (used to switch views) dispatch their respective view to the redux store.
+* **content-padding**  
+Used to wrap content in a div with padding.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### data
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Contains a json with the chapter hall data. This is planned to be stored in the firebase db instead.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### model
+* **redux**  
+The redux store, reducers, actions and their related functions are located here.
+* **crowd-estimation-model**  
+The estimation model consists of different classes that fetches data from the KTH API to estimate the crowds of different chapter halls.
+* **views**  
+The different available views are located here and can be used by different parts of the app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### pages
+* **main-content**  
+The main-content-connect uses react-redux's `connect` to connect the view state to the main content page which displays different content depending on the view.
 
-## Learn More
+### theme
+Contains a css file with css variables for colors to be used in the app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-----
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Start development
+The current site is now using express as server backend. Do the following to begin development:
+
+1. Go to the root folder and type `node server` This starts the express app on port 5000.
+2. Go to the client folder and type `npm start`. This starts the the front-end server on port 3000. This is the one that should be open in the browser.
+
+# Error
+If you get an error running from a "clean" (You have not changed any code) master branch, it is often because you have not installed the latest packages. Go to the **client** folder and run `npm install`. Then restart the "Start development part again".

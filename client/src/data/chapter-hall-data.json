@@ -1,0 +1,179 @@
+[
+    {
+        "name": "Bryggeriet",
+        "address": "Teknikringen 22A",
+        "contact": "las@arkitektursektionen.se",
+        "chapters": [
+            {
+                "name": "Architecture",
+                "averageStudentAmount": 100,
+                "code": "ARKIT"
+            },
+            {
+                "name": "Byggteknik och design",
+                "averageStudentAmount": 100,
+                "code": "TIBYH"
+            },
+            {
+                "name": "Teknik och ekonomi, inriktning Byggteknik & Design",
+                "averageStudentAmount": 100,
+                "code": "TITEH_TIBY"
+            }
+        ]
+    },
+    {
+        "name": "Draget",
+        "address": "Teknikringen 36B",
+        "contact": "isb-loka@ths.kth.se",
+        "chapters": [
+            {
+                "name": "Bioteknik",
+                "averageStudentAmount": 100,
+                "code": "CBIOT"
+            },
+            {
+                "name": "Teknisk kemi",
+                "averageStudentAmount": 100,
+                "code": "CTKEM"
+            },
+            {
+                "name": "Kemiteknik",
+                "averageStudentAmount": 100,
+                "code": "TIKED"
+            }
+        ]
+    },
+    {
+        "name": "Gråttan",
+        "address": "Osquars backe 8",
+        "contact": "gr8n@cl-sektionen.se",
+        "chapters": [
+            {
+                "name": "Engineering and Teacher Education",
+                "averageStudentAmount": 100,
+                "code": "CLGYM"
+            },
+            {
+                "name": "Energy and Environment",
+                "averageStudentAmount": 100,
+                "code": "CENMI"
+            }
+        ]
+    },
+    {
+        "name": "Hardox",
+        "address": "Brinellvägen 23",
+        "contact": "isb-loka@ths.kth.se",
+        "chapters": [
+            {
+                "name": "Materials Design and Engineering",
+                "averageStudentAmount": 100,
+                "code": "CMATD"
+            }
+        ]
+    },
+    {
+        "name": "I-stället",
+        "address": "Brinellvägen 22",
+        "contact": "logistik@iare.nu",
+        "chapters": [
+            {
+                "name": "Industrial Engineering and Management",
+                "averageStudentAmount": 100,
+                "code": "CINEK"
+            }
+        ]
+    },
+    {
+        "name": "Kistan",
+        "address": "Kistagången 16",
+        "contact": "studiesocialt@insektionen.se",
+        "chapters": [
+            {
+                "name": "Information and Communication Technology",
+                "averageStudentAmount": 100,
+                "code": "CINTE"
+            },
+            {
+                "name": "Information and Communication Technology",
+                "averageStudentAmount": 100,
+                "code": "CINTE"
+            }
+        ]
+    },
+    {
+        "name": "Konsulatet",
+        "address": "Brinellvägen 89",
+        "contact": "gk@f.kth.se",
+        "chapters": [
+            {
+                "name": "Engineering Physics",
+                "averageStudentAmount": 100,
+                "code": "CTFYS"
+            }
+        ]
+    },
+    {
+        "name": "META",
+        "address": "Osquars backe 21",
+        "contact": "lokalchef@d.kth.se",
+        "chapters": [
+            {
+                "name": "Media Technology",
+                "averageStudentAmount": 100,
+                "code": "CMETE"
+            },
+            {
+                "name": "Computer Science and Technology",
+                "averageStudentAmount": 100,
+                "code": "CDATE"
+            }
+        ]
+    },
+    {
+        "name": "Smörjkammaren",
+        "address": "Brinellvägen 28",
+        "contact": "sko@m.kth.se",
+        "chapters": [
+            {
+                "name": "Design och produktframtagning",
+                "averageStudentAmount": 100,
+                "code": "CDEPR"
+            },
+            {
+                "name": "Maskinteknik",
+                "averageStudentAmount": 100,
+                "code": "CMAST"
+            }
+        ]
+    },
+    {
+        "name": "T-centralen",
+        "address": "Drottning Kristinas väg 29",
+        "contact": "lokal@t.kth.se",
+        "chapters": [
+            {
+                "name": "Vehicle Engineering",
+                "averageStudentAmount": 100,
+                "code": "CFATE"
+            }
+        ]
+    },
+    {
+        "name": "Tolvan",
+        "address": "Osquars backe 12",
+        "contact": "kallarmastare@e.kth.se",
+        "chapters": [
+            {
+                "name": "Medical Engineering",
+                "averageStudentAmount": 100,
+                "code": "CMEDT"
+            },
+            {
+                "name": "Electrical Engineering",
+                "averageStudentAmount": 100,
+                "code": "CELTE"
+            }
+        ]
+    }
+]
