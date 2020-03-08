@@ -1,21 +1,33 @@
 import React, { FC, useState} from 'react';
 import './chapter-hall-card.css';
+import { ChapterHall } from '../../model/chapter-hall-model';
+import { NavLink } from 'react-router-dom';
 
-type ChapterHallCardProps = {
-    name: string,
-    logo: string,
-}
-const ChapterHallCard: FC<ChapterHallCardProps> = (props) => {
+import seatEatLogo from '../../assets/logo/seateat_transparent.png'
 
-    const [cardActive, toggleCardActive] = useState(false);
+const ChapterHallCard: FC<{chapterHall: ChapterHall, onClick: Function}> = (props) => {
 
     return (
-        <div>
-            <div className="chapter-hall-name">
-                {props.name}
-            <img src={props.logo} className="chapter-hall-logo" alt=""/>
-            </div>
-        </div>
+        <NavLink 
+            exact
+            className="chapter-hall-container"
+            activeClassName="chapter-hall-container active"
+            
+            to={'/chapter/' + props.chapterHall.name} 
+            key={props.chapterHall.name}>
+                <div className="chapter-hall-name">
+                    {props.chapterHall.name}
+                </div>
+                <div className="chapter-hall-logo-container">
+                    {props.chapterHall.logos.map(logo => {
+                        return <div 
+                            key={logo}
+                            className="chapter-hall-logo"
+                            style={{backgroundImage: `url(/assets/chapter-logos/${logo})`}}>
+                        </div>
+                    })}
+                </div>
+        </NavLink>
     );
 }
 

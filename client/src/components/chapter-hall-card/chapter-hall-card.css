@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Heebo:700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Changa:700|Jockey+One|Viga&display=swap');
 .chapter-hall-container {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 
-    border-radius: 2px;
-    border: 2px solid var(--theme-color-yellow-light);
+    transition: color 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+
+    border-radius: 5px;
+    overflow: hidden;
     background-color: var(--theme-color-yellow);
-    color: var(--theme-color-blue-dark);   
-    
+    color: var(--theme-color-blue-dark); 
 }
 
 .chapter-hall-container:hover {
@@ -16,23 +21,37 @@
 }
 .chapter-hall-container.active {
     background-color: var(--theme-color-blue-dark);
-    border: 2px solid var(--theme-color-blue-dark);
-    color:var(--theme-color-yellow-light);
+    color: var(--theme-color-yellow-light);
 }
+
 .chapter-hall-name {
-    display: flex;
-    flex-direction: row-reverse;
-    margin: auto;
-    font-family: 'Jockey One', ;
-    font-size: 14pt;
-    text-align: center;
+    flex: 1;
+    margin-left: 15px;
+    text-align: left;
+    font-size: 13px;
     font-weight: bold;
 }
 
+.chapter-hall-name a {
+    text-decoration: none;
+}
+
+.chapter-hall-logo-container {
+    height: 43px;
+    display: flex;
+}
 .chapter-hall-logo {
-   width: 50px;
-   display: flex;
-   align-items: left;
+    display: flex;
+    align-items: center;
+    width: 43px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    border-left: 1px solid var(--theme-color-yellow);
+    background-color:var(--theme-color-blue-dark);
+    background-size: auto 55%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 @media (max-width: 850px) {
