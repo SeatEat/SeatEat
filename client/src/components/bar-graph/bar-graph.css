@@ -17,6 +17,8 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+
+    transition: height 1s, width 1s;
 }
 
 .bar-graph-limit-line {
