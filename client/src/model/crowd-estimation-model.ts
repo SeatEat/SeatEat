@@ -392,7 +392,7 @@ export default class CrowdEstimationModel {
         });
 
         return new CourseSchedule(
-            course.code,
+            course.Code,
             course.Name,
             isElective,
             lectures
