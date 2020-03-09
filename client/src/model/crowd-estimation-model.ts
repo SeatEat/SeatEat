@@ -343,6 +343,13 @@ export default class CrowdEstimationModel {
         return yearCodes;
     }
 
+    private static parseLectureDate(date: string): Date {
+        // We need to insert a 'T' between the date and the time. This is because safari otherwise
+        // thinks that the date is invalid
+        date = date.replace(' ', 'T');
+        return new Date(date);
+    }
+
     private static async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
 
         // Add inital ednpoint
@@ -374,11 +381,12 @@ export default class CrowdEstimationModel {
         // Get the course schedule
         const courseSchedule = await fetch(endpoint).then(r => r.json());
 
+        
         // Map the response to Lecture objects
         const lectures: Lecture[] = courseSchedule.entries.map((lecture: any) => {
             return new Lecture(
-                new Date(lecture.start),
-                new Date(lecture.end),
+                this.parseLectureDate(lecture.start),
+                this.parseLectureDate(lecture.end),
                 (lecture.type === 'OVR') ? true : false
             );
         });
