@@ -149,7 +149,16 @@ export class ProgramCohort {
     private getLectureList(dateStart: Date): Lecture[] {
         let lectures: Lecture[] = [];
         this.courses.forEach(course => {
-            course.lectures.map(lecture => {
+            course.lectures.forEach(lecture => {
+
+                // If the lecture starts on the same time for a given chapter,
+                // we only calcuate the first one
+                for (let addedLecture of lectures) {
+                    if (addedLecture.start.getTime() === lecture.start.getTime()) {
+                        return;
+                    }
+                }
+
                 if (dateStart.getTime() < lecture.end.getTime()) {
                     lectures.push(lecture);
                 }
@@ -319,11 +328,16 @@ interface ChapterData {
     code: string;
 }
 
+interface StudyYear {
+    code: string,
+    currentStudyYear: number
+}
+
 export default class CrowdEstimationModel {
 
-    /** Get active year codes from current date */
-    public static getActiveYearCodes(): string[] {
-        let yearCodes = [];
+    /** Get active study year */
+    public static getActiveYearCodes(): StudyYear[] {
+        let yearCodes: StudyYear[] = [];
 
         const schoolStartMonth = 7;
         const yearToCheck = 3;
@@ -338,7 +352,10 @@ export default class CrowdEstimationModel {
 
         for (let i = 0; i < yearToCheck; i++) {
             var year = (currentDate.getFullYear() - i - yearOffset).toString().substring(2, 4);
-            yearCodes.push('HT' + year);
+            yearCodes.push({
+                code: 'HT' + year,
+                currentStudyYear: i + 1
+            });
         }
         return yearCodes;
     }
@@ -392,11 +409,21 @@ export default class CrowdEstimationModel {
         });
 
         return new CourseSchedule(
-            course.code,
+            course.Code,
             course.Name,
             isElective,
             lectures
         );
+    }
+
+    /** Check if a course schedule already exist with the given course code */
+    private static courseScheduleExist(courseSchedules: CourseSchedule[], courseCode: string): boolean {
+        for (let course of courseSchedules) {
+            if (course.code === courseCode) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
@@ -406,7 +433,7 @@ export default class CrowdEstimationModel {
         onProgress: (arg0: number) => void,
         ): Promise < CrowdEstimationData > {
 
-        const yearCodes = CrowdEstimationModel.getActiveYearCodes();
+        const studyYear = CrowdEstimationModel.getActiveYearCodes();
 
         //Ugly code, want to do this better
         const startDate = new Date(startDateOfEstimation)
@@ -415,44 +442,65 @@ export default class CrowdEstimationModel {
 
         let programCohorts: ProgramCohort[] = [];
         for (const chapter of chapterData) {
-            for (const yearCode of yearCodes) {
-
-                onProgress(
-                    chapterData.indexOf(chapter) / chapterData.length +
-                    yearCodes.indexOf(yearCode) / (yearCodes.length) / chapterData.length
-                );
+            for (const yearCode of studyYear) {
 
                 let courseSchedules: CourseSchedule[] = [];
 
                 const programCohortResponse = await fetch(
                     '/kth/kopps/programme/academic-year-plan/' +
-                    chapter.code + '/' + yearCode).then(r => r.json());
+                    chapter.code + '/' + yearCode.code).then(r => r.json());
 
-                await programCohortResponse.Specs.forEach(async (spec: any, i: number) => {
+                for (let specIndex = 0; specIndex < programCohortResponse.Specs.length; specIndex++) {
+                    let spec = programCohortResponse.Specs[specIndex];
                     const courses: any[] = spec.Electivity[0].Courses;
 
-                    if (!spec.SpecCode && i !== yearCodes.indexOf(yearCode) ) {
-                        return;
+                    onProgress(
+                        chapterData.indexOf(chapter) / chapterData.length +
+                        studyYear.indexOf(yearCode) / studyYear.length / chapterData.length + 
+                        specIndex / programCohortResponse.Specs.length / studyYear.length / chapterData.length
+                    );
+
+                    // We only want to check active courses
+                    if (yearCode.currentStudyYear != spec.StudyYear) {
+                        continue;
+                    }
+    
+                    if (!spec.SpecCode && specIndex !== studyYear.indexOf(yearCode) ) {
+                        continue;
                     }
 
-                    for (const course of courses) {
-                        courseSchedules.push(await this.getCourseSchedule(
+                    // First we need to skip all the courses that already is added, this same course
+                    // is occuring multiple times in the spec array
+                    let filteredCourses = courses.filter((course) => {
+                        if (this.courseScheduleExist(courseSchedules, course.Code)) {
+                            return false;
+                        }
+                        return true;
+                    });
+
+                    // We want to get all the schedules in parallel, otherwise we have to wait for each
+                    // course loading witch can take alot of time
+                    let courseSchedulePromises: Promise<CourseSchedule>[] = filteredCourses.map(course => {
+                        return this.getCourseSchedule(
                             course,
                             spec.SpecCode !== undefined ? true : false,
                             startDate,
-                            endDate)
+                            endDate
                         );
-                    }
-                });
+                    });
+                    courseSchedules.push(...await Promise.all(courseSchedulePromises));
+                }
                 
                 programCohorts.push(new ProgramCohort(
                     programCohortResponse.ProgramCode,
-                    yearCode,
+                    yearCode.code,
                     chapter.averageStudentAmount,
                     courseSchedules
                 ));
             }
         }
+
+        // Run callback that we are done with the estimation
         onProgress(1);
 
         return new CrowdEstimationData(
