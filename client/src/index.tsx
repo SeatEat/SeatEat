@@ -11,7 +11,9 @@ import { requestEstimation } from './model/redux/estimationState';
 import ChapterHallData from './data/chapter-hall-data.json';
 
 store.subscribe(() => {
+    console.groupCollapsed("State change");
     console.log(store.getState());
+    console.groupEnd();
 });
 
 ReactDOM.render(
