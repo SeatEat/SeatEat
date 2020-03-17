@@ -10,7 +10,6 @@ export const ViewActionTypes = {
     SET_VIEW: 'SET_VIEW',
 }
 
-
 export interface SetActiveViewAction {
     type: string,
     payload: string
@@ -24,7 +23,6 @@ function setActiveView (activeView: string): SetActiveViewAction {
 
 export function setView(activeView: string) {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(updateSlideValue(0));
         dispatch(setActiveView(activeView));
     }
 }

@@ -3,11 +3,12 @@ import { CrowdEstimationData } from "../../model/crowd-estimation-model";
 import { views } from "../../model/views";
 import BarGraph from "../bar-graph/bar-graph";
 import { monthNames } from "../../data/month-names";
+import { SlideState } from "../../model/redux/crowdDataSliderState";
 
 export type CrowdGraphProps = {
-    estimationData: CrowdEstimationData | null,
-    slideValue: number,
     activeView: string,
+    estimationData: CrowdEstimationData | null,
+    slideValue: SlideState,
 }
 
 const CrowdGraph: FC<CrowdGraphProps> = (props) => {
@@ -21,11 +22,11 @@ const CrowdGraph: FC<CrowdGraphProps> = (props) => {
         }
 
         if (props.activeView === views.daily.name) {
-            return props.estimationData.getEstimationDay(props.slideValue).slice(startHour, endHour);
+            return props.estimationData.getEstimationDay(props.slideValue.daily).slice(startHour, endHour);
         }
 
         if (props.activeView === views.weekly.name) {
-            return props.estimationData.getEstimationWeekly(props.slideValue)
+            return props.estimationData.getEstimationWeekly(props.slideValue.weekly)
         }
 
         return [];
