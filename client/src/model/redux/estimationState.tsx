@@ -85,7 +85,6 @@ export function requestEstimation(chapterHall: ChapterHall) {
             cancelLastEstimation();
         }
 
-        dispatch(updateSlideValue(0));
         dispatch(startRequest(chapterHall));
 
         CrowdEstimationModel.estimateChapterCrowdedness(
