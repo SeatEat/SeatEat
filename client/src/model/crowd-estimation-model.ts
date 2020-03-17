@@ -426,14 +426,21 @@ export default class CrowdEstimationModel {
         return false;
     }
 
-    /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
+    /** Estimation chapter hall crowdedness */
     public static async estimateChapterCrowdedness(
         startDateOfEstimation: Date,
         chapterData: Chapter[],
         onProgress: (arg0: number) => void,
-        ): Promise < CrowdEstimationData > {
+        createCancelCallback: (arg0: Function) => void,
+        ): Promise < CrowdEstimationData | null> {
 
         const studyYear = CrowdEstimationModel.getActiveYearCodes();
+
+        // Creates a cancel callback
+        let shouldCancel = false;
+        createCancelCallback(() => {
+            shouldCancel = true;
+        });
 
         //Ugly code, want to do this better
         const startDate = new Date(startDateOfEstimation)
@@ -453,6 +460,11 @@ export default class CrowdEstimationModel {
                 for (let specIndex = 0; specIndex < programCohortResponse.Specs.length; specIndex++) {
                     let spec = programCohortResponse.Specs[specIndex];
                     const courses: any[] = spec.Electivity[0].Courses;
+
+                    // Check if we should cancel our estimation request
+                    if (shouldCancel) {
+                        return null;
+                    }
 
                     onProgress(
                         chapterData.indexOf(chapter) / chapterData.length +
