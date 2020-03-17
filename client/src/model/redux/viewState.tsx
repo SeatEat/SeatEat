@@ -24,7 +24,6 @@ function setActiveView (activeView: string): SetActiveViewAction {
 
 export function setView(activeView: string) {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(updateSlideValue(0));
         dispatch(setActiveView(activeView));
     }
 }

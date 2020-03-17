@@ -3,14 +3,16 @@ import { CrowdEstimationData } from "../../model/crowd-estimation-model";
 import { monthNames } from "../../data/month-names";
 import DateSlider from "../date-slider/date-slider";
 import { views } from "../../model/views";
+import { SlideState } from "../../model/redux/crowdDataSliderState";
 
 export interface CrowdDataSliderPropsState {
     estimationData: CrowdEstimationData | null,
     activeView: string,
+    crowdDataSlideState: SlideState
 }
 
 export interface CrowdDataSliderPropsActions {
-    onSliderChange: (arg0: number) => void
+    onSliderChange: (arg0: string, arg1: number) => void
 }
 
 const CrowdDataSlider: FC<CrowdDataSliderPropsState & CrowdDataSliderPropsActions> = (props) => {
@@ -39,7 +41,10 @@ const CrowdDataSlider: FC<CrowdDataSliderPropsState & CrowdDataSliderPropsAction
     return <DateSlider
         values={generateSlideValues()}
         stepTextBuilder={generateSlideStepText}
-        onValueChange={props.onSliderChange}/>
+        onValueChange={props.onSliderChange}
+        activeView={props.activeView}
+        crowdDataSlideState={props.crowdDataSlideState}
+        />
 }
 
 export default CrowdDataSlider;

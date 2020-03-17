@@ -76,7 +76,6 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 
 export function requestEstimation(chapterHall: ChapterHall) {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(updateSlideValue(0));
         dispatch(startRequest(chapterHall));
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),

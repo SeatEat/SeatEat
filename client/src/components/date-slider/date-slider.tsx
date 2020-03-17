@@ -1,25 +1,52 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import Slider from 'rc-slider';
 import './date-slider.css';
+import { SlideState } from "../../model/redux/crowdDataSliderState";
 
 export type DateSliderProps = {
     values: number[], 
     stepTextBuilder: (arg0: number) => string,
-    onValueChange: (value: number) => void
+    onValueChange: (activeView: string, value: number) => void
+    activeView: string,
+    crowdDataSlideState: SlideState,
 }
 
 const DateSlider: FC<DateSliderProps> = (props) => {
 
-    const defaultValue = props.values[0];
-    const [activeValue, setActiveCalue] = useState(defaultValue)
+    const activeView = props.activeView;
+    const defaultValue = props.crowdDataSlideState[props.activeView];
+    const [activeValue, setActiveValue] = useState(defaultValue);
+    const [disableChange, setDisableChange] = useState(false);
+
+    function useDidUpdateEffect(fn: Function, inputs: any) {
+        const didMountRef = useRef(false);
+      
+        useEffect(() => {
+          if (didMountRef.current)
+            fn();
+          else
+            didMountRef.current = true;
+        }, inputs);
+    }
+
+    useDidUpdateEffect(() => {
+        setDisableChange(true);
+    }, [props.activeView]);
 
     useEffect(() => {
-        setActiveCalue(defaultValue);
+        setActiveValue(defaultValue);
     }, [defaultValue]);
 
+    useEffect(() => {
+        if(disableChange) {
+            setDisableChange(false);
+        } else{
+            props.onValueChange(activeView, activeValue);
+        }
+    }, [activeValue]);
+
     const handleChange = (value: number) => {
-        props.onValueChange(value);
-        setActiveCalue(value);
+        setActiveValue(value);
     };
 
     const generateStepElement = (value: number, text: string) => {
