@@ -4,11 +4,9 @@ export enum CrowdDataActionTypes {
     UPDATE_SLIDE_VALUE = "UPDATE_SLIDE_VALUE",
 }
 
-export interface ViewSlideState {
+export interface SlideState {
     [key: string]: number,
 }
-
-export interface SlideState extends ViewSlideState, ViewSlideState {}
 
 // Change value of the state
 export interface ChangeSlideValue {
