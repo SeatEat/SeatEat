@@ -12,7 +12,7 @@ const ChapterHallCard: FC<{chapterHall: ChapterHall, onClick: Function}> = (prop
             exact
             className="chapter-hall-container"
             activeClassName="chapter-hall-container active"
-            
+            onClick={() => props.onClick()}
             to={'/chapter/' + props.chapterHall.name} 
             key={props.chapterHall.name}>
                 <div className="chapter-hall-name">
