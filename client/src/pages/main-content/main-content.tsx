@@ -34,6 +34,10 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
         }
     }, [nameOfChapter]);
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, [props.view])
+
     return (
         <div className="main-content-container">
                 <div className="main-content">
