@@ -84,14 +84,16 @@
 
         background-color: var(--theme-color-green);
 
-        opacity: 0;
         transform: translateX(25%);
-        transition: transform 0.5s, opacity 0.5s, visibility 0.5s;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: transform 0.5s, opacity 0.2s, visibility 0.5s;
     }
 
     .navbar-content.active {
         transform: translateX(0%);
         opacity: 1;
-        visibility: visible;
+        height: auto;
     }
 }

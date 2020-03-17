@@ -10,11 +10,11 @@ export const ViewActionTypes = {
     SET_VIEW: 'SET_VIEW',
 }
 
-
 export interface SetActiveViewAction {
     type: string,
     payload: string
 }
+
 function setActiveView (activeView: string): SetActiveViewAction {
     return {
         type: ViewActionTypes.SET_VIEW,
