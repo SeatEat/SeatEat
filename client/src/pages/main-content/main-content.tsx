@@ -14,6 +14,7 @@ import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
 import { views } from '../../model/views';
 import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
+import CheckInStatus from '../../components/check-in-status/check-in-status';
 
 export interface MainContentStateProps {
     view: string,
@@ -30,7 +31,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     useEffect(() => {
         if (nameOfChapter) {
-            props.onRequestEstimation(nameOfChapter);
+            // props.onRequestEstimation(nameOfChapter);
         }
     }, [nameOfChapter]);
 
@@ -41,14 +42,17 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
     return (
         <div className="main-content-container">
                 <div className="main-content">
-                    <CircularProgressIndicator
+                    <ContentPadding>
+                        <CheckInStatus/>
+                    </ContentPadding>
+                    {/* <CircularProgressIndicator
                         loadingIsDone={!props.isLoading}
                         progress={props.loadingProgress}>
                         <ContentPadding>
                             {
                                 props.view === views.current.name
                                 ?
-                                    <CrowdMapConnect/>
+                                    <CheckInStatus/>
                                 :
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
@@ -60,7 +64,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                     </div>
                             }
                         </ContentPadding>
-                    </CircularProgressIndicator>
+                    </CircularProgressIndicator> */}
                 </div>
                 <ViewNavbar/>
         </div>

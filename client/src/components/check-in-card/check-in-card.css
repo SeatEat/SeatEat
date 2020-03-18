@@ -1,0 +1,43 @@
+.check-in-card-container {
+    border-radius: var(--theme-shape-card-radius);
+    background-color: var(--theme-color-yellow);
+}
+
+.check-in-card-name {
+    font-weight: bold;
+}
+
+.check-in-card-data-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.check-in-card-data {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: var(--theme-shape-card-radius);
+    background-color: var(--theme-color-yellow-light);
+}
+
+.check-in-card-data-data {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.check-in-card-data-icon {
+    width: 23px;
+    height: auto;
+    margin-right: 3px;
+
+    display: flex;
+    align-items: center;
+}
+.check-in-card-data-icon img {
+    width: 100%;
+}
+.check-in-card-data-description {
+    font-size: 10px;
+}
