@@ -1,12 +1,28 @@
 .view-card img {
     cursor: pointer;
-    opacity: 0.5;
+    width: 50px;
+    filter: invert(13%) sepia(64%) saturate(2124%) hue-rotate(213deg) brightness(91%) contrast(93%);
+}
+
+.view-card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.view-card-title {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--theme-color-blue-dark); 
 }
 
 .view-card.active img {
-    opacity: 1;
+    filter: invert(75%) sepia(23%) saturate(383%) hue-rotate(100deg) brightness(95%) contrast(97%);
 }
 
-.view-card img {
-    width: 50px;
+.view-card.active .view-card-title {
+    filter: invert(75%) sepia(23%) saturate(383%) hue-rotate(100deg) brightness(95%) contrast(97%);
 }
+
+
+

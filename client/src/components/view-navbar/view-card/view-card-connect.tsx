@@ -6,7 +6,7 @@ import { setView } from '../../../model/redux/viewState';
 
 const mapStateToProps = (state: AppState, ownProps: {viewData: ViewData}): ViewCardStateProps => ({
   view: ownProps.viewData,
-  viewState: state.viewState.activeView,
+  viewState: state.viewState.activeView
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): ViewCardActionProps => ({
