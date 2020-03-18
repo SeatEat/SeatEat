@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import './view-card.css';
 import { ViewData } from "../../../model/views";
+import { prependListener } from "cluster";
 
 export type ViewCardStateProps = {
     view: ViewData,
@@ -12,13 +13,24 @@ export type ViewCardActionProps = {
 }
 
 const ViewCard: FC<ViewCardStateProps & ViewCardActionProps> = (props) => {
-    return(
+    return (
         <div className={
-                `view-card ${props.viewState === props.view.name ? ' active' : ''}`
-            } 
-            key={props.view.name} 
+            `view-card ${props.viewState === props.view.name ? ' active' : ''}`
+        }
+            key={props.view.name}
             onClick={() => props.onClick(props.view.name)}>
-            <img src={props.view.img} alt={props.view.name}/>
+            <table>
+                <tr>
+                    <td>
+                        <img src={props.view.img} alt={props.view.name} />
+                    </td>
+                    <td>
+                        <div className="view-card-title">
+                            {props.view.title}
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     )
 }
