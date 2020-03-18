@@ -5,18 +5,14 @@ import './theme/colors.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-
-import * as firebase from 'firebase';
-import credentials from './credentials/credentials.json';
 import store from './model/redux/store'
+
 
 store.subscribe(() => {
     console.groupCollapsed("State change");
     console.log(store.getState());
     console.groupEnd();
 });
-
-firebase.initializeApp(credentials.firebase);
 
 ReactDOM.render(
     <Provider store={store}>
