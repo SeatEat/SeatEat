@@ -8,13 +8,19 @@ import './check-in-status.css';
 import BookIcon from '../../assets/icons/book.svg';
 import EatIcon from '../../assets/icons/eat.svg';
 import QuestionIcon from '../../assets/icons/question.svg';
+import { useDialogService } from "../dialog/dialog";
+import { ChapterHall } from "../../model/chapter-hall-model";
+import Button from "../button/button";
+import Input from "../form/input/input";
+import Select from "../form/select/select";
+import CheckInForm from "../check-in-form/check-in-form";
 
 interface CheckInReason {
     id: string,
     title: string,
     logo: string
 }
-const checkInReasons: {[key: string]: CheckInReason} = {
+export const checkInReasons: { [key: string]: CheckInReason } = {
     food: {
         id: 'food',
         title: 'Eating',
@@ -33,12 +39,12 @@ const checkInReasons: {[key: string]: CheckInReason} = {
 }
 
 export class CheckInPerson {
-    constructor (
+    constructor(
         public name: string,
         public id: string,
         public checkInTime: Date,
         public reason: CheckInReason
-    ){};
+    ) { };
 
     public getMinutesFromCheckIn(): number {
         let currentDate = new Date();
@@ -48,15 +54,31 @@ export class CheckInPerson {
 }
 
 interface CheckInStatusProps {
-    personsCheckedIn: CheckInPerson[]
+    personsCheckedIn: CheckInPerson[],
+    currentChapter: ChapterHall | null,
 }
 
 const CheckInStatus: FC<CheckInStatusProps> = (props) => {
+
+    const confirm = useDialogService()
+    const openCheckInDialog = () => {
+        confirm({
+            content: (closeDialog => <CheckInForm 
+                closeDialog={closeDialog}
+                currentChapter={props.currentChapter}/>),
+        });
+    }
+
     return <div className="check-in-status-container">
         <h1>People currently checked in</h1>
+        <br />
+        <Button isCompact={true} onClick={openCheckInDialog}>
+            Check in yourself
+        </Button>
+        <br/><br/>
         <div className="check-in-status-cards">
             {props.personsCheckedIn.map((person) => {
-                return <CheckInCard key={person.name} checkInPerson={person}/>
+                return <CheckInCard key={person.name} checkInPerson={person} />
             })}
         </div>
     </div>
@@ -75,6 +97,7 @@ export default connect(
             new CheckInPerson('Helena', '7', new Date(), checkInReasons.other),
             new CheckInPerson('Sara', '8', new Date(), checkInReasons.study),
             new CheckInPerson('Mr Andersson', '9', new Date(), checkInReasons.other),
-        ]
+        ],
+        currentChapter: state.estimationState.chapterHall
     })
 )(CheckInStatus);
