@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className='navbar'>
             <div className='navbar-leading navbar-padding'>
                 <NavLink to='/'>
-                    <img className='navbar-logo' src={seatEatLogo} alt=''/>
+                    <img className='navbar-logo' src={seatEatLogo} alt='' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}/>
                 </NavLink>
                 <div className='navbar-mobile-menu-button'>
                     <HamburgerButton 
