@@ -40,29 +40,29 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     return (
         <div className="main-content-container">
-                <div className="main-content">
-                    <CircularProgressIndicator
-                        loadingIsDone={!props.isLoading}
-                        progress={props.loadingProgress}>
-                        <ContentPadding>
-                            {
-                                props.view === views.current.name
-                                ?
-                                    <CrowdMapConnect/>
-                                :
-                                    <div className="main-content-content">
-                                        <div className="main-content-graph">
-                                            <CrowdGraphConnect/>
-                                        </div>
-                                        <div className="main-content-slider">
-                                            <CrowdDataSlider/>
-                                        </div>
+            <div className="main-content">
+                <CircularProgressIndicator
+                    loadingIsDone={!props.isLoading}
+                    progress={props.loadingProgress}>
+                    <ContentPadding>
+                        {
+                            props.view === views.current.name
+                            ?
+                                <CrowdMapConnect/>
+                            :
+                                <div className="main-content-content">
+                                    <div className="main-content-graph">
+                                        <CrowdGraphConnect/>
                                     </div>
-                            }
-                        </ContentPadding>
-                    </CircularProgressIndicator>
-                </div>
-                <ViewNavbar/>
+                                    <div className="main-content-slider">
+                                        <CrowdDataSlider/>
+                                    </div>
+                                </div>
+                        }
+                    </ContentPadding>
+                </CircularProgressIndicator>
+            </div>
+            <ViewNavbar/>
         </div>
     )
 }
