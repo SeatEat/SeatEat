@@ -1,0 +1,42 @@
+.input-shell-content-wrapper {
+    width: 100%;
+}
+
+.input-shell-container {
+    width: 100%;
+}
+
+.input-shell-border {
+    height: 5px;
+    background-color: var(--theme-color-blue-dark)
+}
+
+.input-shell-border-focus,
+.input-shell-border-error {
+    height: 100%;
+    width: 0px;
+
+    transition: width 0.5s;
+    transition-timing-function: cubic-bezier(0.45, 0, 0.45, 1);
+}
+
+.input-shell-border-focus.active,
+.input-shell-border-error.active {
+    width: 100%;
+}
+
+.input-shell-border-focus {
+    background-color: var(--theme-color-yellow);
+}
+
+.input-shell-description {
+    transform: translateY(5px);
+    opacity: 0;
+    font-size: 12px;
+
+    transition: all 0.25s;
+}
+.input-shell-description.active {
+    opacity: 1;
+    transform: translateY(0);
+}
