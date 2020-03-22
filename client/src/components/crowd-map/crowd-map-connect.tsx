@@ -4,6 +4,7 @@ import CrowdMap, { CrowdMapProps } from './crowd-map';
 
 const mapStateToProps = (state: AppState): CrowdMapProps => ({
     estimationData: state.estimationState.estimationData,
+    chapterHall: state.estimationState.chapterHall
 });
 
 export default connect(
