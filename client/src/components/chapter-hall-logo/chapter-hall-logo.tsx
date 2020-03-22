@@ -1,11 +1,20 @@
 import React, { FC } from 'react';
+import { connect } from 'react-redux';
 import './chapter-hall-logo.css';
-import { ChapterHall } from "../../model/chapter-hall-model";
+import { AppState } from '../../model/redux/store';
 import ChapterHallText from "../chapter-hall-text/chapter-hall-text";
+import { CrowdEstimationData } from '../../model/crowd-estimation-model';
+import { ChapterHall } from '../../model/chapter-hall-model';
 
-const ChapterLogos: FC <{rate : number | undefined, logos : Array<string> | undefined, name: string | undefined}> = (props) => {
-    const logos = props.logos ? props.logos : []
-    const name = props.name ? props.name : []
+type ChapterLogosProps = {
+    estimationData: CrowdEstimationData | null,
+    chapterHall: ChapterHall | null,
+}
+
+const ChapterLogos: FC<ChapterLogosProps> = (props) => {
+    const logos = props.chapterHall?.logos ? props.chapterHall?.logos : []
+    const name = props.chapterHall?.name ? props.chapterHall?.name : []
+    const rate = props.estimationData?.getCurrentCrowdedness()
     return (
         <div className="chapter-information-container">
             <div className="chapter-crowd-container">
@@ -16,7 +25,7 @@ const ChapterLogos: FC <{rate : number | undefined, logos : Array<string> | unde
                         <div
                             key={logo}
                             className="chapter-hall-logos">
-                            <img className={`occupancy-scale-${props.rate}`} src={`/assets/chapter-logos/${logo}`} alt=""/>
+                            <img className={`occupancy-scale-${rate}`} src={`/assets/chapter-logos/${logo}`} alt=""/>
                         </div>
                     </>
                 })}
@@ -42,12 +51,19 @@ const ChapterLogos: FC <{rate : number | undefined, logos : Array<string> | unde
                 </div>
             </div>
             <div className="text-container">
-                <span className="chapter-hall-text"><ChapterHallText rate={props.rate} chapterHall={name}/></span>
+                <span className="chapter-hall-text"><ChapterHallText rate={rate} chapterHall={name}/></span>
                 <span className="check-in-text">Check below to see how many people have checked in.</span>
             </div>
         </div>
     );
 }
 
+const mapStateToProps = (state: AppState): ChapterLogosProps => ({
+    estimationData: state.estimationState.estimationData,
+    chapterHall: state.estimationState.chapterHall
+});
 
-export default ChapterLogos;
+export default connect(
+  mapStateToProps,
+)(ChapterLogos);
+
