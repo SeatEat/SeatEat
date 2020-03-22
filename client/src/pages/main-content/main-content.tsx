@@ -31,7 +31,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     useEffect(() => {
         if (nameOfChapter) {
-            // props.onRequestEstimation(nameOfChapter);
+            props.onRequestEstimation(nameOfChapter);
         }
     }, [nameOfChapter]);
 
@@ -42,10 +42,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
     return (
         <div className="main-content-container">
                 <div className="main-content">
-                    <ContentPadding>
-                        <CheckInStatus/>
-                    </ContentPadding>
-                    {/* <CircularProgressIndicator
+                    <CircularProgressIndicator
                         loadingIsDone={!props.isLoading}
                         progress={props.loadingProgress}>
                         <ContentPadding>
@@ -64,7 +61,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                     </div>
                             }
                         </ContentPadding>
-                    </CircularProgressIndicator> */}
+                    </CircularProgressIndicator>
                 </div>
                 <ViewNavbar/>
         </div>

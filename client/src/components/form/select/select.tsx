@@ -29,7 +29,8 @@ const Select: FC<SelectProps> = (props) => {
     }
 
     const generateSelectOption = (option: SelectOption): React.ReactNode => {
-        return <div 
+        return <div
+            key={option.value}
             className={`select-option ${option === currentValue ? 'selected' : ''}`}
             onClick={() => onValueChange(option)}>
             <div className="select-option-icon">
