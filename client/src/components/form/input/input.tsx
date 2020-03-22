@@ -14,7 +14,9 @@ const Input: FC<InputProps> = (props) => {
     const [currentValue, setCurrentValue] = useState('');
 
     const onValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCurrentValue(event.currentTarget.value);
+        const inputValue = event.currentTarget.value;
+        setCurrentValue(inputValue);
+        props.onInput(inputValue);
     }
 
     return <InputShell 
