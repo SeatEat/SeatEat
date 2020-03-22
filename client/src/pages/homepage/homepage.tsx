@@ -16,34 +16,36 @@ const Homepage: FC = (props) => {
                     </div>
                     <div className='view-description'>
                         <table>
-                            <tr>
-                                <td>
-                                    {/*To be changed to svg when the svg fix is merged*/}
-                                    <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-connection-6.png' />
-                                </td>
-                                <td>
-                                    <div className='description-title'>Right Now</div> 
-                                    <div className='description'>See the current estimation of crowdedness at the chapter hall.</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-time-7.png' />
-                                </td>
-                                <td>
-                                <div className='description-title'>Daily View</div> 
-                                <div className='description'>See the estimation of crowdedness at the chapter hall for each hour and day during the upcoming week.</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-calendar-7.png' />
-                                </td>
-                                <td>
-                                <div className='description-title'>Weekly View</div> 
-                                <div className='description'>See the estimation of crowdedness at the chapter hall for a specific hour during each day of the upcoming week.</div>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {/*To be changed to svg when the svg fix is merged*/}
+                                        <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-connection-6.png' />
+                                    </td>
+                                    <td>
+                                        <div className='description-title'>Right Now</div> 
+                                        <div className='description'>See the current estimation of crowdedness at the chapter hall.</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-time-7.png' />
+                                    </td>
+                                    <td>
+                                    <div className='description-title'>Daily View</div> 
+                                    <div className='description'>See the estimation of crowdedness at the chapter hall for each hour and day during the upcoming week.</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <img src='https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-calendar-7.png' />
+                                    </td>
+                                    <td>
+                                    <div className='description-title'>Weekly View</div> 
+                                    <div className='description'>See the estimation of crowdedness at the chapter hall for a specific hour during each day of the upcoming week.</div>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table> 
                     </div>
                     <div className='coming-soon'>
