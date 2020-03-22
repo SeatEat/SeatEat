@@ -24,3 +24,16 @@
     display: inline-block;
 }
 
+.button-disabled {
+    cursor: default;
+    color: #aaa;
+    background-color: var(--theme-color-blue-dark);
+}
+.button-disabled:active {
+    background-color: var(--theme-color-red)
+}
+.button-disabled:hover {
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+}
