@@ -3,3 +3,13 @@
     justify-content: space-evenly;
     flex: 1;
 }
+
+@media (max-width: 850px) {
+    .view-navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--theme-color-green);
+        height: 60px;
+    }
+}

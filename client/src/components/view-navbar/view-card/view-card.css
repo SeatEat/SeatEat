@@ -1,6 +1,15 @@
 .view-card {
     cursor: pointer;
     -webkit-user-select: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.view-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .view-card svg {
@@ -8,15 +17,10 @@
     fill: var(--theme-color-blue-dark); 
 }
 
-.view-card-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .view-card-title {
+    padding: 10px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--theme-color-blue-dark); 
 }
 
@@ -28,4 +32,18 @@
    color: var(--theme-color-green);
 }
 
+@media (max-width: 850px) {
+    .view-card-title {
+        display: none;
+    }
+
+    .view-card svg {
+        height: 40px;
+    }
+
+    .view-card.active svg {
+        fill: var(--theme-color-yellow); 
+    }
+ 
+}
 
