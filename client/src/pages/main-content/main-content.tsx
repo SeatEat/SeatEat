@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
 import { views } from '../../model/views';
-import ChapterHallLogo from '../../components/chapter-hall-logo/chapter-hall-logo';
+import CrowdCurrent from '../../components/crowd-current/crowd-current';
 
 
 export interface MainContentStateProps {
@@ -49,7 +49,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                             {
                                 props.view === views.current.name
                                 ?
-                                    <ChapterHallLogo/>
+                                    <CrowdCurrent/>
                                 :
                                     <div className="main-content-content">
                                         <div className="main-content-graph">

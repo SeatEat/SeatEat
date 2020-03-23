@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import './chapter-hall-logo.css';
+import './crowd-current.css';
 import { AppState } from '../../model/redux/store';
-import ChapterHallText from "../chapter-hall-text/chapter-hall-text";
 import { CrowdEstimationData } from '../../model/crowd-estimation-model';
 import { ChapterHall } from '../../model/chapter-hall-model';
 
-type ChapterLogosProps = {
+type CrowdCurrentProps = {
     estimationData: CrowdEstimationData | null,
     chapterHall: ChapterHall | null,
 }
 
-const ChapterLogos: FC<ChapterLogosProps> = (props) => {
+const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
     const logos = props.chapterHall?.logos ? props.chapterHall?.logos : []
     const name = props.chapterHall?.name ? props.chapterHall?.name : []
-    const rate = props.estimationData?.getCurrentCrowdedness()
+    const rate = props.estimationData?.getCurrentCrowdedness() ? props.estimationData?.getCurrentCrowdedness() : 0
+    const percentList = [" 0-20%", " 20-40%", " 40-60%", " 60-80%", " 80-100%"]
     return (
         <div className="chapter-information-container">
             <div className="chapter-crowd-container">
@@ -32,38 +32,32 @@ const ChapterLogos: FC<ChapterLogosProps> = (props) => {
                 </div>
                 <div className="color-container">
                     <div className="circle-container">
-                        <div className="circle-1">
-                            <div className="hover-content-1">0-20%</div>
+                    {percentList.map((percent, index) => {
+                    return <>
+                        <div
+                            key={percent}
+                            className={"circle-" + index.toString()}>
+                            <div className={"hover-content-" + index.toString()}>{percent}</div>
                         </div>
-                        <div className="circle-2">
-                            <div className="hover-content-2">20-40%</div>
-                        </div>
-                        <div className="circle-3">
-                            <div className="hover-content-3">40-60%</div>
-                        </div>
-                        <div className="circle-4">
-                            <div className="hover-content-4">60-80%</div>
-                        </div>
-                        <div className="circle-5">
-                            <div className="hover-content-5">80-100%</div>
-                        </div>
+                    </>
+                })}
                     </div>
                 </div>
             </div>
             <div className="text-container">
-                <span className="chapter-hall-text"><ChapterHallText rate={rate} chapterHall={name}/></span>
+            <span className="chapter-hall-text">{name + " is estimated to be" + percentList[rate] + " full."}</span>
                 <span className="check-in-text">Check below to see how many people have checked in.</span>
             </div>
         </div>
     );
 }
 
-const mapStateToProps = (state: AppState): ChapterLogosProps => ({
+const mapStateToProps = (state: AppState): CrowdCurrentProps => ({
     estimationData: state.estimationState.estimationData,
     chapterHall: state.estimationState.chapterHall
 });
 
 export default connect(
   mapStateToProps,
-)(ChapterLogos);
+)(CrowdCurrent);
 

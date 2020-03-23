@@ -300,21 +300,20 @@ export class CrowdEstimationData {
         var maxCapacity = 100
         var hour = this.startDateOfEstimation.getHours()
         var percent = this.estimation[0][hour]/maxCapacity * 100
-        console.log(percent);
         if (percent >= 0 && percent < 20) {
-            return 1;
+            return 0;
         }
         else if (percent >= 20 && percent < 40) {
-            return 2;
+            return 1;
         }
         else if (percent >= 40 && percent < 60) {
-            return 3;
+            return 2;
         }
         else if (percent >= 60 && percent < 80) {
-            return 4;
+            return 3;
         }
         else  {
-            return 5;
+            return 4;
         }
 
     }
