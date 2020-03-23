@@ -19,34 +19,32 @@ const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
         <div className="chapter-information-container">
             <div className="chapter-crowd-container">
                 <div className="chapter-logo-container">
-                    {logos.map(logo => {
-                    return <>
-                    
+                    {logos.map(logo =>
                         <div
                             key={logo}
                             className="chapter-hall-logos">
                             <img className={`occupancy-scale-${rate}`} src={`/assets/chapter-logos/${logo}`} alt=""/>
                         </div>
-                    </>
-                })}
+                    )}
                 </div>
                 <div className="color-container">
                     <div className="circle-container">
-                    {percentList.map((percent, index) => {
-                    return <>
-                        <div
-                            key={percent}
-                            className={"circle-" + index.toString()}>
-                            <div className={"hover-content-" + index.toString()}>{percent}</div>
-                        </div>
-                    </>
-                })}
+                        {percentList.map((percent, index) => 
+                            <div
+                                key={percent}
+                                className={"circle-" + index.toString()}>
+                                <div className={"hover-content-" + index.toString()}>{percent}</div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
             <div className="text-container">
-            <span className="chapter-hall-text">{name + " is estimated to be" + percentList[rate] + " full."}</span>
-                <span className="check-in-text">Check below to see how many people have checked in.</span>
+                <span className="text">
+                    {name + " is estimated to be" + percentList[rate] + " full."}
+                    <br/>
+                    Check below to see how many people have checked in.
+                </span>
             </div>
         </div>
     );

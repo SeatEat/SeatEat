@@ -98,9 +98,9 @@
     font-family: 'Nunito', sans-serif;
 }
 
-.check-in-text {
-    display: flex;
-    flex-wrap: wrap;
+.text {
+    width: 80%;
+    text-align: center;
 }
 
 .occupancy-scale-0 {
