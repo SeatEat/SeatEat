@@ -13,7 +13,8 @@ import { useEffect } from 'react';
 import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
 import { views } from '../../model/views';
-import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
+import CrowdCurrent from '../../components/crowd-current/crowd-current';
+
 
 export interface MainContentStateProps {
     view: string,
@@ -48,7 +49,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                             {
                                 props.view === views.current.name
                                 ?
-                                    <CrowdMapConnect/>
+                                    <CrowdCurrent/>
                                 :
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
