@@ -4,10 +4,10 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { viewReducer, ViewActions } from './viewState'
 import { estmiationReducer, EstimationActions } from './estimationState';
 import { CrowdDataActions, crowdDataSliderReducer } from './crowdDataSliderState';
-import { checkInReducer } from './checkInState';
+import { checkInReducer, CheckInActions } from './checkInState';
 import { userReducer } from './userState';
 
-import { addCheckInListener } from '../firebase/checkInCalls'
+import { addCheckInListener } from '../check-in-model'
 
 const rootReducer = combineReducers({
     viewState: viewReducer,
@@ -20,7 +20,8 @@ const rootReducer = combineReducers({
 export type AppActions = 
     EstimationActions | 
     CrowdDataActions |
-    ViewActions;
+    ViewActions |
+    CheckInActions;
 
 export type AppState = ReturnType<typeof rootReducer>
 const store = createStore(

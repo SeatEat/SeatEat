@@ -5,32 +5,32 @@ import InputShell from "../input-shell/input-shell";
 import ExpandDown from '../../../assets/icons/expand-down.svg';
 import ExpandUp from '../../../assets/icons/expand-up.svg';
 
-export interface SelectOption {
-    value: string,
+export interface SelectOption<ValueType> {
+    value: ValueType,
     text: string,
     icon: string
 }
 
-interface SelectProps {
-    options: SelectOption[],
+interface SelectProps<ValueType> {
+    options: SelectOption<ValueType>[],
     placeholder: string,
     errorText: string | null,
-    onSelect: (option: SelectOption) => void,
+    onSelect: (value: ValueType) => void,
 }
 
-const Select: FC<SelectProps> = (props) => {
+const Select = <ValueType extends {}>(props: SelectProps<ValueType>) => {
 
     const [currentValue, setCurrentValue] = useState(props.options[0]);
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const onValueChange = (option: SelectOption) => {
+    const onValueChange = (option: SelectOption<ValueType>) => {
         setCurrentValue(option);
-        props.onSelect(option);
+        props.onSelect(option.value);
     }
 
-    const generateSelectOption = (option: SelectOption): React.ReactNode => {
+    const generateSelectOption = (option: SelectOption<ValueType>): React.ReactNode => {
         return <div
-            key={option.value}
+            key={option.text}
             className={`select-option ${option === currentValue ? 'selected' : ''}`}
             onClick={() => onValueChange(option)}>
             <div className="select-option-icon">

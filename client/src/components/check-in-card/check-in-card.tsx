@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
-import { CheckInPerson } from "../check-in-status/check-in-status";
-
 import './check-in-card.css';
-import ContentPadding from "../content-padding";
 
+import ContentPadding from "../content-padding";
 import ClockIcon from '../../assets/icons/clock.svg';
 
 interface CheckInCardProps {
-    checkInPerson: CheckInPerson
+    name: string,
+    checkInDate: Date,
+    checkInActivityLogo: string,
+    checkInActivityText: string,
 }
 
 const CheckInCard: FC<CheckInCardProps> = (props) => {
@@ -16,7 +17,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
 
     useEffect(() => {
         const timeoutID = setInterval(() => {
-            setMinutesFromCheckIn(props.checkInPerson.getMinutesFromCheckIn());
+            setMinutesFromCheckIn(getMinutesFromCheckIn(props.checkInDate));
         }, 5000);
         return () => {
             clearInterval(timeoutID);
@@ -45,15 +46,21 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
     }
 
     const renderCheckInTimeDescription = () => {
-        const minutes = props.checkInPerson.checkInTime.getMinutes();
-        const hour = props.checkInPerson.checkInTime.getHours();
+        const minutes = props.checkInDate.getMinutes();
+        const hour = props.checkInDate.getHours();
         return `Checked in ${hour < 10 ? `0${hour}` : hour}:${minutes < 10 ? `0${minutes}` : minutes}`
+    }
+
+    const getMinutesFromCheckIn = (checkInTime: Date): number => {
+        let currentDate = new Date();
+        let timeDiffMS = currentDate.getTime() - checkInTime.getTime();
+        return Math.floor(timeDiffMS / 1000 / 60);
     }
 
     return <div className="check-in-card-container">
         <ContentPadding>
             <div className="check-in-card-name">
-                {props.checkInPerson.name}
+                {props.name}
             </div>
             <div className="check-in-card-data-container">
                 {
@@ -65,9 +72,9 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
                 }
                 {
                     renderDataSection(
-                        props.checkInPerson.reason.logo,
+                        props.checkInActivityLogo,
                         'Activity',
-                        props.checkInPerson.reason.title
+                        props.checkInActivityText
                     )
                 }
             </div>

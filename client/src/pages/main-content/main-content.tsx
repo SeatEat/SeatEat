@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 
 import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
-import { views } from '../../model/views';
+import { views } from '../../model/views-model';
 import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
 import CheckInStatus from '../../components/check-in-status/check-in-status';
 
@@ -31,7 +31,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     useEffect(() => {
         if (nameOfChapter) {
-            props.onRequestEstimation(nameOfChapter);
+            // props.onRequestEstimation(nameOfChapter);
         }
     }, [nameOfChapter]);
 
@@ -42,7 +42,10 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
     return (
         <div className="main-content-container">
                 <div className="main-content">
-                    <CircularProgressIndicator
+                    <ContentPadding>
+                        <CheckInStatus/>
+                    </ContentPadding>
+                    {/* <CircularProgressIndicator
                         loadingIsDone={!props.isLoading}
                         progress={props.loadingProgress}>
                         <ContentPadding>
@@ -61,7 +64,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                     </div>
                             }
                         </ContentPadding>
-                    </CircularProgressIndicator>
+                    </CircularProgressIndicator> */}
                 </div>
                 <ViewNavbar/>
         </div>

@@ -1,12 +1,13 @@
-export interface UserAction {
-    type: string,
-    payload: User
-}
 
 export interface User {
     uid: string
 }
 
+
+export interface UserAction {
+    type: string,
+    payload: User
+}
 //Will be replaced by firebaseAuth
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
