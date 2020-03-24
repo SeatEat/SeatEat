@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
+import { CrowdEstimationData } from '../../model/crowd-estimation-model';
 import CircularProgressIndicator from '../../components/circular-progress-indicator/circular-progress-indicator';
+import BarGraph from '../../components/bar-graph/bar-graph';
 import CrowdDataSlider from '../../components/crowd-data-slider/crowd-data-slider-connect';
 import ContentPadding from '../../components/content-padding';
 import { useEffect } from 'react';
@@ -11,8 +13,7 @@ import { useEffect } from 'react';
 import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
 import { views } from '../../model/views';
-import CrowdCurrent from '../../components/crowd-current/crowd-current';
-
+import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
 
 export interface MainContentStateProps {
     view: string,
@@ -39,29 +40,29 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     return (
         <div className="main-content-container">
-                <div className="main-content">
-                    <CircularProgressIndicator
-                        loadingIsDone={!props.isLoading}
-                        progress={props.loadingProgress}>
-                        <ContentPadding>
-                            {
-                                props.view === views.current.name
-                                ?
-                                    <CrowdCurrent/>
-                                :
-                                    <div className="main-content-content">
-                                        <div className="main-content-graph">
-                                            <CrowdGraphConnect/>
-                                        </div>
-                                        <div className="main-content-slider">
-                                            <CrowdDataSlider/>
-                                        </div>
+            <div className="main-content">
+                <CircularProgressIndicator
+                    loadingIsDone={!props.isLoading}
+                    progress={props.loadingProgress}>
+                    <ContentPadding>
+                        {
+                            props.view === views.current.name
+                            ?
+                                <CrowdMapConnect/>
+                            :
+                                <div className="main-content-content">
+                                    <div className="main-content-graph">
+                                        <CrowdGraphConnect/>
                                     </div>
-                            }
-                        </ContentPadding>
-                    </CircularProgressIndicator>
-                </div>
-                <ViewNavbar/>
+                                    <div className="main-content-slider">
+                                        <CrowdDataSlider/>
+                                    </div>
+                                </div>
+                        }
+                    </ContentPadding>
+                </CircularProgressIndicator>
+            </div>
+            <ViewNavbar/>
         </div>
     )
 }
