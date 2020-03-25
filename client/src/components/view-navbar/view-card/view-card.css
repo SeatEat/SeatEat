@@ -1,28 +1,50 @@
-.view-card img {
+.view-card {
     cursor: pointer;
-    width: 50px;
-    filter: invert(13%) sepia(64%) saturate(2124%) hue-rotate(213deg) brightness(91%) contrast(93%);
+    -webkit-user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .view-card-content {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    height: 100%;
+}
+
+.view-card svg {
+    max-width: 50px;
+    fill: var(--theme-color-blue-dark); 
 }
 
 .view-card-title {
+    padding: 10px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--theme-color-blue-dark); 
 }
 
-.view-card.active img {
-    filter: invert(75%) sepia(23%) saturate(383%) hue-rotate(100deg) brightness(95%) contrast(97%);
+.view-card.active svg {
+    fill: var(--theme-color-green); 
 }
 
 .view-card.active .view-card-title {
-    filter: invert(75%) sepia(23%) saturate(383%) hue-rotate(100deg) brightness(95%) contrast(97%);
+    color: var(--theme-color-green);
 }
 
+@media (max-width: 850px) {
+    .view-card-title {
+        display: none;
+    }
 
+    .view-card svg {
+        height: 40px;
+    }
+
+    .view-card.active svg {
+        fill: var(--theme-color-yellow); 
+    }
+ 
+}
 

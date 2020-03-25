@@ -24,6 +24,7 @@
 
 @media (max-width: 850px) {
     .main-content {
-        margin-top: 55px;
+        padding-top: 55px;
+        padding-bottom: calc(70px + env(safe-area-inset-bottom))
     }
 }
