@@ -1,8 +1,9 @@
 import { Store } from "redux";
 import store, { AppActions, AppState } from "./store";
 import { Dispatch } from "react";
-import { addCheckIn, removeCheckIn, PersonCheckIn } from "../check-in-model";
+import { addCheckIn, removeCheckIn, PersonCheckIn, addCheckInListener } from "../check-in-model";
 import { CheckInActivityIDs } from "../../data/check-in-activities";
+import { ThunkAction } from "redux-thunk";
 
 const userCheckInDocIDLocalStorageName = 'userCheckInDocID'
 
@@ -16,6 +17,7 @@ export enum CheckInActionTypes {
 export interface CheckInState {
     checkInUser: {
         docID: string | null
+        chapterName: string | null,
         loading: boolean,
         userCheckedIn: boolean
     }
@@ -27,6 +29,7 @@ function loadInitCheckInState(): CheckInState {
     return {
         checkInUser: {
             docID: userDocID,
+            chapterName: null,
             loading: false,
             userCheckedIn: userDocID !== null
         },
@@ -48,16 +51,22 @@ export function setUserCheckInLoading(loading: boolean): SetUserCheckInLoadingAc
 
 export interface SetUserCheckInDataAction {
     type: CheckInActionTypes.SET_USER_CHECK_IN_DATA,
-    payload: string
+    payload: {
+        docID: string,
+        chapterName: string
+    }
 }
-export function setUserCheckInData(docID: string): SetUserCheckInDataAction {
+export function setUserCheckInData(docID: string, chapterName: string): SetUserCheckInDataAction {
 
     //Store the doc ID in local storage
     localStorage.setItem(userCheckInDocIDLocalStorageName, docID);
 
     return {
         type: CheckInActionTypes.SET_USER_CHECK_IN_DATA,
-        payload: docID
+        payload: {
+            docID: docID,
+            chapterName: chapterName
+        }
     }
 } 
 
@@ -74,13 +83,21 @@ export function removeUserCheckInData(): RemoveUserCheckInDataAction {
 
 
 export function requestUserCheckIn(name: string, type: CheckInActivityIDs) {
-    return (dispatch: Dispatch<AppActions>) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+
+        // Begin loading
         dispatch(setUserCheckInLoading(true));
-        addCheckIn(name, type).then((doc) => {
-            dispatch(setUserCheckInData(doc.id));
-        }).catch(() => {
-            /** TODO */
-        })
+
+        // Get active chapter
+        const chapterName = getState().estimationState.chapterHall?.name;
+        
+        if (chapterName) {
+            addCheckIn(name, type, chapterName).then((doc) => {
+                dispatch(setUserCheckInData(doc.id, chapterName));
+            }).catch(() => {
+                /** TODO */
+            });
+        }
     }
 }
 
@@ -91,6 +108,24 @@ export function requestUserCheckOut() {
         if (docID) {
             removeCheckIn(docID);
             dispatch(removeUserCheckInData());
+        }
+    }
+}
+
+
+let checkInUnsubscribe: Function;
+export function requestCheckInListener() {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+        // We need to unsubscribe to the last checkInListener
+        if (checkInUnsubscribe) {
+            checkInUnsubscribe();
+        }
+        const activeChapterName = getState().estimationState.chapterHall?.name;
+
+        if (activeChapterName) {
+            checkInUnsubscribe = addCheckInListener(activeChapterName, (checkIns) => {
+                dispatch(setCheckIns(checkIns));
+            });
         }
     }
 }
@@ -135,7 +170,8 @@ export const checkInReducer = (
             return {
                 ...state,
                 checkInUser: {
-                    docID: action.payload,
+                    docID: action.payload.docID,
+                    chapterName: action.payload.chapterName,
                     userCheckedIn: true,
                     loading: false
                 }

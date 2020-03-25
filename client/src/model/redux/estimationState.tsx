@@ -3,6 +3,7 @@ import { ChapterHall } from "../chapter-hall-model";
 import { Dispatch } from "react";
 import { AppActions, AppState } from "./store";
 import { updateSlideValue } from "./crowdDataSliderState";
+import { requestCheckInListener } from "./checkInState";
 
 export interface EstimationState {
     isLoading: boolean,
@@ -75,8 +76,9 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 }
 
 export function requestEstimation(chapterHall: ChapterHall) {
-    return (dispatch: Dispatch<AppActions>) => {
+    return (dispatch: Dispatch<any>) => {
         dispatch(startRequest(chapterHall));
+        
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),
             chapterHall.chapters,

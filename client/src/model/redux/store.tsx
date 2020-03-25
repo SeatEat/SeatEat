@@ -7,8 +7,6 @@ import { CrowdDataActions, crowdDataSliderReducer } from './crowdDataSliderState
 import { checkInReducer, CheckInActions } from './checkInState';
 import { userReducer } from './userState';
 
-import { addCheckInListener } from '../check-in-model'
-
 const rootReducer = combineReducers({
     viewState: viewReducer,
     estimationState: estmiationReducer,
@@ -29,7 +27,5 @@ const store = createStore(
     applyMiddleware(thunk as ThunkMiddleware<AppState, AppActions>)
 );
 
-addCheckInListener(store);
-  
 export default store;
 export type Dispatch = typeof store.dispatch

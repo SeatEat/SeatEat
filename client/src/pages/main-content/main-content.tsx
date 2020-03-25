@@ -31,7 +31,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
 
     useEffect(() => {
         if (nameOfChapter) {
-            // props.onRequestEstimation(nameOfChapter);
+            props.onRequestEstimation(nameOfChapter);
         }
     }, [nameOfChapter]);
 
@@ -43,17 +43,14 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
         <div className="main-content-container">
                 <div className="main-content">
                     <ContentPadding>
-                        <CheckInStatus/>
-                    </ContentPadding>
-                    {/* <CircularProgressIndicator
-                        loadingIsDone={!props.isLoading}
-                        progress={props.loadingProgress}>
-                        <ContentPadding>
-                            {
-                                props.view === views.current.name
-                                ?
-                                    <CheckInStatus/>
-                                :
+                        {
+                            props.view === views.current.name
+                            ?
+                                <CheckInStatus/>
+                            :
+                                <CircularProgressIndicator
+                                    loadingIsDone={!props.isLoading}
+                                    progress={props.loadingProgress}>
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
                                             <CrowdGraphConnect/>
@@ -62,9 +59,9 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                             <CrowdDataSlider/>
                                         </div>
                                     </div>
-                            }
-                        </ContentPadding>
-                    </CircularProgressIndicator> */}
+                                </CircularProgressIndicator>
+                        }
+                    </ContentPadding>
                 </div>
                 <ViewNavbar/>
         </div>

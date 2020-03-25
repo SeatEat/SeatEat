@@ -27,8 +27,8 @@ export interface PersonCheckIn {
     date: Date
 }
 
-export function addCheckInListener(store: Store): void {
-    db.collection(baseCollection).onSnapshot(function (collectionSnapshot) {
+export function addCheckInListener(chapterName: string, onChange: (checkIns: PersonCheckIn[]) => void): Function {
+    return db.collection(baseCollection).where('chapterName', '==', chapterName).onSnapshot(function (collectionSnapshot) {
         let checkIns: PersonCheckIn[] = [];
         collectionSnapshot.forEach((doc) => {
             const docData = doc.data();
@@ -39,15 +39,16 @@ export function addCheckInListener(store: Store): void {
                 type: docData['type']
             });
         });
-        store.dispatch(setCheckIns(checkIns));
+        onChange(checkIns);
     });
 }
 
-export async function addCheckIn(name: string, type: CheckInActivityIDs) {
+export async function addCheckIn(name: string, type: CheckInActivityIDs, chapterName: string) {
     let newDoc = db.collection(baseCollection).doc();
     await newDoc.set({
         name: name, 
-        type: type, 
+        type: type,
+        chapterName: chapterName,
         date: new Date().toISOString()
     });
     return newDoc;
