@@ -1,0 +1,23 @@
+.view-card-description {
+    position: relative;
+    text-align: left;
+    background-color: var(--theme-grey-color, #eee);
+}
+
+.view-card-description-title {
+    margin-bottom: 5px;
+    color: var(--theme-color-green);
+    font-weight: bold;
+}
+
+.view-card-description-description {
+    font-size: 15px;
+}
+
+.view-card-description-icon {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    transform: translate(25%, -25%)
+}
