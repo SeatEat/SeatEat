@@ -2,7 +2,8 @@
     cursor: pointer;
     -webkit-user-select: none;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .view-card-content {
@@ -29,7 +30,7 @@
 }
 
 .view-card.active .view-card-title {
-   color: var(--theme-color-green);
+    color: var(--theme-color-green);
 }
 
 @media (max-width: 850px) {
