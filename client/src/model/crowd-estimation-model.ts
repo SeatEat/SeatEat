@@ -296,7 +296,25 @@ export class CrowdEstimationData {
     /**
      * Get how crowded it is right now
      */
-    public getCurrentCrowdedness() {
+    public getCurrentCrowdedness(): number {
+        var maxCapacity = 100
+        var hour = this.startDateOfEstimation.getHours()
+        var percent = this.estimation[0][hour]/maxCapacity * 100
+        if (percent >= 0 && percent < 20) {
+            return 0;
+        }
+        else if (percent >= 20 && percent < 40) {
+            return 1;
+        }
+        else if (percent >= 40 && percent < 60) {
+            return 2;
+        }
+        else if (percent >= 60 && percent < 80) {
+            return 3;
+        }
+        else  {
+            return 4;
+        }
 
     }
 
@@ -426,14 +444,21 @@ export default class CrowdEstimationModel {
         return false;
     }
 
-    /** TODO, make API calls and stuff. After all fetching is done, return a nice CrowdEstimationData object :D */
+    /** Estimation chapter hall crowdedness */
     public static async estimateChapterCrowdedness(
         startDateOfEstimation: Date,
         chapterData: Chapter[],
         onProgress: (arg0: number) => void,
-        ): Promise < CrowdEstimationData > {
+        createCancelCallback: (arg0: Function) => void,
+        ): Promise < CrowdEstimationData | null> {
 
         const studyYear = CrowdEstimationModel.getActiveYearCodes();
+
+        // Creates a cancel callback
+        let shouldCancel = false;
+        createCancelCallback(() => {
+            shouldCancel = true;
+        });
 
         //Ugly code, want to do this better
         const startDate = new Date(startDateOfEstimation)
@@ -453,6 +478,11 @@ export default class CrowdEstimationModel {
                 for (let specIndex = 0; specIndex < programCohortResponse.Specs.length; specIndex++) {
                     let spec = programCohortResponse.Specs[specIndex];
                     const courses: any[] = spec.Electivity[0].Courses;
+
+                    // Check if we should cancel our estimation request
+                    if (shouldCancel) {
+                        return null;
+                    }
 
                     onProgress(
                         chapterData.indexOf(chapter) / chapterData.length +

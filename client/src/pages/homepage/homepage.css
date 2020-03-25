@@ -1,0 +1,42 @@
+.view-description {
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-bottom: 20px;
+    color: var(--theme-color-blue-dark);
+}
+
+.intro {
+    color: var(--theme-color-blue-dark);
+    padding-bottom: 15px;
+}
+
+.view-description img {
+   width: 80px;
+   filter: invert(75%) sepia(23%) saturate(383%) hue-rotate(100deg) brightness(95%) contrast(97%);
+}
+
+.description-title {
+    color: var(--theme-color-green);
+    font-weight: bold;
+}
+
+td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: left;
+    padding-left: 20px
+}
+
+h4 {
+    color: var(--theme-color-pink);
+    font-weight: bold;
+}
+
+.coming-soon p {
+    color: var(--theme-color-blue-dark);
+}
+
+.contact {
+    padding-top: 10px;
+    color: var(--theme-color-blue-dark);
+}

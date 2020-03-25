@@ -27,6 +27,8 @@ export enum EstimationActionTypes {
     SET_ESTIMATION_DATA = "SET_ESTIMATION_DATA",
 }
 
+let cancelLastEstimation: Function;
+
 // Start estimation request
 export interface RequestEstimationAction {
     type: EstimationActionTypes.REQUEST_ESTIMATION,
@@ -76,17 +78,23 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 }
 
 export function requestEstimation(chapterHall: ChapterHall) {
+
     return (dispatch: Dispatch<any>) => {
         dispatch(startRequest(chapterHall));
-        
+
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),
             chapterHall.chapters,
             (prog) => {
                 dispatch(updateProgress(prog))
+            },
+            (cancelCallback) => {
+                cancelLastEstimation = cancelCallback;
             }
-        ).then((data) => {
-            dispatch(setEstimationData(data));
+        ).then((data: CrowdEstimationData | null) => {
+            if (data) {
+                dispatch(setEstimationData(data));
+            }
         }).catch((response: Response) => {
             dispatch(setEstimationError(response.statusText));
         });

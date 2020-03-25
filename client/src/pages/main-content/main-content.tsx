@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import 'rc-slider/assets/index.css';
 import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
 import { views } from '../../model/views-model';
-import CrowdMapConnect from '../../components/crowd-map/crowd-map-connect';
+import CrowdCurrent from '../../components/crowd-current/crowd-current';
 import CheckInStatus from '../../components/check-in-status/check-in-status';
 
 export interface MainContentStateProps {
@@ -46,7 +46,10 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                         {
                             props.view === views.current.name
                             ?
-                                <CheckInStatus/>
+                                <>
+                                    <CheckInStatus/>
+                                    <CrowdCurrent/>
+                                </>
                             :
                                 <CircularProgressIndicator
                                     loadingIsDone={!props.isLoading}
