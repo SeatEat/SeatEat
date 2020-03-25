@@ -9,7 +9,8 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        background-color: var(--theme-color-green);
         height: 60px;
+        padding-bottom: env(safe-area-inset-bottom);
+        background-color: var(--theme-color-green);
     }
 }
