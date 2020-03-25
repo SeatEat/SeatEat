@@ -1,7 +1,9 @@
 .view-navbar {
     display: flex;
     justify-content: space-evenly;
+    align-items: stretch;
     flex: 1;
+    background-color: var(--theme-color-grey);
 }
 
 @media (max-width: 850px) {
