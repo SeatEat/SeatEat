@@ -30,7 +30,7 @@ export function setView(activeView: string) {
 
 export type ViewActions = SetActiveViewAction;
 
-export const ViewReducer = (
+export const viewReducer = (
     state: ViewState = { activeView: 'current' }, 
     action: SetActiveViewAction
 ): ViewState => {

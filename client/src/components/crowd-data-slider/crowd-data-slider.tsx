@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { CrowdEstimationData } from "../../model/crowd-estimation-model";
 import { monthNames } from "../../data/month-names";
 import DateSlider from "../date-slider/date-slider";
-import { views } from "../../model/views";
+import { views } from "../../model/views-model";
 import { SlideState } from "../../model/redux/crowdDataSliderState";
 
 export interface CrowdDataSliderPropsState {

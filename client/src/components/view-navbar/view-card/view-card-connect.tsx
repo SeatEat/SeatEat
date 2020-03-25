@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ViewCard, { ViewCardStateProps, ViewCardActionProps } from './view-card'
 import { Dispatch, AppState } from '../../../model/redux/store'
-import { ViewData } from '../../../model/views';
+import { ViewData } from '../../../model/views-model';
 import { setView } from '../../../model/redux/viewState';
 
 const mapStateToProps = (state: AppState, ownProps: {viewData: ViewData}): ViewCardStateProps => ({

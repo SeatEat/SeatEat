@@ -3,7 +3,7 @@ import './homepage.css';
 import ContentPadding from "../../components/content-padding";
 
 const Homepage: FC = (props) => {
-    return <div>
+    return (
         <ContentPadding>
             <div className="intro">
             <h1>Welcome to SeatEat!</h1>
@@ -49,7 +49,7 @@ const Homepage: FC = (props) => {
             For any questions regarding SeatEat, don't hesitate to contact us.   
             </div>    
         </ContentPadding>
-    </div>
+    )
 }
 
 export default Homepage;

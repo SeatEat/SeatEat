@@ -9,8 +9,8 @@
     transition: color 0.5s;
     cursor: pointer;
     text-decoration: none;
+    border-radius: var(--theme-shape-card-radius);
 
-    border-radius: 5px;
     overflow: hidden;
     background-color: var(--theme-color-yellow);
     color: var(--theme-color-blue-dark); 
