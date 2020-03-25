@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom';
 import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
-import { CrowdEstimationData } from '../../model/crowd-estimation-model';
 import CircularProgressIndicator from '../../components/circular-progress-indicator/circular-progress-indicator';
-import BarGraph from '../../components/bar-graph/bar-graph';
 import CrowdDataSlider from '../../components/crowd-data-slider/crowd-data-slider-connect';
 import ContentPadding from '../../components/content-padding';
 import { useEffect } from 'react';
@@ -47,8 +45,8 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                             props.view === views.current.name
                             ?
                                 <>
-                                    <CheckInStatus/>
                                     <CrowdCurrent/>
+                                    <CheckInStatus/>
                                 </>
                             :
                                 <CircularProgressIndicator
