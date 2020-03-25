@@ -1,8 +1,9 @@
 import BookIcon from '../assets/icons/book.svg';
 import EatIcon from '../assets/icons/eat.svg';
 import QuestionIcon from '../assets/icons/question.svg';
+import MeetingIcon from '../assets/icons/meeting.svg';
 
-export type CheckInActivityIDs = 'food' | 'study' | 'other';
+export type CheckInActivityIDs = 'food' | 'study' | 'other' | 'meeting';
 
 export interface CheckInActivity {
     id: CheckInActivityIDs,
@@ -25,5 +26,10 @@ export const checkInActivities: CheckInActivity[] = [
         id: 'other',
         title: 'Other',
         logo: QuestionIcon
+    },
+    {
+        id: 'meeting',
+        title: 'Meeting',
+        logo: MeetingIcon
     },
 ]
