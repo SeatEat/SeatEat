@@ -11,12 +11,9 @@
 }
 .button:hover {
     opacity: 0.9;
-
-    transform: translateY(-2px);
     box-shadow: var(--theme-shadow-normal-hover);
 }
 .button:active {
-    transform: translateY(0);
     background-color: var(--theme-color-pink);
 }
 

@@ -3,7 +3,7 @@
 .chapter-information-container {
     width: auto;
     height: 170px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--theme-color-grey);
     display: flex;
     flex-direction: row;
     align-items: center;
