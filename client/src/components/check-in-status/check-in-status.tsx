@@ -18,7 +18,8 @@ interface CheckInStatusProps {
     personsCheckedIn: PersonCheckIn[],
     currentChapter: ChapterHall | null,
     userIsCheckedIn: boolean,
-    userCheckInLoading: boolean
+    userCheckInLoading: boolean,
+    userCheckInChapterName: string | null,
 }
 
 interface CheckInStatusDispatch {
@@ -43,19 +44,19 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
     }
 
     const renderCheckInStatusButton = () => {
-        let buttonText = "";
+        let buttonText: React.ReactNode = "";
         let action: Function = () => {};
 
         if (props.userCheckInLoading) {
             buttonText = "Laddar";
         }
         else if (props.userIsCheckedIn) {
-            buttonText = "Check out";
+            buttonText = <span>Check out from <i>{props.userCheckInChapterName}</i></span>;
             action = props.onCheckOut;
         }
         else {
             action = openCheckInDialog;
-            buttonText = "Check in"
+            buttonText = <span>Check in to <i>{props.currentChapter?.name}</i></span>;
         }
 
         return <Button isCompact={true} onClick={action}>
@@ -96,7 +97,8 @@ export default connect(
         personsCheckedIn: state.checkInState.peopleCheckIn,
         currentChapter: state.estimationState.chapterHall,
         userCheckInLoading: state.checkInState.checkInUser.loading,
-        userIsCheckedIn: state.checkInState.checkInUser.userCheckedIn
+        userIsCheckedIn: state.checkInState.checkInUser.userCheckedIn,
+        userCheckInChapterName: state.checkInState.checkInUser.chapterName
     }),
     (dispatch: Dispatch): CheckInStatusDispatch => ({
         onCheckOut: () => dispatch(requestUserCheckOut())
