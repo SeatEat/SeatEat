@@ -7,10 +7,9 @@ import {
     Redirect
 } from "react-router-dom";
 
+import Homepage from './pages/homepage/homepage';
 import MainContentConnect from './pages/main-content/main-content-connect'
 import Navbar from './components/navbar/navbar'
-
-import ChapterHallData from './data/chapter-hall-data.json';
 
 function App() {
     return (
@@ -19,7 +18,7 @@ function App() {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={"/chapter/" + ChapterHallData[0].name}/>;
+                        <Homepage/>
                     </Route>
                     <Route path="/chapter/:nameOfChapter">
                         <MainContentConnect/>

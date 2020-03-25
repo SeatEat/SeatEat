@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import './view-card.css';
-import { ViewData } from "../../../model/views";
+import { ViewData } from "../../../model/views-model";
 
 export type ViewCardStateProps = {
     view: ViewData,

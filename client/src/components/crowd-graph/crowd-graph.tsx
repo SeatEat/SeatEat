@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { CrowdEstimationData } from "../../model/crowd-estimation-model";
-import { views } from "../../model/views";
+import { views } from "../../model/views-model";
 import BarGraph from "../bar-graph/bar-graph";
 import { monthNames } from "../../data/month-names";
 import { SlideState } from "../../model/redux/crowdDataSliderState";

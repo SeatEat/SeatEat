@@ -6,6 +6,9 @@
     --theme-color-red: #db001e;
     --theme-color-pink: #fb98ae;
 
+    --theme-shadow-normal: 0 3px 10px rgba(0, 0, 0, 0.15);
+    --theme-shadow-normal-hover: 0 5px 13px rgba(0, 0, 0, 0.2);
+
     --theme-text-bright: #ffffff; 
     --theme-text-dark: #000000;
 }

@@ -4,6 +4,7 @@ import { Dispatch } from '../../model/redux/store';
 import MainContent, { MainContentStateProps, MainContentActionProps } from './main-content';
 import { getChapterHallFromName } from '../../model/chapter-hall-model';
 import { requestEstimation } from '../../model/redux/estimationState';
+import { requestCheckInListener } from '../../model/redux/checkInState';
 
 const mapStateToProps = (state: AppState): MainContentStateProps => ({
     view: state.viewState.activeView,
@@ -15,6 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MainContentActionProps => ({
         let chapterHall = getChapterHallFromName(nameOfChapter);
         if (chapterHall) {
             dispatch(requestEstimation(chapterHall));
+            dispatch(requestCheckInListener());
         }
     }
 });
