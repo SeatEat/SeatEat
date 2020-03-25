@@ -1,6 +1,15 @@
 .check-in-card-container {
     border-radius: var(--theme-shape-card-radius);
     background-color: var(--theme-color-yellow);
+    opacity: 0;
+    transform: scale(1.2);
+    transition: 
+        opacity 0.5s ease, 
+        transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.check-in-card-container.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .check-in-card-name {

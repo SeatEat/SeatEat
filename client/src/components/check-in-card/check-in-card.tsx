@@ -14,6 +14,16 @@ interface CheckInCardProps {
 const CheckInCard: FC<CheckInCardProps> = (props) => {
 
     const [minutesFromCheckIn, setMinutesFromCheckIn] = useState(0);
+    const [showCard, setShowCard] = useState(false);
+
+    useEffect(() => {
+        const showCardTimeout = setTimeout(() => {
+            setShowCard(true);
+        }, 50);
+        return () => {
+            clearTimeout(showCardTimeout);
+        }
+    }, []);
 
     useEffect(() => {
         const timeoutID = setInterval(() => {
@@ -57,7 +67,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return Math.floor(timeDiffMS / 1000 / 60);
     }
 
-    return <div className="check-in-card-container">
+    return <div className={`check-in-card-container ${showCard ? 'active' : ''}`}>
         <ContentPadding>
             <div className="check-in-card-name">
                 {props.name}
