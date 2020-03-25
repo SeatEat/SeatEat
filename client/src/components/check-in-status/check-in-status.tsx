@@ -13,6 +13,8 @@ import { requestUserCheckOut, requestUserCheckIn } from "../../model/redux/check
 import { PersonCheckIn } from "../../model/check-in-model";
 import { checkInActivities } from "../../data/check-in-activities";
 
+import PeopleIcon from '../../assets/icons/person.svg';
+
 
 interface CheckInStatusProps {
     personsCheckedIn: PersonCheckIn[],
@@ -73,7 +75,10 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
             {
                 props.personsCheckedIn.length === 0
                 ?
-                    'No people have checked in'
+                    <div className="check-in-no-people"> 
+                        <img src={PeopleIcon} alt=""/>
+                        <h2>No people have currently checked in to {props.currentChapter?.name}</h2>
+                    </div>
                 :
                     props.personsCheckedIn.map((person) => {
                         const checkInActivity = getCheckInActivityByID(person.type);

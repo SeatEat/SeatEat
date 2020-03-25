@@ -50,3 +50,13 @@
 .check-in-card-data-description {
     font-size: 10px;
 }
+
+.check-in-no-people {
+    text-align: center;
+    opacity: 0.5;
+}
+.check-in-no-people img {
+    max-width: 100%;
+    width: 100px;
+    opacity: 0.25;
+}
