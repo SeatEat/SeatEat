@@ -1,0 +1,35 @@
+.view-card-description {
+    position: relative;
+    border-radius: var(--theme-shape-card-radius);
+    
+    text-align: left;
+    background-color: var(--theme-grey-color, #eee);
+}
+
+.view-card-description-title {
+    margin-bottom: 5px;
+    color: var(--theme-color-green);
+    font-weight: bold;
+}
+
+.view-card-description-description {
+    font-size: 15px;
+}
+
+.view-card-description-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(25%, -25%)
+}
+
+.view-card-description-icon {
+    font-size: 0;
+    background-color: #fff;
+    border-radius: 100%;
+}
+.view-card-description-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--theme-color-green);
+}
