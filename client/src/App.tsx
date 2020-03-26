@@ -8,8 +8,9 @@ import {
 } from "react-router-dom";
 
 import Homepage from './pages/homepage/homepage';
-import MainContentConnect from './pages/main-content/main-content-connect'
-import Navbar from './components/navbar/navbar'
+import MainContentConnect from './pages/main-content/main-content-connect';
+import Navbar from './components/navbar/navbar';
+import CookieMessage from './components/cookie-message/cookie-message';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                         <MainContentConnect/>
                     </Route>
                 </Switch>
+                <CookieMessage />
             </div>
         </Router>
     );

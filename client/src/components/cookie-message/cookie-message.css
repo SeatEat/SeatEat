@@ -1,0 +1,9 @@
+.cookie-message-accept .button {
+    color: var(--theme-color-yellow-light);
+    background: var(--theme-color-blue-dark);
+}
+
+.cookie-message-decline .button {
+    color: var(--theme-color-yellow-light);
+    background: var( --theme-color-red);
+}
