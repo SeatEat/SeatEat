@@ -35,6 +35,8 @@ Used to wrap content in a div that centers it.
 Returns a chapter-map, indicating its crowdedness by its color. The crowdedness level and blueprint image is provided by props.
 * **circular-progress-indicator**  
 A circular "spinner", used to track loading progress.
+* **cookie-message**  
+A bar that informs the user that SeatEat is using cookies. The user can accept or decline the usage of cookies.
 * **crowd-data-slider**  
 Slider to be used with the bar graph.
 * **crowd-graph**  
