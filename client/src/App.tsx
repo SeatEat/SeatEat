@@ -7,11 +7,9 @@ import {
     Redirect
 } from "react-router-dom";
 
+import Homepage from './pages/homepage/homepage';
 import MainContentConnect from './pages/main-content/main-content-connect'
 import Navbar from './components/navbar/navbar'
-
-import ChapterHallData from './data/chapter-hall-data.json';
-import Homepage from './pages/homepage/homepage';
 
 function App() {
     return (

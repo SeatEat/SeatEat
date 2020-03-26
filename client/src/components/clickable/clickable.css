@@ -1,0 +1,10 @@
+.clickable {
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.clickable:hover {
+    transform: translateY(-2px);
+}
+.clickable:active {
+    transform: translateY(0);
+}

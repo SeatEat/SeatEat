@@ -180,9 +180,18 @@
     .bar-graph-limit-text {
         transform: translateX(50%);
     }
+
+    .bar-graph-bar-ground-unit {
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media (max-width: 450px) {
+    .bar-graph-bar-ground-unit {
+        font-size: 12px;
+    }
+
     .bar-graph-bar-value-unit:nth-child(2n),
     .bar-graph-bar-value-unit:nth-child(4n + 1) {
         opacity: 0;
