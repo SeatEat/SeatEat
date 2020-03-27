@@ -70,7 +70,7 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
         <h1>People currently checked in</h1>
         <br />
         {renderCheckInStatusButton()}
-        <br /><br />
+        <br />
         <div className="check-in-status-cards">
             {
                 props.personsCheckedIn.length === 0

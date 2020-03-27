@@ -80,6 +80,13 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 export function requestEstimation(chapterHall: ChapterHall) {
 
     return (dispatch: Dispatch<any>) => {
+
+        // We do not want the last estimation to keep going if 
+        // a new estimation request is requested
+        if (cancelLastEstimation) {
+            cancelLastEstimation();
+        }
+
         dispatch(startRequest(chapterHall));
 
         CrowdEstimationModel.estimateChapterCrowdedness(

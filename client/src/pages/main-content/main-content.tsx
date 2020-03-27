@@ -46,6 +46,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                             ?
                                 <>
                                     <CrowdCurrent/>
+                                    <br />
                                     <CheckInStatus/>
                                 </>
                             :
