@@ -1,9 +1,24 @@
-.cookie-message-accept .button {
-    color: var(--theme-color-yellow-light);
-    background: var(--theme-color-blue-dark);
+.cookie-container {
+    align-items: baseline;
+    background: var(--theme-color-dark-grey);
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    left: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    bottom: 0px;
 }
 
-.cookie-message-decline .button {
-    color: var(--theme-color-yellow-light);
-    background: var( --theme-color-red);
+.cookie-content {
+    color: var(--theme-text-bright);
+    padding: 20px;
+}
+
+@media (max-width: 850px) {
+    .cookie-container .clickable .button {
+        margin-right: 20px;
+        transform: translateY(50%);
+     }
 }
