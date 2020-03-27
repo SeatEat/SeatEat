@@ -34,9 +34,6 @@ const Navbar = () => {
                         })
                     }
                 </div>
-                <div className='navbar-footer'>
-                    this is the navbar footer
-                </div>
             </div>
         </div>
     );

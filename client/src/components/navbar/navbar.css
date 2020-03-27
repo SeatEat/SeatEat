@@ -32,11 +32,6 @@
     display: none;
 }
 
-.navbar-footer {
-    width: 100%;
-    flex: 1;
-}
-
 .navbar-logo {
     width: 100%;
 }
