@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import './select.css';
 import InputShell from "../input-shell/input-shell";
 

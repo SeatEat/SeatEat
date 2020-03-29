@@ -1,4 +1,4 @@
-import { ChapterHall, Chapter } from "./chapter-hall-model";
+import { Chapter } from "./chapter-hall-model";
 
 /** A period should only be 1, 2, 3 or 4 */
 type period = 1 | 2 | 3 | 4;
@@ -491,7 +491,7 @@ export default class CrowdEstimationModel {
                     );
 
                     // We only want to check active courses
-                    if (yearCode.currentStudyYear != spec.StudyYear) {
+                    if (yearCode.currentStudyYear !== spec.StudyYear) {
                         continue;
                     }
     

@@ -1,6 +1,4 @@
-import { Store } from "redux";
 import { db } from "./firebase-model"
-import {setCheckIns, CheckInState } from "./redux/checkInState"
 import { CheckInActivityIDs } from "../data/check-in-activities";
 
 const baseCollection = "CheckIn";

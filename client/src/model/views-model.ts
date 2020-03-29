@@ -1,5 +1,3 @@
-import connectionIcon from '../assets/icons/iconmonstr-connection-6.svg'
-
 export class ViewData {
     constructor(
         public name: string,

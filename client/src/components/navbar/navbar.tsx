@@ -29,6 +29,7 @@ const Navbar = () => {
                     {
                         ChapterData.map((chapter) => {
                             return <ChapterHallCard 
+                                key={chapter.name}
                                 chapterHall={chapter}
                                 onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}/>
                         })

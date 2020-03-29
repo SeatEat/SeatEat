@@ -1,6 +1,5 @@
 import { AppActions } from "./store";
 import { Dispatch } from "react";
-import { updateSlideValue } from "./crowdDataSliderState";
 
 export interface ViewState {
     activeView: string,
