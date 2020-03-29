@@ -38,11 +38,11 @@ Used to wrap content in a div that centers it.
 * **chapter-hall-card**
 A card with a link to a chapter hall view
 * **check-in-card**
-TODO
+A card that shows info about a checked in person.
 * **check-in-form**
-TODO
+A form that allows the active user to check in to a the active chapter hall.
 * **check-in-status**
-TODO
+A page that show what people is checked in in the current state as well as the check in status of the active user.
 * **circular-progress-indicator**  
 A circular "spinner", used to track loading progress.
 * **clickable**
@@ -97,7 +97,7 @@ Contains types and functions related to the chapter halls
 * **crowd-estimation-model**  
 The estimation model consists of different classes that fetches data from the KTH API to estimate the crowds of different chapter halls.
 * **firebase-model**
-TODO
+Creates an Firestore instance from the Firebase API.
 * **views-model**  
 The different available views are located here and can be used by different parts of the app. Their icons are stored as svg paths.
 
