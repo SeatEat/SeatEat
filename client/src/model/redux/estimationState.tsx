@@ -1,9 +1,6 @@
 import CrowdEstimationModel, { CrowdEstimationData } from "../crowd-estimation-model";
 import { ChapterHall } from "../chapter-hall-model";
 import { Dispatch } from "react";
-import { AppActions, AppState } from "./store";
-import { updateSlideValue } from "./crowdDataSliderState";
-import { requestCheckInListener } from "./checkInState";
 
 export interface EstimationState {
     isLoading: boolean,

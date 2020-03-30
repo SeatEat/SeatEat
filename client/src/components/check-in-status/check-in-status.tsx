@@ -9,7 +9,7 @@ import { useDialogService } from "../dialog/dialog";
 import { ChapterHall } from "../../model/chapter-hall-model";
 import Button from "../button/button";
 import CheckInForm from "../check-in-form/check-in-form";
-import { requestUserCheckOut, requestUserCheckIn } from "../../model/redux/checkInState";
+import { requestUserCheckOut } from "../../model/redux/checkInState";
 import { PersonCheckIn } from "../../model/check-in-model";
 import { checkInActivities } from "../../data/check-in-activities";
 

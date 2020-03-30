@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import './circular-progress-indicator.css';
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
