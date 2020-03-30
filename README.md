@@ -31,25 +31,25 @@ Assets contain images such as the logotype.
 Here we have functional components that can be used in different parts of the app. 
 * **bar-graph**  
 The bar graph that can be used for both the daily and weekly views by providing it with different props. 
-* **button**
+* **button**  
 A stylized button used for check in, cookie accept message etc.
 * **center-content**  
 Used to wrap content in a div that centers it.
-* **chapter-hall-card**
+* **chapter-hall-card**  
 A card with a link to a chapter hall view
-* **check-in-card**
+* **check-in-card**  
 A card that shows info about a checked in person.
-* **check-in-form**
+* **check-in-form**  
 A form that allows the active user to check in to a the active chapter hall.
-* **check-in-status**
+* **check-in-status**  
 A page that show what people is checked in in the current state as well as the check in status of the active user.
 * **circular-progress-indicator**  
 A circular "spinner", used to track loading progress.
-* **clickable**
+* **clickable**  
 Used to surround clickable buttons.
 * **cookie-message**  
 A bar that informs the user that SeatEat is using cookies.
-* **crowd-current**
+* **crowd-current**  
 Used to show information about the current estimated crowd.
 * **crowd-data-slider**  
 Slider to be used with the bar graph.
@@ -57,21 +57,21 @@ Slider to be used with the bar graph.
 Uses bar-graph to display a graph of the crowdedness.
 * **date-slider**  
 Slider to be used with the bar graph for dates.
-* **dialog**
+* **dialog**  
 Used to open a dialog (modal) window.
-* **form**
+* **form**  
 Contains FC:s for form elements such as input and select.
 * **hamburger-button**  
 Returns a hamburger button used to show the navbar on mobile.
 * **navbar**  
 The navbar provides links to each chapter hall. Uses `NavLink` from `react-router-dom`.
-* **view-card-description**
+* **view-card-description**  
 Used to explain the different views on the homepage.
 * **view-navbar**  
 A navbar to switch between different chapter hall views. The view cards (used to switch views) dispatch their respective view to the redux store.
 * **content-padding**  
 Used to wrap content in a div with padding.
-* **page-container**
+* **page-container**  
 Used to wrap content on a page.
 
 ### credentials
@@ -92,17 +92,17 @@ Contains an array with month names
 ### model
 * **redux**  
 The redux store, reducers, actions and their related functions are located here.
-* **chapter-hall-model**
+* **chapter-hall-model**  
 Contains types and functions related to the chapter halls
 * **crowd-estimation-model**  
 The estimation model consists of different classes that fetches data from the KTH API to estimate the crowds of different chapter halls.
-* **firebase-model**
+* **firebase-model**  
 Creates an Firestore instance from the Firebase API.
 * **views-model**  
 The different available views are located here and can be used by different parts of the app. Their icons are stored as svg paths.
 
 ### pages
-* **homepage**
+* **homepage**  
 A homepage which is used as an introduction to the webapp and contains information about usage.
 * **main-content**  
 The main-content-connect uses react-redux's `connect` to connect the view state to the main content page which displays different content depending on the view.
