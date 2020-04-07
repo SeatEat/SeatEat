@@ -52,7 +52,8 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                             :
                                 <CircularProgressIndicator
                                     loadingIsDone={!props.isLoading}
-                                    progress={props.loadingProgress}>
+                                    progress={props.loadingProgress}
+                                    activeChapterHallName={nameOfChapter}>
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
                                             <CrowdGraphConnect/>
