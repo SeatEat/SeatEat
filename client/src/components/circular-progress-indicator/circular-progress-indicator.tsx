@@ -4,10 +4,10 @@ import './circular-progress-indicator.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const CircularProgressIndicator: FC<{progress: number, loadingIsDone: boolean}> = (props) => {
+const CircularProgressIndicator: FC<{progress: number, loadingIsDone: boolean, noPadding: boolean}> = (props) => {
 
     return <div className="circular-progress-indicator">
-        <div className={"circular-progress-indicator-loading " + (props.loadingIsDone ? "loading-done" : "")}>
+        <div className={"circular-progress-indicator-loading " + (props.loadingIsDone ? "loading-done" : "") + " " + (props.noPadding ? "no-padding" : "")}>
             <div className="circular-progress-indicator-loading-item">
                 <CircularProgressbar 
                     value={props.progress} 

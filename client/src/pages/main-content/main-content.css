@@ -1,3 +1,8 @@
+.current-crowd-container{
+    position: relative;
+    height: 170px;
+}
+
 .main-content-container {
     display: flex;
     flex-direction: column;
@@ -26,5 +31,9 @@
     .main-content {
         padding-top: 55px;
         padding-bottom: calc(70px + env(safe-area-inset-bottom))
+    }
+
+    .current-crowd-container{
+        height: 100px;
     }
 }
