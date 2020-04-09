@@ -57,9 +57,10 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
             buttonTextCheckOut = "Loading";
         }
         else if (props.userIsCheckedIn) {
-            buttonTextCheckOut = <span>Check out from <i>{props.currentChapter?.name}</i></span>;
+            buttonTextCheckOut = <span>Check out from <i>{props.userCheckInChapterName ? props.userCheckInChapterName : props.currentChapter?.name}</i></span>;
             disableCheckIn = true;
             action = props.onCheckOut;
+            
         }
         else {
             action = openCheckInDialog;
