@@ -67,10 +67,12 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
             disableCheckOut = true;
         }
 
-        return  <div className="button-container">
-                    <Button isCompact={true}  onClick={action} disabled={disableCheckIn}>
-                        {buttonTextCheckIn}
-                    </Button>
+        return  <div className="check-in-status-button-container">
+                    <div className="check-in-button">
+                        <Button isCompact={true}  onClick={action} disabled={disableCheckIn}>
+                            {buttonTextCheckIn}
+                        </Button>
+                    </div>
                     <Button isCompact={true}  onClick={action} disabled={disableCheckOut}>
                         {buttonTextCheckOut}
                     </Button>

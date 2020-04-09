@@ -2,13 +2,13 @@
     text-align: left;
 }
 
-.button-container {
+.check-in-status-button-container {
     display: flex;
     flex-direction: row;
 }
 
-.button-container * {
-    margin-right: 10px;
+.check-in-button {
+    margin-right: 5px;
 }
 
 .check-in-status-cards {
@@ -18,7 +18,7 @@
 }
 
 @media (max-width: 850px) {
-    .button-container * {
+    .check-in-button  {
         margin-right: 2%;
     }
 }
