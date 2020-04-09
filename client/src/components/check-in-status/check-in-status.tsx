@@ -53,14 +53,13 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
         let action: Function = () => {};
 
         if (props.userCheckInLoading) {
-            buttonTextCheckIn = "Laddar";
-            buttonTextCheckOut = "Laddar";
+            buttonTextCheckIn = "Loading";
+            buttonTextCheckOut = "Loading";
         }
         else if (props.userIsCheckedIn) {
-            buttonTextCheckOut = <span>Check out from <i>{props.userCheckInChapterName}</i></span>;
+            buttonTextCheckOut = <span>Check out from <i>{props.currentChapter?.name}</i></span>;
             disableCheckIn = true;
             action = props.onCheckOut;
-            
         }
         else {
             action = openCheckInDialog;
