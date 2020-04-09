@@ -25,6 +25,8 @@
     cursor: default;
     color: #aaa;
     background-color: var(--theme-color-blue-dark);
+    pointer-events: none;
+    user-select: none;
 }
 .button-disabled:active {
     background-color: var(--theme-color-red)
