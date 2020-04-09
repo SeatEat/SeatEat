@@ -46,34 +46,24 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
     }
 
     const renderCheckInStatusButton = () => {
-        let buttonTextCheckIn: React.ReactNode = <span>Check in to <i>{props.currentChapter?.name}</i></span>;
-        let buttonTextCheckOut: React.ReactNode = <span>Check out from <i>{props.currentChapter?.name}</i></span>;
-        let disableCheckIn = false;
-        let disableCheckOut = false;
+        let buttonText: React.ReactNode = "";
         let action: Function = () => {};
 
         if (props.userCheckInLoading) {
-            buttonTextCheckIn = "Loading";
-            buttonTextCheckOut = "Loading";
+            buttonText = "Laddar";
         }
         else if (props.userIsCheckedIn) {
-            buttonTextCheckOut = <span>Check out from <i>{props.currentChapter?.name}</i></span>;
-            disableCheckIn = true;
+            buttonText = <span>Check out from <i>{props.userCheckInChapterName}</i></span>;
             action = props.onCheckOut;
         }
         else {
             action = openCheckInDialog;
-            disableCheckOut = true;
+            buttonText = <span>Check in to <i>{props.currentChapter?.name}</i></span>;
         }
 
-        return  <div className="button-container">
-                    <Button isCompact={true}  onClick={action} disabled={disableCheckIn}>
-                        {buttonTextCheckIn}
-                    </Button>
-                    <Button isCompact={true}  onClick={action} disabled={disableCheckOut}>
-                        {buttonTextCheckOut}
-                    </Button>
-                </div>
+        return <Button isCompact={true} onClick={action}>
+            {buttonText}
+        </Button>
     }
 
     return <div className="check-in-status-container">
