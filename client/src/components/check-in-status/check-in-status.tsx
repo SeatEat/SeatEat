@@ -9,6 +9,7 @@ import { useDialogService } from "../dialog/dialog";
 import { ChapterHall } from "../../model/chapter-hall-model";
 import Button from "../button/button";
 import CheckInForm from "../check-in-form/check-in-form";
+import ConfirmCheckOut from "../confirm-check-out/confirm-check-out";
 import { requestUserCheckOut } from "../../model/redux/checkInState";
 import { PersonCheckIn } from "../../model/check-in-model";
 import { checkInActivities } from "../../data/check-in-activities";
@@ -24,11 +25,7 @@ interface CheckInStatusProps {
     userCheckInChapterName: string | null,
 }
 
-interface CheckInStatusDispatch {
-    onCheckOut: Function
-}
-
-const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) => {
+const CheckInStatus: FC<CheckInStatusProps> = (props) => {
 
     const confirm = useDialogService()
     const openCheckInDialog = () => {
@@ -36,6 +33,14 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
             content: (closeDialog => <CheckInForm
                 closeDialog={closeDialog}
                 currentChapter={props.currentChapter} />),
+        });
+    }
+
+    const openCheckOutDialog = () => {
+        confirm ({
+            content: (closeDialog => <ConfirmCheckOut
+                closeDialog={closeDialog}
+                currentChapterHall={props.userCheckInChapterName}/>)
         });
     }
 
@@ -54,7 +59,7 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
         }
         else if (props.userIsCheckedIn) {
             buttonText = <span>Check out from <i>{props.userCheckInChapterName}</i></span>;
-            action = props.onCheckOut;
+            action = openCheckOutDialog;
         }
         else {
             action = openCheckInDialog;
@@ -104,8 +109,5 @@ export default connect(
         userCheckInLoading: state.checkInState.checkInUser.loading,
         userIsCheckedIn: state.checkInState.checkInUser.userCheckedIn,
         userCheckInChapterName: state.checkInState.checkInUser.chapterName
-    }),
-    (dispatch: Dispatch): CheckInStatusDispatch => ({
-        onCheckOut: () => dispatch(requestUserCheckOut())
     })
 )(CheckInStatus);
