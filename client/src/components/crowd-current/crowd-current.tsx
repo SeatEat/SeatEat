@@ -8,6 +8,8 @@ import { ChapterHall } from '../../model/chapter-hall-model';
 type CrowdCurrentProps = {
     estimationData: CrowdEstimationData | null,
     chapterHall: ChapterHall | null,
+    isLoading: boolean,
+    loadingProgress: number,
 }
 
 const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
@@ -52,7 +54,9 @@ const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
 
 const mapStateToProps = (state: AppState): CrowdCurrentProps => ({
     estimationData: state.estimationState.estimationData,
-    chapterHall: state.estimationState.chapterHall
+    chapterHall: state.estimationState.chapterHall,
+    isLoading: state.estimationState.isLoading,
+    loadingProgress: Math.round(state.estimationState.loadingProgress * 100)
 });
 
 export default connect(

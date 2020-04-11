@@ -11,7 +11,11 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = (props) => {
     return <Clickable disabled={props.disabled ?? false}>
         <div 
-            onClick={() => props.onClick()} 
+            onClick={() => {
+                if (!props.disabled) {
+                    props.onClick();
+                }
+            }} 
             className={
                 `button 
                 ${props.isCompact ? 'button-compact' : ''}

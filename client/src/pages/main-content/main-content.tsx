@@ -44,15 +44,23 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                         {
                             props.view === views.current.name
                             ?
-                                <>
-                                    <CrowdCurrent/>
+                                <>  
+                                    <div className="current-crowd-container">
+                                        <CircularProgressIndicator
+                                        loadingIsDone={!props.isLoading}
+                                        progress={props.loadingProgress}
+                                        noPadding={true}>
+                                            <CrowdCurrent/>
+                                        </CircularProgressIndicator>
+                                    </div>
                                     <br />
                                     <CheckInStatus/>
                                 </>
                             :
                                 <CircularProgressIndicator
                                     loadingIsDone={!props.isLoading}
-                                    progress={props.loadingProgress}>
+                                    progress={props.loadingProgress}
+                                    noPadding={false}>
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
                                             <CrowdGraphConnect/>

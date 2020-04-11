@@ -2,8 +2,23 @@
     text-align: left;
 }
 
+.check-in-status-button-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.check-in-button {
+    margin-right: 10px;
+}
+
 .check-in-status-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
     gap: 15px;
+}
+
+@media (max-width: 850px) {
+    .check-in-button  {
+        margin-right: 2%;
+    }
 }
