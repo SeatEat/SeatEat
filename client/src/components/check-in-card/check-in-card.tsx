@@ -9,6 +9,7 @@ interface CheckInCardProps {
     checkInDate: Date,
     checkInActivityLogo: string,
     checkInActivityText: string,
+    isOwnedByUser: boolean
 }
 
 const CheckInCard: FC<CheckInCardProps> = (props) => {
@@ -67,7 +68,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return Math.floor(timeDiffMS / 1000 / 60);
     }
 
-    return <div className={`check-in-card-container ${showCard ? 'active' : ''}`}>
+    return <div className={`check-in-card-container ${props.isOwnedByUser ? 'owned-by-user' : ''} ${showCard ? 'active' : ''}`}>
         <ContentPadding>
             <div className="check-in-card-name">
                 {props.name}

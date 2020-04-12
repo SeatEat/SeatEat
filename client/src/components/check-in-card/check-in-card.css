@@ -12,6 +12,17 @@
     transform: scale(1);
 }
 
+.check-in-card-container.owned-by-user {
+    opacity: 1;
+    transform: scale(1);
+    background-color: var(--theme-color-blue-dark);
+    color: var(--theme-color-yellow-light);
+}
+.check-in-card-container.owned-by-user .check-in-card-data {
+    background-color: var(--theme-color-green);
+    color: var(--theme-color-blue-dark);
+}
+
 .check-in-card-name {
     font-weight: bold;
 }
