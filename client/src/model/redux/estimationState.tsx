@@ -100,7 +100,7 @@ export function requestEstimation(chapterHall: ChapterHall) {
                 dispatch(setEstimationData(data));
             }
         }).catch((response: Response) => {
-            dispatch(setEstimationError(response.statusText));
+            dispatch(setEstimationError('Estimation failed to load'));
         });
     }
 }

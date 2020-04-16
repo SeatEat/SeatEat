@@ -1,0 +1,10 @@
+.error-bar-text {
+    color: var(--theme-color-red);
+}
+
+.error-bar-button {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+}
