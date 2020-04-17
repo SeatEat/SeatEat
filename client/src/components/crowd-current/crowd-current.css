@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+:root{
+    --rate-color-dark-green: #13b813;
+    --rate-color-ligh-green: #9acd32;
+    --rate-color-yellow: #ffd000;
+    --rate-color-orange:  #fc8c53;
+    --rate-color-red: #fa4538;
 
+}
 .chapter-information-container {
     width: auto;
-    height: 170px;
+    height: 180px;
     background-color: var(--theme-color-grey);
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-radius: 10px;
-    
+    border-radius: 10px; 
 }
 
 .chapter-crowd-container {
@@ -40,16 +45,18 @@
     width: 300px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-bottom: 2%;
 }
 
 .circle-container {
-    width: 150px;
+    width: 160px;
+    height: 100%;
     display: flex;
     justify-content: space-between;
-    font-family: 'Nunito', sans-serif;
+    align-items: center;
     font-weight: bold;
     font-size: 10px;
+   
 }
 
 .circle-0, .circle-1, .circle-2, .circle-3, .circle-4{
@@ -58,34 +65,45 @@
     border-radius: 50%;
 }
 
+.circle-0.current-percent, .circle-1.current-percent, .circle-2.current-percent, .circle-3.current-percent, .circle-4.current-percent{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    box-shadow: var(--theme-shadow-normal);
+}
+
 .hover-content-0, .hover-content-1, .hover-content-2, .hover-content-3, .hover-content-4{
     display: none;
-    width: 50px;
-    padding-top: 25px;
+    width: 60px;
+    padding-top: 30px;
 }
 
-.circle-0:hover .hover-content-0,.circle-1:hover .hover-content-1, .circle-2:hover .hover-content-2, .circle-3:hover .hover-content-3, .circle-4:hover .hover-content-4{
-    display: block;
+.hover-content-0.current-percent, .hover-content-1.current-percent, .hover-content-2.current-percent, .hover-content-3.current-percent, .hover-content-4.current-percent{
+    padding-top: 35px;
 }
 
-.circle-0 {
-    background-color: #13b813;
+.circle-0:hover .hover-content-0, .circle-1:hover .hover-content-1, .circle-2:hover .hover-content-2, .circle-3:hover .hover-content-3, .circle-4:hover .hover-content-4{
+    display: flex;
+}
+
+.circle-0  {
+    background-color: var(--rate-color-dark-green);
 }
 
 .circle-1 {
-    background-color: #9acd32;
+    background-color: var(--rate-color-ligh-green);
 }
 
 .circle-2 {
-    background-color: #ffd000;
+    background-color: var(--rate-color-yellow);
 }
 
 .circle-3{
-    background-color: #fc8c53;
+    background-color: var(--rate-color-orange);
 }
 
 .circle-4 {
-    background-color: #fa4538;
+    background-color: var(--rate-color-red);
 }
 
 .text-container {
@@ -96,12 +114,31 @@
     align-items: center;
     flex-direction: column;
     font-weight: bold;
-    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
 }
 
-.text {
-    width: 80%;
-    text-align: center;
+.text-percent-0, .text-percent-1, .text-percent-2, .text-percent-3, .text-percent-4 {
+    font-size: 25px;
+}
+
+.text-percent-0 {
+    color: var(--rate-color-dark-green);
+}
+
+.text-percent-1 {
+    color: var(--rate-color-ligh-green);
+}
+
+.text-percent-2 {
+    color: var(--rate-color-yellow);
+}
+
+.text-percent-3 {
+    color: var(--rate-color-orange);
+}
+
+.text-percent-4 {
+    color: var(--rate-color-red);
 }
 
 .occupancy-scale-0 {
@@ -149,8 +186,17 @@
         width: 10px;
     }
 
+    .circle-0.current-percent, .circle-1.current-percent, .circle-2.current-percent, .circle-3.current-percent, .circle-4.current-percent{
+        height: 15px;
+        width: 15px;
+    }
+
     .text-container {
         font-size: 10px;
         padding-right: 5px;
+    }
+
+    .text-percent-0, .text-percent-1, .text-percent-2, .text-percent-3, .text-percent-4 {
+        font-size: 15px;
     }
 }
