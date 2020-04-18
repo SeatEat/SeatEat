@@ -39,5 +39,5 @@ const kickOutAllUsers = require('./kick-out-cron.js');
 var CronJob = require('cron').CronJob;
 var job = new CronJob('0 0 * * *', function() {
   kickOutAllUsers();
-}, null, true, 'Sweden/Stockholm');
+}, null, true, 'Europe/Stockholm');
 job.start();
