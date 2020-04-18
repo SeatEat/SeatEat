@@ -1,11 +1,3 @@
-:root{
-    --rate-color-dark-green: #13b813;
-    --rate-color-ligh-green: #9acd32;
-    --rate-color-yellow: #ffd000;
-    --rate-color-orange:  #fc8c53;
-    --rate-color-red: #fa4538;
-
-}
 .chapter-information-container {
     width: auto;
     height: 180px;
@@ -55,55 +47,54 @@
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    font-size: 10px;
-   
+    font-size: 10px; 
 }
 
-.circle-0, .circle-1, .circle-2, .circle-3, .circle-4{
+.circle-crowd-rate{
     height: 25px;
     width: 25px;
     border-radius: 50%;
 }
 
-.circle-0.current-percent, .circle-1.current-percent, .circle-2.current-percent, .circle-3.current-percent, .circle-4.current-percent{
+.circle-crowd-rate.current-percent{
     height: 35px;
     width: 35px;
     border-radius: 50%;
     box-shadow: var(--theme-shadow-normal);
 }
 
-.hover-content-0, .hover-content-1, .hover-content-2, .hover-content-3, .hover-content-4{
+.hover-content-crowd-rate{
     display: none;
     width: 60px;
     padding-top: 30px;
 }
 
-.hover-content-0.current-percent, .hover-content-1.current-percent, .hover-content-2.current-percent, .hover-content-3.current-percent, .hover-content-4.current-percent{
+.hover-content-crowd-rate.current-percent{
     padding-top: 35px;
 }
 
-.circle-0:hover .hover-content-0, .circle-1:hover .hover-content-1, .circle-2:hover .hover-content-2, .circle-3:hover .hover-content-3, .circle-4:hover .hover-content-4{
+.circle-crowd-rate:hover .hover-content-crowd-rate {
     display: flex;
 }
 
 .circle-0  {
-    background-color: var(--rate-color-dark-green);
+    background-color: var( --rate-color-0-20-full);
 }
 
 .circle-1 {
-    background-color: var(--rate-color-ligh-green);
+    background-color: var(--rate-color-20-40-full);
 }
 
 .circle-2 {
-    background-color: var(--rate-color-yellow);
+    background-color: var(--rate-color-40-60-full);
 }
 
 .circle-3{
-    background-color: var(--rate-color-orange);
+    background-color: var(--rate-color-60-80-full);
 }
 
 .circle-4 {
-    background-color: var(--rate-color-red);
+    background-color: var(--rate-color-80-100-full);
 }
 
 .text-container {
@@ -117,28 +108,24 @@
     font-size: 18px;
 }
 
-.text-percent-0, .text-percent-1, .text-percent-2, .text-percent-3, .text-percent-4 {
-    font-size: 25px;
-}
-
 .text-percent-0 {
-    color: var(--rate-color-dark-green);
+    color: var(--rate-color-0-20-full);
 }
 
 .text-percent-1 {
-    color: var(--rate-color-ligh-green);
+    color: var(--rate-color-20-40-full);
 }
 
 .text-percent-2 {
-    color: var(--rate-color-yellow);
+    color: var(--rate-color-40-60-full);
 }
 
 .text-percent-3 {
-    color: var(--rate-color-orange);
+    color: var(--rate-color-60-80-full);
 }
 
 .text-percent-4 {
-    color: var(--rate-color-red);
+    color: var(--rate-color-80-100-full);
 }
 
 .occupancy-scale-0 {
@@ -181,12 +168,12 @@
         width: 70px;
     }
 
-    .circle-0, .circle-1, .circle-2, .circle-3, .circle-4, .circle-5{
+    .circle-crowd-rate{
         height: 10px;
         width: 10px;
     }
 
-    .circle-0.current-percent, .circle-1.current-percent, .circle-2.current-percent, .circle-3.current-percent, .circle-4.current-percent{
+    .circle-crowd-rate.current-percent{
         height: 15px;
         width: 15px;
     }
@@ -194,9 +181,5 @@
     .text-container {
         font-size: 10px;
         padding-right: 5px;
-    }
-
-    .text-percent-0, .text-percent-1, .text-percent-2, .text-percent-3, .text-percent-4 {
-        font-size: 15px;
     }
 }

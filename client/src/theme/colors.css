@@ -13,4 +13,10 @@
 
     --theme-text-bright: #ffffff; 
     --theme-text-dark: #000000;
+
+    --rate-color-0-20-full: #13b813;
+    --rate-color-20-40-full: #9acd32;
+    --rate-color-40-60-full: #ffd000;
+    --rate-color-60-80-full:  #fc8c53;
+    --rate-color-80-100-full: #fa4538;
 }
