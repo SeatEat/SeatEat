@@ -5,9 +5,9 @@ import { AppState } from '../../model/redux/store';
 import { useDialogService } from '../dialog/dialog'
 import ContentPadding from '../content-padding';
 import Button from '../button/button';
+import ErrorTypes from '../../model/errorTypes';
 
 interface ErrorDialogProps {
-    appHasError: boolean,
     errorText: string
 }
 
@@ -43,21 +43,36 @@ const ErrorDialog: FC<ErrorDialogProps> = (props) => {
     }
 
     useEffect(() => {
-        if (props.appHasError && !dialogIsOpen) {
+        if (props.errorText !== "" && !dialogIsOpen) {
             openErrorDialog();
             setDialogIsOpen(true);
         }
-    }, [props.appHasError])
+    }, [props.errorText])
 
     return <></>;
 }
 
-function getAppErrorText(state: AppState): string {
-    if (state.estimationState.loadingError !== "") {
-        return state.estimationState.loadingError;
+function getErrorTextFromLoadingError(loadingError: number) {
+    switch (loadingError) {
+        case ErrorTypes.NO_INTERNET:
+            return 'no internet connection'
+        case ErrorTypes.API_NOT_FOUND:
+            return 'API not found (404)'
+        case ErrorTypes.INTERNAL_SERVER_ERROR:
+            return 'Internal server error (500)'
+        default:
+            return 'Unknown error'
     }
-    if (state.checkInState.userCheckedInError !== "") {
-        return state.checkInState.userCheckedInError;
+}
+
+function getAppErrorText(state: AppState): string {
+    if (state.estimationState.loadingError !== null) {
+        const activeChapterHall = state.estimationState.chapterHall?.name;
+        return `Failed to fetch estimation for ${activeChapterHall}, ${getErrorTextFromLoadingError(state.estimationState.loadingError)}`;
+    }
+    
+    if (state.checkInState.userCheckedInError !== null) {
+        return `Failed to check in, ${getErrorTextFromLoadingError(state.checkInState.userCheckedInError)}`;
     }
     
     return "";
@@ -65,7 +80,6 @@ function getAppErrorText(state: AppState): string {
 
 export default connect(
     (state: AppState): ErrorDialogProps => ({
-        appHasError: getAppErrorText(state) !== "",
         errorText: getAppErrorText(state)
     })
 )(ErrorDialog);
