@@ -18,6 +18,7 @@ export interface MainContentStateProps {
     view: string,
     isLoading: boolean,
     loadingProgress: number,
+    loadingStatus: string,
 }
 
 export interface MainContentActionProps {
@@ -51,6 +52,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                 </>
                             :
                                 <CircularProgressIndicator
+                                    status={props.loadingStatus}
                                     loadingIsDone={!props.isLoading}
                                     progress={props.loadingProgress}
                                     activeChapterHallName={nameOfChapter}>
