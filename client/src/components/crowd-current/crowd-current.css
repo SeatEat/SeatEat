@@ -1,14 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
-
 .chapter-information-container {
     width: auto;
-    height: 170px;
+    height: 180px;
     background-color: var(--theme-color-grey);
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-radius: 10px;
-    
+    border-radius: 10px; 
 }
 
 .chapter-crowd-container {
@@ -40,52 +37,64 @@
     width: 300px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-bottom: 2%;
 }
 
 .circle-container {
-    width: 150px;
+    width: 160px;
+    height: 100%;
     display: flex;
     justify-content: space-between;
-    font-family: 'Nunito', sans-serif;
+    align-items: center;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 10px; 
 }
 
-.circle-0, .circle-1, .circle-2, .circle-3, .circle-4{
+.circle-crowd-rate{
     height: 25px;
     width: 25px;
     border-radius: 50%;
 }
 
-.hover-content-0, .hover-content-1, .hover-content-2, .hover-content-3, .hover-content-4{
+.circle-crowd-rate.current-percent{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    box-shadow: var(--theme-shadow-normal);
+}
+
+.hover-content-crowd-rate{
     display: none;
-    width: 50px;
-    padding-top: 25px;
+    width: 60px;
+    padding-top: 30px;
 }
 
-.circle-0:hover .hover-content-0,.circle-1:hover .hover-content-1, .circle-2:hover .hover-content-2, .circle-3:hover .hover-content-3, .circle-4:hover .hover-content-4{
-    display: block;
+.hover-content-crowd-rate.current-percent{
+    padding-top: 35px;
 }
 
-.circle-0 {
-    background-color: #13b813;
+.circle-crowd-rate:hover .hover-content-crowd-rate {
+    display: flex;
+}
+
+.circle-0  {
+    background-color: var( --rate-color-0-20-full);
 }
 
 .circle-1 {
-    background-color: #9acd32;
+    background-color: var(--rate-color-20-40-full);
 }
 
 .circle-2 {
-    background-color: #ffd000;
+    background-color: var(--rate-color-40-60-full);
 }
 
 .circle-3{
-    background-color: #fc8c53;
+    background-color: var(--rate-color-60-80-full);
 }
 
 .circle-4 {
-    background-color: #fa4538;
+    background-color: var(--rate-color-80-100-full);
 }
 
 .text-container {
@@ -96,12 +105,27 @@
     align-items: center;
     flex-direction: column;
     font-weight: bold;
-    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
 }
 
-.text {
-    width: 80%;
-    text-align: center;
+.text-percent-0 {
+    color: var(--rate-color-0-20-full);
+}
+
+.text-percent-1 {
+    color: var(--rate-color-20-40-full);
+}
+
+.text-percent-2 {
+    color: var(--rate-color-40-60-full);
+}
+
+.text-percent-3 {
+    color: var(--rate-color-60-80-full);
+}
+
+.text-percent-4 {
+    color: var(--rate-color-80-100-full);
 }
 
 .occupancy-scale-0 {
@@ -144,9 +168,14 @@
         width: 70px;
     }
 
-    .circle-0, .circle-1, .circle-2, .circle-3, .circle-4, .circle-5{
+    .circle-crowd-rate{
         height: 10px;
         width: 10px;
+    }
+
+    .circle-crowd-rate.current-percent{
+        height: 15px;
+        width: 15px;
     }
 
     .text-container {

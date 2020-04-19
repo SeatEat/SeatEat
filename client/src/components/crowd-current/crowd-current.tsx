@@ -34,16 +34,16 @@ const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
                         {percentList.map((percent, index) => 
                             <div
                                 key={percent}
-                                className={"circle-" + index.toString()}>
-                                <div className={"hover-content-" + index.toString()}>{percent}</div>
+                                className={`circle-crowd-rate circle-${index} ${rate === index ? 'current-percent' : ''}`}>
+                                <div className={`hover-content-crowd-rate ${rate === index ? 'current-percent' : ''}`}>{percent}</div>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
             <div className="text-container">
-                <span className="text">
-                    {name + " is estimated to be" + percentList[rate] + " full."}
+                <span>
+                    {`${name} is estimated to be `}<span className={`text-content text-percent-${rate}`}>{percentList[rate]}</span> full.
                     <br/>
                     Check below to see how many people have checked in.
                 </span>
