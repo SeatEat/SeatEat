@@ -9,7 +9,7 @@ import { useDialogService } from "../dialog/dialog";
 import { ChapterHall } from "../../model/chapter-hall-model";
 import Button from "../button/button";
 import CheckInForm from "../check-in-form/check-in-form";
-import { requestUserCheckOut } from "../../model/redux/checkInState";
+import ConfirmCheckOut from "../confirm-check-out/confirm-check-out";
 import { PersonCheckIn } from "../../model/check-in-model";
 import { checkInActivities } from "../../data/check-in-activities";
 
@@ -19,17 +19,14 @@ import PeopleIcon from '../../assets/icons/person.svg';
 interface CheckInStatusProps {
     personsCheckedIn: PersonCheckIn[],
     currentChapter: ChapterHall | null,
+    userCheckedInId: string | null,
     userIsCheckedIn: boolean,
     userCheckInLoading: boolean,
     userCheckInChapterName: string | null,
     userDocId: string | null
 }
 
-interface CheckInStatusDispatch {
-    onCheckOut: Function
-}
-
-const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) => {
+const CheckInStatus: FC<CheckInStatusProps> = (props) => {
 
     const confirm = useDialogService()
     const openCheckInDialog = () => {
@@ -40,6 +37,14 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
         });
     }
 
+    const openCheckOutDialog = () => {
+        confirm ({
+            content: (closeDialog => <ConfirmCheckOut
+                closeDialog={closeDialog}
+                currentChapterHall={props.userCheckInChapterName}/>)
+        });
+    }
+
     const getCheckInActivityByID = (activityID: string) => {
         return checkInActivities.find(
             (value) => value.id === activityID
@@ -47,25 +52,40 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
     }
 
     const renderCheckInStatusButton = () => {
-        let buttonText: React.ReactNode = "";
+        let buttonTextCheckIn: React.ReactNode = <span>Check in to <i>{props.currentChapter?.name}</i></span>;
+        let buttonTextCheckOut: React.ReactNode = <span>Check out from <i>{props.currentChapter?.name}</i></span>;
+        let disableCheckIn = false;
+        let disableCheckOut = false;
         let action: Function = () => {};
 
         if (props.userCheckInLoading) {
-            buttonText = "Laddar";
+            buttonTextCheckIn = "Loading";
+            buttonTextCheckOut = "Loading";
         }
         else if (props.userIsCheckedIn) {
-            buttonText = <span>Check out from <i>{props.userCheckInChapterName}</i></span>;
-            action = props.onCheckOut;
+            buttonTextCheckOut = <span>Check out from <i>{props.userCheckInChapterName ? props.userCheckInChapterName : props.currentChapter?.name}</i></span>;
+            disableCheckIn = true;
+            action = openCheckOutDialog;
+            
         }
         else {
             action = openCheckInDialog;
-            buttonText = <span>Check in to <i>{props.currentChapter?.name}</i></span>;
+            disableCheckOut = true;
         }
 
-        return <Button isCompact={true} onClick={action}>
-            {buttonText}
-        </Button>
+        return  <div className="check-in-status-button-container">
+                    <div className="check-in-button">
+                        <Button isCompact={true}  onClick={action} disabled={disableCheckIn}>
+                            {buttonTextCheckIn}
+                        </Button>
+                    </div>
+                    <Button isCompact={true}  onClick={action} disabled={disableCheckOut}>
+                        {buttonTextCheckOut}
+                    </Button>
+                </div>
     }
+
+    const checkedInListSorted = props.personsCheckedIn.sort((a,b) => (a.docID == props.userCheckedInId ? -1 : b.docID == props.userCheckedInId ? 1 :(a.date < b.date ) ? 1 : -1))
 
     return <div className="check-in-status-container">
         <h1>People currently checked in</h1>
@@ -74,16 +94,16 @@ const CheckInStatus: FC<CheckInStatusProps & CheckInStatusDispatch> = (props) =>
         <br />
         <div className="check-in-status-cards">
             {
-                props.personsCheckedIn.length === 0
+                checkedInListSorted.length === 0
                 ?
                     <div className="check-in-no-people"> 
                         <img src={PeopleIcon} alt=""/>
                         <h2>No people have currently checked in to {props.currentChapter?.name}</h2>
                     </div>
                 :
-                    props.personsCheckedIn.map((person) => {
+                    checkedInListSorted.map((person) => {
+                        
                         const checkInActivity = getCheckInActivityByID(person.type);
-                        console.log(checkInActivity);
                         if (checkInActivity) {
                             return <CheckInCard 
                                 key={person.name}
@@ -103,12 +123,10 @@ export default connect(
     (state: AppState): CheckInStatusProps => ({
         personsCheckedIn: state.checkInState.peopleCheckIn,
         currentChapter: state.estimationState.chapterHall,
+        userCheckedInId: state.checkInState.checkInUser.docID,
         userCheckInLoading: state.checkInState.checkInUser.loading,
         userIsCheckedIn: state.checkInState.checkInUser.userCheckedIn,
         userCheckInChapterName: state.checkInState.checkInUser.chapterName,
         userDocId: state.checkInState.checkInUser.docID
-    }),
-    (dispatch: Dispatch): CheckInStatusDispatch => ({
-        onCheckOut: () => dispatch(requestUserCheckOut())
     })
 )(CheckInStatus);

@@ -1,6 +1,8 @@
 import CrowdEstimationModel, { CrowdEstimationData } from "../crowd-estimation-model";
 import { ChapterHall } from "../chapter-hall-model";
 import { Dispatch } from "react";
+import { AppState } from "./store";
+import { updateSlideValue } from "./crowdDataSliderState";
 
 export interface EstimationState {
     isLoading: boolean,
@@ -11,7 +13,7 @@ export interface EstimationState {
     status: string
 }
 const initialState: EstimationState = {
-    isLoading: false,
+    isLoading: true,
     loadingProgress: 0,
     loadingError: "",
     chapterHall: null,
@@ -85,7 +87,7 @@ function setEstimationData(data: CrowdEstimationData): SetEstimationDataAction {
 
 export function requestEstimation(chapterHall: ChapterHall) {
 
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<any>, getState: () => AppState) => {
 
         // We do not want the last estimation to keep going if 
         // a new estimation request is requested
@@ -106,6 +108,13 @@ export function requestEstimation(chapterHall: ChapterHall) {
             }
         ).then((data: CrowdEstimationData | null) => {
             if (data) {
+
+                // Prevent the graph slider overflow the number of days the estimation has
+                let slideDailyValue = getState().crowdDataSlideState['daily'];
+                if (slideDailyValue >= data.daysOfEstimation) {
+                    dispatch(updateSlideValue('daily', data.daysOfEstimation - 1));
+                }
+
                 dispatch(setEstimationData(data));
             }
         }).catch((response: Response) => {

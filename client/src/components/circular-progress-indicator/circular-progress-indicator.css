@@ -1,4 +1,3 @@
-
 .circular-progress-indicator {
     height: 100%;
     width: 100%;
@@ -25,6 +24,14 @@
     transition: opacity 0.5s;
 }
 
+.circular-progress-indicator-loading.no-padding {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+}
+
 .circular-progress-indicator-loading-item {
     height: 100%;
     width: 100%;
@@ -41,10 +48,17 @@
     height: 100%;
     width: 100%;
     opacity: 0;
+}
+
+.circular-progress-indicator-done-loading-animation {
     animation-name: content-fade;
     animation-delay: 0.5s;
     animation-fill-mode: forwards;
     animation-duration: 0.5s ;
+}
+.circular-progress-indicator-done-loading-animation-cancel {
+    animation-name: none;
+    opacity: 1;
 }
 
 @keyframes content-fade {

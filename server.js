@@ -33,3 +33,11 @@ app.get('*', function(req, res) {
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );
 });
+
+// Kick out CRON
+const kickOutAllUsers = require('./kick-out-cron.js');
+var CronJob = require('cron').CronJob;
+var job = new CronJob('0 0 * * *', function() {
+  kickOutAllUsers();
+}, null, true, 'Europe/Stockholm');
+job.start();

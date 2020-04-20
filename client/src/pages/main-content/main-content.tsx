@@ -19,6 +19,7 @@ export interface MainContentStateProps {
     isLoading: boolean,
     loadingProgress: number,
     loadingStatus: string,
+    estimationOfChapter: string | null,
 }
 
 export interface MainContentActionProps {
@@ -27,7 +28,7 @@ export interface MainContentActionProps {
 
 const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) => {
     const { nameOfChapter } = useParams();
-
+    
     useEffect(() => {
         if (nameOfChapter) {
             props.onRequestEstimation(nameOfChapter);
@@ -45,17 +46,28 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                         {
                             props.view === views.current.name
                             ?
-                                <>
-                                    <CrowdCurrent/>
+                                <>  
+                                    <div className="current-crowd-container">
+                                        <CircularProgressIndicator
+                                            dataKey={props.estimationOfChapter ?? ''}
+                                            status={props.loadingStatus}
+                                            renderContentWhileLoading={true}
+                                            loadingIsDone={!props.isLoading}
+                                            progress={props.loadingProgress}
+                                            noPadding={true}>
+                                            <CrowdCurrent/>
+                                        </CircularProgressIndicator>
+                                    </div>
                                     <br />
                                     <CheckInStatus/>
                                 </>
                             :
                                 <CircularProgressIndicator
+                                    dataKey={props.estimationOfChapter ?? ''}
                                     status={props.loadingStatus}
                                     loadingIsDone={!props.isLoading}
                                     progress={props.loadingProgress}
-                                    activeChapterHallName={nameOfChapter}>
+                                    noPadding={false}>
                                     <div className="main-content-content">
                                         <div className="main-content-graph">
                                             <CrowdGraphConnect/>

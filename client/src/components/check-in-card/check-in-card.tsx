@@ -21,6 +21,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         const showCardTimeout = setTimeout(() => {
             setShowCard(true);
         }, 50);
+        setMinutesFromCheckIn(getMinutesFromCheckIn(props.checkInDate))
         return () => {
             clearTimeout(showCardTimeout);
         }
@@ -51,11 +52,13 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         if (minutesFromCheckIn === 0) {
             return 'Now';
         }
-        else {
+        else if (minutesFromCheckIn < 60){
             return `${minutesFromCheckIn}min ago`;
         }
+        else {
+            return `${Math.floor(minutesFromCheckIn / 60)}h ago`;
+        }
     }
-
     const renderCheckInTimeDescription = () => {
         const minutes = props.checkInDate.getMinutes();
         const hour = props.checkInDate.getHours();
