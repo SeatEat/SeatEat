@@ -7,7 +7,7 @@ import { updateSlideValue } from "./crowdDataSliderState";
 export interface EstimationState {
     isLoading: boolean,
     loadingProgress: number,
-    loadingError: string,
+    loadingError: number | null,
     chapterHall: ChapterHall | null,
     estimationData: CrowdEstimationData | null,
     status: string
@@ -15,7 +15,7 @@ export interface EstimationState {
 const initialState: EstimationState = {
     isLoading: true,
     loadingProgress: 0,
-    loadingError: "",
+    loadingError: null,
     chapterHall: null,
     estimationData: null,
     status: ""
@@ -64,12 +64,12 @@ function updateProgress(progress: number, status: string): UpdateLoadingProgress
 // Set info about error
 interface SetEstimationErrorAction {
     type: EstimationActionTypes.SET_ESTIMATION_ERROR,
-    payload: string
+    payload: number | null
 }
-function setEstimationError(errorText: string): SetEstimationErrorAction {
+function setEstimationError(errorStatus: number): SetEstimationErrorAction {
     return {
         type: EstimationActionTypes.SET_ESTIMATION_ERROR,
-        payload: errorText
+        payload: errorStatus
     }
 }
 
@@ -118,7 +118,8 @@ export function requestEstimation(chapterHall: ChapterHall) {
                 dispatch(setEstimationData(data));
             }
         }).catch((response: Response) => {
-            dispatch(setEstimationError('Estimation failed to load'));
+            // Status value of undefined give value 0, no internet connection.
+            dispatch(setEstimationError(response.status ?? 0));
         });
     }
 }
@@ -139,6 +140,7 @@ export function estmiationReducer(
                 ...state,
                 isLoading: true,
                 loadingProgress: 0,
+                loadingError: null,
                 chapterHall: action.payload
             }
         case EstimationActionTypes.UPDATE_LOADING_PROGRESS:

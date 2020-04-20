@@ -2,6 +2,8 @@ import { AppActions, AppState } from "./store";
 import { Dispatch } from "react";
 import { addCheckIn, removeCheckIn, PersonCheckIn, addCheckInListener } from "../check-in-model";
 import { CheckInActivityIDs } from "../../data/check-in-activities";
+import { FirebaseError } from "firebase";
+import ErrorTypes from "../errorTypes";
 
 const userCheckInDocIDLocalStorageName = 'userCheckInDocID'
 
@@ -14,7 +16,7 @@ export enum CheckInActionTypes {
 }
 
 export interface CheckInState {
-    userCheckedInError: string,
+    userCheckedInError: number | null,
     checkInUser: {
         docID: string | null
         chapterName: string | null,
@@ -27,7 +29,7 @@ export interface CheckInState {
 function loadInitCheckInState(): CheckInState {
     const userDocID = localStorage.getItem(userCheckInDocIDLocalStorageName);
     return {
-        userCheckedInError: "",
+        userCheckedInError: null,
         checkInUser: {
             docID: userDocID,
             chapterName: null,
@@ -84,14 +86,14 @@ export function removeUserCheckInData(): RemoveUserCheckInDataAction {
 
 export interface AddUserCheckInErrorAction {
     type: CheckInActionTypes.ADD_USER_CHECK_IN_ERROR,
-    payload: string,
+    payload: number,
 }
-export function addUserCheckInError(errorText: string): AddUserCheckInErrorAction {
+export function addUserCheckInError(errorType: number): AddUserCheckInErrorAction {
     //Remove doc ID from local stroage
     localStorage.removeItem(userCheckInDocIDLocalStorageName);
     return {
         type: CheckInActionTypes.ADD_USER_CHECK_IN_ERROR,
-        payload: errorText
+        payload: errorType
     }
 } 
 
@@ -108,8 +110,20 @@ export function requestUserCheckIn(name: string, type: CheckInActivityIDs) {
         if (chapterName) {
             addCheckIn(name, type, chapterName).then((doc) => {
                 dispatch(setUserCheckInData(doc.id, chapterName));
-            }).catch(() => {
-                dispatch(addUserCheckInError('Could not check in'));
+            }).catch((response: FirebaseError) => {
+                let errorCode = null;
+                switch (response.code) {
+                    case "INTERNAL":
+                        errorCode = ErrorTypes.INTERNAL_SERVER_ERROR;
+                        break;
+                    case "UNREGISTERED":
+                        errorCode = ErrorTypes.API_NOT_FOUND;
+                        break;
+                    default:
+                        errorCode = ErrorTypes.UNKNOWN;
+                        break;
+                }
+                dispatch(addUserCheckInError(errorCode));
             });
         }
     }
@@ -179,7 +193,8 @@ export const checkInReducer = (
                 checkInUser: {
                     ...state.checkInUser,
                     loading: action.payload
-                }
+                },
+                userCheckedInError: null
             };
         case CheckInActionTypes.SET_USER_CHECK_IN_DATA:
             return {
@@ -203,6 +218,10 @@ export const checkInReducer = (
         case CheckInActionTypes.ADD_USER_CHECK_IN_ERROR:
             return {
                 ...state,
+                checkInUser: {
+                    ...state.checkInUser,
+                    loading: false
+                },
                 userCheckedInError: action.payload
             };
         default:
