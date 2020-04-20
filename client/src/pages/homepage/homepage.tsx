@@ -18,7 +18,7 @@ const Homepage: FC = (props) => {
                             <div>
                                 SeatEat is an app that provides estimation of how busy are KTH’s different 
                                 chapter halls. SeatEat looks at the courses and programmes of the students at the different chapter halls through the KTH API. 
-                                The estimation of how many students have a scheduled activity, as well as popular hours (like lunch) helps to estimate how busy the chapter hall is.
+                                The estimation is based on how many students have a scheduled activity, as well as popular hours (like lunch).
                             <div>
                                 With SeatEat you'll never have to step unprepared into a crowded hall again. 
                             </div>
