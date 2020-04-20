@@ -8,15 +8,17 @@ export interface EstimationState {
     isLoading: boolean,
     loadingProgress: number,
     loadingError: string,
-    chapterHall: ChapterHall | null
-    estimationData: CrowdEstimationData | null
+    chapterHall: ChapterHall | null,
+    estimationData: CrowdEstimationData | null,
+    status: string
 }
 const initialState: EstimationState = {
-    isLoading: false,
+    isLoading: true,
     loadingProgress: 0,
     loadingError: "",
     chapterHall: null,
-    estimationData: null
+    estimationData: null,
+    status: ""
 }
 
 export enum EstimationActionTypes {
@@ -43,12 +45,19 @@ function startRequest(chapterHall: ChapterHall): RequestEstimationAction {
 // Update loading progress action
 interface UpdateLoadingProgressAction {
     type: EstimationActionTypes.UPDATE_LOADING_PROGRESS,
-    payload: number
+    payload: {
+        progress: number,
+        statusText: string
+    }
+
 }
-function updateProgress(progress: number): UpdateLoadingProgressAction {
+function updateProgress(progress: number, status: string): UpdateLoadingProgressAction {
     return {
         type: EstimationActionTypes.UPDATE_LOADING_PROGRESS,
-        payload: progress
+        payload: {
+            progress: progress, 
+            statusText: status
+        }
     }
 }
 
@@ -91,8 +100,8 @@ export function requestEstimation(chapterHall: ChapterHall) {
         CrowdEstimationModel.estimateChapterCrowdedness(
             new Date(),
             chapterHall.chapters,
-            (prog) => {
-                dispatch(updateProgress(prog))
+            (prog, status) => {
+                dispatch(updateProgress(prog, status))
             },
             (cancelCallback) => {
                 cancelLastEstimation = cancelCallback;
@@ -109,7 +118,7 @@ export function requestEstimation(chapterHall: ChapterHall) {
                 dispatch(setEstimationData(data));
             }
         }).catch((response: Response) => {
-            dispatch(setEstimationError(response.statusText));
+            dispatch(setEstimationError('Estimation failed to load'));
         });
     }
 }
@@ -135,7 +144,8 @@ export function estmiationReducer(
         case EstimationActionTypes.UPDATE_LOADING_PROGRESS:
             return {
                 ...state,
-                loadingProgress: action.payload
+                loadingProgress: action.payload.progress,
+                status: action.payload.statusText
             }
         case EstimationActionTypes.SET_ESTIMATION_DATA:
             return {

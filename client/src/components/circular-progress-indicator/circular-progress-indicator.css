@@ -48,10 +48,17 @@
     height: 100%;
     width: 100%;
     opacity: 0;
+}
+
+.circular-progress-indicator-done-loading-animation {
     animation-name: content-fade;
     animation-delay: 0.5s;
     animation-fill-mode: forwards;
     animation-duration: 0.5s ;
+}
+.circular-progress-indicator-done-loading-animation-cancel {
+    animation-name: none;
+    opacity: 1;
 }
 
 @keyframes content-fade {

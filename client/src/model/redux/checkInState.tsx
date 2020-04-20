@@ -10,14 +10,16 @@ export enum CheckInActionTypes {
     SET_USER_CHECK_IN_LOADING = 'SET_USER_CHECK_IN_LOADING',
     SET_USER_CHECK_IN_DATA = 'SET_USER_CHECK_IN_DATA',
     REMOVE_USER_CHECK_IN_DATA = 'REMOVE_USER_CHECK_IN_DATA',
+    ADD_USER_CHECK_IN_ERROR = 'ADD_USER_CHECK_IN_ERROR',
 }
 
 export interface CheckInState {
+    userCheckedInError: string,
     checkInUser: {
         docID: string | null
         chapterName: string | null,
         loading: boolean,
-        userCheckedIn: boolean
+        userCheckedIn: boolean,
     }
     peopleCheckIn: PersonCheckIn[]
 }
@@ -25,11 +27,12 @@ export interface CheckInState {
 function loadInitCheckInState(): CheckInState {
     const userDocID = localStorage.getItem(userCheckInDocIDLocalStorageName);
     return {
+        userCheckedInError: "",
         checkInUser: {
             docID: userDocID,
             chapterName: null,
             loading: false,
-            userCheckedIn: userDocID !== null
+            userCheckedIn: userDocID !== null,
         },
         peopleCheckIn: []
     }
@@ -77,6 +80,19 @@ export function removeUserCheckInData(): RemoveUserCheckInDataAction {
     return {
         type: CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA,
     }
+}
+
+export interface AddUserCheckInErrorAction {
+    type: CheckInActionTypes.ADD_USER_CHECK_IN_ERROR,
+    payload: string,
+}
+export function addUserCheckInError(errorText: string): AddUserCheckInErrorAction {
+    //Remove doc ID from local stroage
+    localStorage.removeItem(userCheckInDocIDLocalStorageName);
+    return {
+        type: CheckInActionTypes.ADD_USER_CHECK_IN_ERROR,
+        payload: errorText
+    }
 } 
 
 
@@ -93,7 +109,7 @@ export function requestUserCheckIn(name: string, type: CheckInActivityIDs) {
             addCheckIn(name, type, chapterName).then((doc) => {
                 dispatch(setUserCheckInData(doc.id, chapterName));
             }).catch(() => {
-                /** TODO */
+                dispatch(addUserCheckInError('Could not check in'));
             });
         }
     }
@@ -144,7 +160,8 @@ export type CheckInActions =
     SetCheckInsAction | 
     SetUserCheckInLoadingAction |
     SetUserCheckInDataAction |
-    RemoveUserCheckInDataAction
+    RemoveUserCheckInDataAction |
+    AddUserCheckInErrorAction
 
 export const checkInReducer = (
     state: CheckInState = loadInitCheckInState(), 
@@ -171,7 +188,7 @@ export const checkInReducer = (
                     docID: action.payload.docID,
                     chapterName: action.payload.chapterName,
                     userCheckedIn: true,
-                    loading: false
+                    loading: false,
                 }
             };
         case CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA:
@@ -182,6 +199,11 @@ export const checkInReducer = (
                     docID: null,
                     userCheckedIn: false
                 }
+            };
+        case CheckInActionTypes.ADD_USER_CHECK_IN_ERROR:
+            return {
+                ...state,
+                userCheckedInError: action.payload
             };
         default:
             return state;

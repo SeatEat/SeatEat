@@ -18,6 +18,8 @@ export interface MainContentStateProps {
     view: string,
     isLoading: boolean,
     loadingProgress: number,
+    loadingStatus: string,
+    estimationOfChapter: string | null,
 }
 
 export interface MainContentActionProps {
@@ -26,7 +28,7 @@ export interface MainContentActionProps {
 
 const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) => {
     const { nameOfChapter } = useParams();
-
+    
     useEffect(() => {
         if (nameOfChapter) {
             props.onRequestEstimation(nameOfChapter);
@@ -47,9 +49,12 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                 <>  
                                     <div className="current-crowd-container">
                                         <CircularProgressIndicator
-                                        loadingIsDone={!props.isLoading}
-                                        progress={props.loadingProgress}
-                                        noPadding={true}>
+                                            dataKey={props.estimationOfChapter ?? ''}
+                                            status={props.loadingStatus}
+                                            renderContentWhileLoading={true}
+                                            loadingIsDone={!props.isLoading}
+                                            progress={props.loadingProgress}
+                                            noPadding={true}>
                                             <CrowdCurrent/>
                                         </CircularProgressIndicator>
                                     </div>
@@ -58,6 +63,8 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
                                 </>
                             :
                                 <CircularProgressIndicator
+                                    dataKey={props.estimationOfChapter ?? ''}
+                                    status={props.loadingStatus}
                                     loadingIsDone={!props.isLoading}
                                     progress={props.loadingProgress}
                                     noPadding={false}>

@@ -10,6 +10,8 @@ const mapStateToProps = (state: AppState): MainContentStateProps => ({
     view: state.viewState.activeView,
     isLoading: state.estimationState.isLoading,
     loadingProgress: Math.round(state.estimationState.loadingProgress * 100),
+    loadingStatus: state.estimationState.status,
+    estimationOfChapter: state.estimationState.chapterHall?.name ?? null
 });
 const mapDispatchToProps = (dispatch: Dispatch): MainContentActionProps => ({
     onRequestEstimation: (nameOfChapter) => {

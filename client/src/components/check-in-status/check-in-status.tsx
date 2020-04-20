@@ -23,6 +23,7 @@ interface CheckInStatusProps {
     userIsCheckedIn: boolean,
     userCheckInLoading: boolean,
     userCheckInChapterName: string | null,
+    userDocId: string | null
 }
 
 const CheckInStatus: FC<CheckInStatusProps> = (props) => {
@@ -109,7 +110,8 @@ const CheckInStatus: FC<CheckInStatusProps> = (props) => {
                                 name={person.name}
                                 checkInDate={person.date}
                                 checkInActivityLogo={checkInActivity.logo}
-                                checkInActivityText={checkInActivity.title}/>
+                                checkInActivityText={checkInActivity.title}
+                                isOwnedByUser={props.userDocId === person.docID}/>
                         }
                     })
             }
@@ -124,6 +126,7 @@ export default connect(
         userCheckedInId: state.checkInState.checkInUser.docID,
         userCheckInLoading: state.checkInState.checkInUser.loading,
         userIsCheckedIn: state.checkInState.checkInUser.userCheckedIn,
-        userCheckInChapterName: state.checkInState.checkInUser.chapterName
+        userCheckInChapterName: state.checkInState.checkInUser.chapterName,
+        userDocId: state.checkInState.checkInUser.docID
     })
 )(CheckInStatus);

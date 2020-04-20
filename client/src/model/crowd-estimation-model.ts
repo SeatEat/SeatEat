@@ -448,7 +448,7 @@ export default class CrowdEstimationModel {
     public static async estimateChapterCrowdedness(
         startDateOfEstimation: Date,
         chapterData: Chapter[],
-        onProgress: (arg0: number) => void,
+        onProgress: (arg0: number, arg1: string) => void,
         createCancelCallback: (arg0: Function) => void,
         ): Promise < CrowdEstimationData | null> {
 
@@ -475,6 +475,8 @@ export default class CrowdEstimationModel {
                     '/kth/kopps/programme/academic-year-plan/' +
                     chapter.code + '/' + yearCode.code).then(r => r.json());
 
+                const loadingStatusText = `Loading schedule for ${chapter.code} - ${yearCode.code}`;
+
                 for (let specIndex = 0; specIndex < programCohortResponse.Specs.length; specIndex++) {
                     let spec = programCohortResponse.Specs[specIndex];
                     const courses: any[] = spec.Electivity[0].Courses;
@@ -487,9 +489,10 @@ export default class CrowdEstimationModel {
                     onProgress(
                         chapterData.indexOf(chapter) / chapterData.length +
                         studyYear.indexOf(yearCode) / studyYear.length / chapterData.length + 
-                        specIndex / programCohortResponse.Specs.length / studyYear.length / chapterData.length
+                        specIndex / programCohortResponse.Specs.length / studyYear.length / chapterData.length,
+                        loadingStatusText
                     );
-
+                    
                     // We only want to check active courses
                     if (yearCode.currentStudyYear !== spec.StudyYear) {
                         continue;
@@ -531,7 +534,7 @@ export default class CrowdEstimationModel {
         }
 
         // Run callback that we are done with the estimation
-        onProgress(1);
+        onProgress(1, "Loading Done");
 
         return new CrowdEstimationData(
             programCohorts,

@@ -3,7 +3,7 @@ import ContentPadding from "../content-padding";
 import './dialog.css';
 
 interface DialogOptions {
-    content: (closeDialog: Function) => React.ReactNode
+    content: (closeDialog: Function) => React.ReactNode | Element
 }
 
 const DialogServiceContext = createContext<

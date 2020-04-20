@@ -3,6 +3,7 @@
     width: 275px;
     color: var(--theme-text-dark);
     background-color: var(--theme-color-green);
+    user-select: none;
 }
 
 .navbar-padding {

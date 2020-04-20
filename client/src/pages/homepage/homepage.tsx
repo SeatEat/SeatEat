@@ -16,8 +16,8 @@ const Homepage: FC = (props) => {
                         <div className='homepage-intro'>
                             <h1>Welcome to SeatEat!</h1>
                             <div>
-                                SeatEat is an app that provides estimation of crowdedness at KTH’s different 
-                                chapter halls. With SeatEat you'll never have to step unprepared into a 
+                                SeatEat is an app that provides estimation of how busy are KTH’s different 
+                                chapter halls, using KTH's APIs for schedule and course- and program catalogue. With SeatEat you'll never have to step unprepared into a 
                                 crowded hall again. After choosing a chapter, you can navigate between three different views:
                             </div>
                         </div>
@@ -25,18 +25,18 @@ const Homepage: FC = (props) => {
                         <div className='view-description'>
                             <ViewCardDescription
                                 title="Right Now"
-                                description="See the current estimation of crowdedness at the chapter hall."
+                                description="See the current estimation of how busy is the chapter hall."
                                 icon={<CurrentIcon/>}
                                 />
                             <ViewCardDescription
                                 title="Daily View"
-                                description="See the estimation of crowdedness at the chapter hall for each 
+                                description="See the estimation of how busy is the chapter hall for each 
                                 hour and day during the upcoming week."
                                 icon={<Clock24Icon/>}
                                 />
                             <ViewCardDescription
                                 title="Weekly View"
-                                description="See the estimation of crowdedness at the chapter hall for a 
+                                description="See the estimation of how busy is the chapter hall for a 
                                 specific hour during each day of the upcoming week."
                                 icon={<CalendarIcon/>}
                                 />

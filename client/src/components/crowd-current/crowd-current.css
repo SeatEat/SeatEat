@@ -1,11 +1,11 @@
 .chapter-information-container {
-    width: auto;
-    height: 180px;
+    height: 100%;
     background-color: var(--theme-color-grey);
     display: flex;
     flex-direction: row;
     align-items: center;
     border-radius: 10px; 
+    padding: 20px;
 }
 
 .chapter-crowd-container {
@@ -29,19 +29,20 @@
 }
 
 .chapter-hall-logos img { 
-    height:100px;
+    height: 80px;
     width: auto;
+    margin: 5px;
+    margin-top: 0;
 }
 
 .color-container {
-    width: 300px;
+    width: auto;
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    padding-bottom: 2%;
 }
 
 .circle-container {
-    width: 160px;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -51,6 +52,7 @@
 }
 
 .circle-crowd-rate{
+    margin: 4px;
     height: 25px;
     width: 25px;
     border-radius: 50%;
@@ -149,33 +151,24 @@
 }
 
 @media (max-width: 850px) {
-    .chapter-information-container {
-        height: 100px;
-        width: 100%;
-    }
 
     .chapter-crowd-container {
         height: 100%;
-        width: 50%;
     }
     
     .chapter-hall-logos img { 
-        height:50px;
-        width: auto;
+        height: 50px;
     }
 
-    .circle-container {
-        width: 70px;
-    }
-
-    .circle-crowd-rate{
-        height: 10px;
-        width: 10px;
-    }
-
-    .circle-crowd-rate.current-percent{
+    .circle-crowd-rate {
         height: 15px;
         width: 15px;
+        margin: 3px;
+    }
+
+    .circle-crowd-rate.current-percent {
+        height: 20px;
+        width: 20px;
     }
 
     .text-container {
