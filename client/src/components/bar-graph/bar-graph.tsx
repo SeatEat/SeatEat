@@ -8,6 +8,8 @@ export type BarGraphProps = {
     buildGroundValues: (index: number) => string
 }
 
+// Do not have any state or data logic, 
+// therefore no container component exist for Bar Graph
 const BarGraph: FC<BarGraphProps> = (props) => {
 
     const getSizeRatio = (value: number) => {
