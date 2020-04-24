@@ -4,6 +4,7 @@
     align-items: stretch;
     flex: 1;
     background-color: var(--theme-color-grey);
+    min-height: 80px;
 }
 
 @media (max-width: 850px) {
