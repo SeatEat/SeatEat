@@ -44,6 +44,10 @@
     opacity: 0;
 }
 
+.display-none {
+    display: none;
+}
+
 .circular-progress-indicator-done-loading {
     height: 100%;
     width: 100%;

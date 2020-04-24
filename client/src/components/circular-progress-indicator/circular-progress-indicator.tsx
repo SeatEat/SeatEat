@@ -16,13 +16,21 @@ type CircularProgressIndicatorProps = {
 
 const CircularProgressIndicator: FC<CircularProgressIndicatorProps> = (props) => {
     const [alreadyLoaded, setAlreadyLoaded] = useState(false);
+    const [displayNone, setDisplayNone] = useState(false);
     useEffect(() => {
-        console.log('Loading is: ' + (props.loadingIsDone ? 'DONE' : 'ONGOING'));
         setAlreadyLoaded(props.loadingIsDone);
+        setDisplayNone(false);
     }, [props.dataKey]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDisplayNone(true)
+          }, 1000);
+          return () => clearTimeout(timer);
+    }, [props.loadingIsDone])
+
     return <div className="circular-progress-indicator">
-        <div className={"circular-progress-indicator-loading " + (props.loadingIsDone ? "loading-done" : "") + " " + (props.noPadding ? "no-padding" : "")}>
+        <div className={`circular-progress-indicator-loading ${props.loadingIsDone ? "loading-done" : ""} ${props.noPadding ? "no-padding" : ""} ${displayNone ? 'display-none' : ''}`}>
             <div className="circular-progress-indicator-loading-item">
                 <CircularProgressbar 
                     value={props.progress} 

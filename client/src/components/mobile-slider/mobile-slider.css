@@ -1,0 +1,14 @@
+.mobile-slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 40px;
+}
+
+.mobile-slider img {
+    width: 40px;
+}
+
+.mobile-slider img.disabled {
+    opacity: 0.2
+}
