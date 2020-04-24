@@ -50,7 +50,7 @@ const DateSlider: FC<DateSliderProps> = (props) => {
     }, [activeValue]);
 
     useEffect(() => {
-        setOnMobile(windowDimensions.width < 800);
+        setOnMobile(windowDimensions.width < 850);
     }, [windowDimensions.width]);
 
     const handleChange = (value: number) => {
