@@ -8,7 +8,7 @@
 
 .navbar-padding {
     box-sizing: border-box;
-    padding: 15px;
+    padding: 10px 15px 10px 15px;
 }
 
 .navbar-leading {
@@ -35,6 +35,16 @@
 
 .navbar-logo {
     width: 100%;
+}
+
+@media (max-height: 700px)  and (min-width: 850px) {
+    .navbar-logo {
+        width: 80%;
+    }
+    .navbar-padding {
+        box-sizing: border-box;
+        padding: 5px 10px 5px 10px;
+    }
 }
 
 @media (max-width: 850px) {

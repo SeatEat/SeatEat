@@ -69,6 +69,19 @@
     filter: invert()
 }
 
+@media (max-height: 700px) and (min-width: 850px) {
+    
+    .chapter-hall-logo-container {
+        height: 32px;
+    }
+    .chapter-hall-logo {
+        width: 32px;
+    }
+    .chapter-hall-logo-container {
+        padding: 7px 0;
+    }
+}
+
 @media (max-width: 850px) {
     .chapter-hall-container {
         align-items: center;
