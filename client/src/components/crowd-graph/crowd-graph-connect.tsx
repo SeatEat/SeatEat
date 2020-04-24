@@ -4,6 +4,7 @@ import { AppState } from '../../model/redux/store';
 
 const mapStateToProps = (state: AppState): CrowdGraphProps => ({
     activeView: state.viewState.activeView,
+    chapterHall: state.estimationState.chapterHall,
     estimationData: state.estimationState.estimationData,
     slideValue: state.crowdDataSlideState
 });
