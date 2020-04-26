@@ -45,7 +45,7 @@ const CheckInFormPresentational: FC<CheckInFormProps> = (props) => {
                 <Button disabled={!props.checkInOK} onClick={() => props.onSubmit()}>
                     Check in
                 </Button>
-                <Button onClick={() => props.onCancel}>
+                <Button onClick={() => props.onCancel()}>
                     Cancel
                 </Button>
             </div>
