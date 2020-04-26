@@ -5,7 +5,8 @@ import Clickable from "../clickable/clickable";
 interface ButtonProps {
     onClick: Function,
     isCompact?: boolean,
-    disabled?: boolean
+    disabled?: boolean,
+    noPadding?: boolean
 }
 
 const Button: FC<ButtonProps> = (props) => {
@@ -19,7 +20,8 @@ const Button: FC<ButtonProps> = (props) => {
             className={
                 `button 
                 ${props.isCompact ? 'button-compact' : ''}
-                ${props.disabled ? 'button-disabled' : ''}`}>
+                ${props.disabled ? 'button-disabled' : ''}
+                ${props.noPadding ? 'button-no-padding' : ''}`}>
             {props.children}
         </div>
     </Clickable>

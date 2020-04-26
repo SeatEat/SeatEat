@@ -34,3 +34,7 @@
     transform: none;
     box-shadow: none;
 }
+
+.button-no-padding {
+    padding: 0;
+}
