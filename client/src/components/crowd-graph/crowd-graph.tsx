@@ -5,6 +5,8 @@ import BarGraph from "../bar-graph/bar-graph";
 import { monthNames } from "../../data/month-names";
 import { SlideState } from "../../model/redux/crowdDataSliderState";
 import { ChapterHall } from "../../model/chapter-hall-model";
+import { AppState } from "../../model/redux/store";
+import { connect } from "react-redux";
 
 export type CrowdGraphProps = {
     activeView: string,
@@ -58,4 +60,13 @@ const CrowdGraph: FC<CrowdGraphProps> = (props) => {
         values={buildGraphValues()}/>
 }
 
-export default CrowdGraph;
+const mapStateToProps = (state: AppState): CrowdGraphProps => ({
+    activeView: state.viewState.activeView,
+    chapterHall: state.estimationState.chapterHall,
+    estimationData: state.estimationState.estimationData,
+    slideValue: state.crowdDataSlideState
+});
+
+export default connect(
+  mapStateToProps,
+)(CrowdGraph);

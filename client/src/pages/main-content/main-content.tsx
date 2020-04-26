@@ -9,7 +9,7 @@ import ContentPadding from '../../components/content-padding';
 import { useEffect } from 'react';
 
 import 'rc-slider/assets/index.css';
-import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph-connect';
+import CrowdGraphConnect from '../../components/crowd-graph/crowd-graph';
 import { views } from '../../model/views-model';
 import CrowdCurrent from '../../components/crowd-current/crowd-current';
 import CheckInStatus from '../../components/check-in-status/check-in-status';
