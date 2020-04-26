@@ -24,8 +24,10 @@ const CircularProgressIndicator: FC<CircularProgressIndicatorProps> = (props) =>
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setDisplayNone(true)
-          }, 1000);
+            if(props.loadingIsDone) {
+                setDisplayNone(true)
+            }
+          }, 500);
           return () => clearTimeout(timer);
     }, [props.loadingIsDone])
 

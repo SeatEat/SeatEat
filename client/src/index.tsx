@@ -6,9 +6,8 @@ import './theme/shapes.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import store from './model/redux/store'
+import store from './model/redux/store';
 import DialogServiceProvider from './components/dialog/dialog';
-
 
 store.subscribe(() => {
     console.groupCollapsed("State change");

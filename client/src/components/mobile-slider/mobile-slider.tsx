@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import './mobile-slider.css'
-import LeftIcon from '../../assets/icons/chevron-left-outline.svg';
-import RightIcon from '../../assets/icons/chevron-right-outline.svg';
+import LeftIcon from '../../assets/icons/dynamic/chevron-left-outline';
+import RightIcon from '../../assets/icons/dynamic/chevron-right-outline';
+import Button from '../button/button';
 
 type MobileSliderProps = {
     onDecrease: () => void,
@@ -13,9 +14,13 @@ type MobileSliderProps = {
 const MobileSlider: FC<MobileSliderProps> = (props) => {
     return (        
         <div className='mobile-slider'>
-            <img className={`${props.disableDecrease ? 'disabled' : ''}`} src={LeftIcon} onClick={props.onDecrease}/>
+            <Button noPadding disabled={props.disableDecrease} onClick={props.onDecrease}>
+                <LeftIcon color={props.disableDecrease ? '#aaa' : ''}/>
+            </Button>
             {props.children}
-            <img className={`${props.disableIncrease ? 'disabled' : ''}`} src={RightIcon} onClick={props.onIncrease}/>
+            <Button noPadding disabled={props.disableIncrease} onClick={props.onIncrease}>
+                <RightIcon color={props.disableIncrease ? '#aaa' : ''}/>
+            </Button>
         </div>
     );
 }
