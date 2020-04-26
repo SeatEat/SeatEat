@@ -3,7 +3,9 @@ import { CrowdEstimationData } from "../../model/crowd-estimation-model";
 import { monthNames } from "../../data/month-names";
 import DateSlider from "../date-slider/date-slider";
 import { views } from "../../model/views-model";
-import { SlideState } from "../../model/redux/crowdDataSliderState";
+import { SlideState, updateSlideValue } from "../../model/redux/crowdDataSliderState";
+import { connect } from "react-redux";
+import { Dispatch, AppState } from "../../model/redux/store";
 
 export interface CrowdDataSliderPropsState {
     estimationData: CrowdEstimationData | null,
@@ -47,4 +49,16 @@ const CrowdDataSlider: FC<CrowdDataSliderPropsState & CrowdDataSliderPropsAction
         />
 }
 
-export default CrowdDataSlider;
+const mapStateToProps = (state: AppState): CrowdDataSliderPropsState => ({
+    estimationData: state.estimationState.estimationData,
+    activeView: state.viewState.activeView,
+    crowdDataSlideState: state.crowdDataSlideState
+});
+const mapDispatchToProps = (dispatch: Dispatch): CrowdDataSliderPropsActions => ({
+    onSliderChange: (activeView, value) => {dispatch(updateSlideValue(activeView, value))}
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CrowdDataSlider);
