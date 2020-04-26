@@ -296,10 +296,9 @@ export class CrowdEstimationData {
     /**
      * Get how crowded it is right now
      */
-    public getCurrentCrowdedness(): number {
-        var maxCapacity = 100
+    public getCurrentCrowdedness(capacity: number): number {
         var hour = this.startDateOfEstimation.getHours()
-        var percent = this.estimation[0][hour]/maxCapacity * 100
+        var percent = this.estimation[0][hour]/capacity * 100
         if (percent >= 0 && percent < 20) {
             return 0;
         }

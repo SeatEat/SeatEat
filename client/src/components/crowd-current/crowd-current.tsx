@@ -15,7 +15,7 @@ type CrowdCurrentProps = {
 const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
     const logos = props.chapterHall?.logos ? props.chapterHall?.logos : []
     const name = props.chapterHall?.name ? props.chapterHall?.name : []
-    const rate = props.estimationData?.getCurrentCrowdedness() ? props.estimationData?.getCurrentCrowdedness() : 0
+    const rate = props.estimationData?.getCurrentCrowdedness(props.chapterHall?.capacity ?? 100) ?? 0
     const percentList = [" 0-20%", " 20-40%", " 40-60%", " 60-80%", " 80-100%"]
     return (
         <div className="chapter-information-container">

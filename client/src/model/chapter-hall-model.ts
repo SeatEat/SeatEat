@@ -4,6 +4,7 @@ export interface ChapterHall {
     name: string,
     address: string,
     contact: string,
+    capacity: number,
     logos: string[],
     chapters: Chapter[]
 }

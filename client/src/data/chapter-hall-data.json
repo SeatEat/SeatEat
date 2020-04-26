@@ -3,6 +3,7 @@
         "name": "Bryggeriet",
         "address": "Teknikringen 22A",
         "contact": "las@arkitektursektionen.se",
+        "capacity": 80,
         "logos": [
             "arkit.png",
             "tibyh.png"
@@ -29,6 +30,7 @@
         "name": "Draget",
         "address": "Teknikringen 36B",
         "contact": "isb-loka@ths.kth.se",
+        "capacity": 150,
         "logos": [
             "cbiot_ctkem_tiked.png"
         ],
@@ -54,6 +56,7 @@
         "name": "Gråttan",
         "address": "Osquars backe 8",
         "contact": "gr8n@cl-sektionen.se",
+        "capacity": 200,
         "logos": [
             "clgym.png",
             "cenmi.png"
@@ -75,6 +78,7 @@
         "name": "Hardox",
         "address": "Brinellvägen 23",
         "contact": "isb-loka@ths.kth.se",
+        "capacity": 110,
         "logos": [
             "cmatd.png"
         ],
@@ -90,6 +94,7 @@
         "name": "I-stället",
         "address": "Brinellvägen 22",
         "contact": "logistik@iare.nu",
+        "capacity": 110,
         "logos": [
             "cinek.png"
         ],
@@ -105,6 +110,7 @@
         "name": "Kistan",
         "address": "Kistagången 16",
         "contact": "studiesocialt@insektionen.se",
+        "capacity": 150,
         "logos": [
             "cinte_tidab_tiedb.png"
         ],
@@ -130,6 +136,7 @@
         "name": "Konsulatet",
         "address": "Brinellvägen 89",
         "contact": "gk@f.kth.se",
+        "capacity": 90,
         "logos": [
             "ctfys.png"
         ],
@@ -145,6 +152,7 @@
         "name": "META",
         "address": "Osquars backe 21",
         "contact": "lokalchef@d.kth.se",
+        "capacity": 150,
         "logos": [
             "cmete.png",
             "cdate.png"
@@ -166,6 +174,7 @@
         "name": "Smörjkammaren",
         "address": "Brinellvägen 28",
         "contact": "sko@m.kth.se",
+        "capacity": 220,
         "logos": [
             "cdepr_cmast.png"
         ],
@@ -186,6 +195,7 @@
         "name": "T-centralen",
         "address": "Drottning Kristinas väg 29",
         "contact": "lokal@t.kth.se",
+        "capacity": 120,
         "logos": [
             "cfate.png",
             "forsk.png"
@@ -207,6 +217,7 @@
         "name": "Tolvan",
         "address": "Osquars backe 12",
         "contact": "kallarmastare@e.kth.se",
+        "capacity": 120,
         "logos": [
             "cmedt.png",
             "celte.png"

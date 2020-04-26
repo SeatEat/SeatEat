@@ -4,9 +4,11 @@ import { views } from "../../model/views-model";
 import BarGraph from "../bar-graph/bar-graph";
 import { monthNames } from "../../data/month-names";
 import { SlideState } from "../../model/redux/crowdDataSliderState";
+import { ChapterHall } from "../../model/chapter-hall-model";
 
 export type CrowdGraphProps = {
     activeView: string,
+    chapterHall: ChapterHall | null,
     estimationData: CrowdEstimationData | null,
     slideValue: SlideState,
 }
@@ -51,7 +53,7 @@ const CrowdGraph: FC<CrowdGraphProps> = (props) => {
     
     return <BarGraph
         buildGroundValues={buildGroundValues}
-        limit={100} 
+        limit={props.chapterHall?.capacity ?? 100} 
         limitText="Maximum capacity" 
         values={buildGraphValues()}/>
 }
