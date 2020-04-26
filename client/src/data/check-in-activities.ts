@@ -11,6 +11,13 @@ export interface CheckInActivity {
     logo: string
 }
 
+export function getCheckInActivityByID(activityID: CheckInActivityIDs) {
+    // The find function can not return undefined as it is type safe
+    return checkInActivities.find(
+        (value) => value.id === activityID
+    ) as CheckInActivity;
+}
+
 export const checkInActivities: CheckInActivity[] = [
     {
         id: 'food',
