@@ -6,6 +6,7 @@ import { useDialogService } from '../dialog/dialog'
 import ContentPadding from '../content-padding';
 import Button from '../button/button';
 import ErrorTypes from '../../model/errorTypes';
+import ErrorDialogPresentational from './error-dialog-presentational';
 
 interface ErrorDialogProps {
     errorText: string
@@ -13,35 +14,8 @@ interface ErrorDialogProps {
 
 const ErrorDialog: FC<ErrorDialogProps> = (props) => {
 
+    // We have a dialog state to prevent multiple dialogs
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
-
-    const confirm = useDialogService()
-    const openErrorDialog = () => {
-        confirm({
-            content: (closeDialog) => (<ContentPadding>
-                <div className="error-bar">
-                    <div className="error-bar-text">
-                        <h3>Error: {props.errorText}</h3>
-                    </div>
-                    
-                    <div className="error-bar-button">
-                        <Button onClick={() => {
-                            closeDialog();
-                            setDialogIsOpen(false);
-                        }}>
-                            Close
-                        </Button>
-                        <Button onClick={() => {
-                           window.location.reload();
-                        }}>
-                            Reload website
-                        </Button>
-                    </div>
-                </div>
-            </ContentPadding>)
-        });
-    }
-
     useEffect(() => {
         if (props.errorText !== "" && !dialogIsOpen) {
             openErrorDialog();
@@ -49,7 +23,27 @@ const ErrorDialog: FC<ErrorDialogProps> = (props) => {
         }
     }, [props.errorText])
 
-    return <></>;
+    const confirm = useDialogService()
+    const openErrorDialog = () => {
+        confirm({
+            content: (closeDialog) => (
+                <ErrorDialogPresentational
+                    errorText={props.errorText}
+                    onCloseDialog={() => {
+                        closeDialog();
+                        setDialogIsOpen(true);
+                    }}
+                    onReloadSite={() => {
+                        window.location.reload();
+                    }}
+                />
+            )
+        });
+    }
+
+    // This component do not return anything as it only renders
+    // content in the dialog component
+    return (null)
 }
 
 function getErrorTextFromLoadingError(loadingError: number) {
