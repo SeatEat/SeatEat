@@ -106,7 +106,7 @@ const CheckInStatus: FC<CheckInStatusProps> = (props) => {
                         const checkInActivity = getCheckInActivityByID(person.type);
                         if (checkInActivity) {
                             return <CheckInCard 
-                                key={person.name}
+                                key={person.docID}
                                 name={person.name}
                                 checkInDate={person.date}
                                 checkInActivityLogo={checkInActivity.logo}
