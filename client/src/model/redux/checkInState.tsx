@@ -1,11 +1,10 @@
-import { AppActions, AppState } from "./store";
+import store, { AppActions, AppState } from "./store";
 import { Dispatch } from "react";
 import { addCheckIn, removeCheckIn, PersonCheckIn, addCheckInListener } from "../check-in-model";
 import { CheckInActivityIDs } from "../../data/check-in-activities";
 import { FirebaseError } from "firebase";
 import ErrorTypes from "../errorTypes";
-
-const userCheckInDocIDLocalStorageName = 'userCheckInDocID'
+import { REHYDRATE } from "redux-persist";
 
 export enum CheckInActionTypes {
     SET_CHECK_INS = 'SET_CHECK_INS',
@@ -15,29 +14,30 @@ export enum CheckInActionTypes {
     ADD_USER_CHECK_IN_ERROR = 'ADD_USER_CHECK_IN_ERROR',
 }
 
+interface CheckInUser {
+    docID: string | null
+    chapterName: string | null,
+    loading: boolean,
+    userCheckedIn: boolean,
+}
+
 export interface CheckInState {
     userCheckedInError: number | null,
-    checkInUser: {
-        docID: string | null
-        chapterName: string | null,
-        loading: boolean,
-        userCheckedIn: boolean,
-    }
+    checkInUser: CheckInUser
     peopleCheckIn: PersonCheckIn[]
 }
 
-function loadInitCheckInState(): CheckInState {
-    const userDocID = localStorage.getItem(userCheckInDocIDLocalStorageName);
-    return {
-        userCheckedInError: null,
-        checkInUser: {
-            docID: userDocID,
-            chapterName: null,
-            loading: false,
-            userCheckedIn: userDocID !== null,
-        },
-        peopleCheckIn: []
-    }
+const initCheckInUserState: CheckInUser = {
+    docID: null,
+    chapterName: null,
+    loading: false,
+    userCheckedIn: false,
+}
+
+const initCheckInState: CheckInState = {
+    userCheckedInError: null,
+    checkInUser: initCheckInUserState,
+    peopleCheckIn: []
 }
 
 
@@ -60,10 +60,6 @@ export interface SetUserCheckInDataAction {
     }
 }
 export function setUserCheckInData(docID: string, chapterName: string): SetUserCheckInDataAction {
-
-    //Store the doc ID in local storage
-    localStorage.setItem(userCheckInDocIDLocalStorageName, docID);
-
     return {
         type: CheckInActionTypes.SET_USER_CHECK_IN_DATA,
         payload: {
@@ -77,8 +73,6 @@ export interface RemoveUserCheckInDataAction {
     type: CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA
 }
 export function removeUserCheckInData(): RemoveUserCheckInDataAction {
-    //Remove doc ID from local stroage
-    localStorage.removeItem(userCheckInDocIDLocalStorageName);
     return {
         type: CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA,
     }
@@ -89,8 +83,6 @@ export interface AddUserCheckInErrorAction {
     payload: number,
 }
 export function addUserCheckInError(errorType: number): AddUserCheckInErrorAction {
-    //Remove doc ID from local stroage
-    localStorage.removeItem(userCheckInDocIDLocalStorageName);
     return {
         type: CheckInActionTypes.ADD_USER_CHECK_IN_ERROR,
         payload: errorType
@@ -158,7 +150,6 @@ export function requestCheckInListener() {
     }
 }
 
-
 export interface SetCheckInsAction {
     type: CheckInActionTypes.SET_CHECK_INS,
     payload: PersonCheckIn[]
@@ -170,15 +161,23 @@ export function setCheckIns(checkIns: PersonCheckIn[]): SetCheckInsAction {
     }
 }
 
+export interface RehydrateCheckInStateAction {
+    type: typeof REHYDRATE,
+    payload: {
+        checkInUser: CheckInUser
+    }
+}
+
 export type CheckInActions = 
     SetCheckInsAction | 
     SetUserCheckInLoadingAction |
     SetUserCheckInDataAction |
     RemoveUserCheckInDataAction |
-    AddUserCheckInErrorAction
+    AddUserCheckInErrorAction |
+    RehydrateCheckInStateAction
 
 export const checkInReducer = (
-    state: CheckInState = loadInitCheckInState(), 
+    state: CheckInState = initCheckInState, 
     action: CheckInActions
 ): CheckInState => {
     switch (action.type) {
@@ -209,20 +208,24 @@ export const checkInReducer = (
         case CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA:
             return {
                 ...state,
-                checkInUser: {
-                    ...state.checkInUser,
-                    docID: null,
-                    userCheckedIn: false
-                }
+                checkInUser: initCheckInUserState,
             };
         case CheckInActionTypes.ADD_USER_CHECK_IN_ERROR:
             return {
                 ...state,
-                checkInUser: {
-                    ...state.checkInUser,
-                    loading: false
-                },
+                checkInUser: initCheckInUserState,
                 userCheckedInError: action.payload
+            };
+        case REHYDRATE: 
+            if(!action.payload) {
+                return state;
+            }
+            return {
+                ...state,
+                checkInUser: {
+                    ...action.payload.checkInUser,
+                    loading: false
+                }
             };
         default:
             return state;

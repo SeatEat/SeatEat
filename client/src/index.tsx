@@ -6,8 +6,9 @@ import './theme/shapes.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import store from './model/redux/store';
+import store, { persistor } from './model/redux/store';
 import DialogServiceProvider from './components/dialog/dialog';
+import { PersistGate } from 'redux-persist/integration/react';
 
 store.subscribe(() => {
     console.groupCollapsed("State change");
@@ -17,9 +18,11 @@ store.subscribe(() => {
 
 ReactDOM.render(
     <Provider store={store}>
-        <DialogServiceProvider>
-            <App />
-        </DialogServiceProvider>
+        <PersistGate loading={null} persistor={persistor}>
+            <DialogServiceProvider>
+                <App />
+            </DialogServiceProvider>
+        </PersistGate>
     </Provider>, 
     document.getElementById('root')
 );
