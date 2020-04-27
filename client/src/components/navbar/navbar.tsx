@@ -32,7 +32,7 @@ const Navbar = () => {
                     { 
                         windowDimensions.width < 850 ? 
                             <LinkCard light path='/' onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}>
-                                Home page
+                                Home
                             </LinkCard> 
                         : <></> 
                     }
