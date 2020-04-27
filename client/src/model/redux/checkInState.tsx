@@ -19,6 +19,7 @@ interface CheckInUser {
     chapterName: string | null,
     loading: boolean,
     userCheckedIn: boolean,
+    timeOut: Date
 }
 
 export interface CheckInState {
@@ -32,6 +33,7 @@ const initCheckInUserState: CheckInUser = {
     chapterName: null,
     loading: false,
     userCheckedIn: false,
+    timeOut: new Date()
 }
 
 const initCheckInState: CheckInState = {
@@ -203,6 +205,8 @@ export const checkInReducer = (
                     chapterName: action.payload.chapterName,
                     userCheckedIn: true,
                     loading: false,
+                    //Set timeOut to 00:00:00 the next day
+                    timeOut: new Date(new Date().setHours(24,0,0,0)),
                 }
             };
         case CheckInActionTypes.REMOVE_USER_CHECK_IN_DATA:
@@ -223,7 +227,9 @@ export const checkInReducer = (
             return {
                 ...state,
                 checkInUser: {
-                    ...action.payload.checkInUser,
+                    //Reset to initCheckInUserState if timeOut has passed
+                    ...((new Date() > new Date(action.payload.checkInUser.timeOut)) ? initCheckInUserState : action.payload.checkInUser),
+                    //Always reset loading in case of error
                     loading: false
                 }
             };
