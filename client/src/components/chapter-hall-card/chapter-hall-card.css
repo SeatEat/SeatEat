@@ -19,7 +19,7 @@
     background-color: var(--theme-color-blue-dark);
     opacity: 0.5;
 }
-.chapter-hall-container.active .chapter-hall-logo-split {
+.link-card-container.active .chapter-hall-logo-split {
     background-color: var(--theme-color-yellow);
 }
 
@@ -27,7 +27,7 @@
     margin: auto;
     height: 100%;
 }
-.chapter-hall-container.active .chapter-hall-logo img {
+.link-card-container.active .chapter-hall-logo img {
     filter: invert()
 }
 
@@ -40,10 +40,3 @@
         padding: 7px 0;
     }
 }
-
-@media (max-width: 850px) {
-    .chapter-hall-container {
-        align-items: center;
-    }
-}
-
