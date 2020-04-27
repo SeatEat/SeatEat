@@ -1,43 +1,5 @@
-.chapter-hall-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-
-    transition: color 0.5s;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: var(--theme-shape-card-radius);
-
-    overflow: hidden;
-    background-color: var(--theme-color-yellow);
-    color: var(--theme-color-blue-dark); 
-}
-
-.chapter-hall-container:hover {
-    background-color: var(--theme-color-yellow-light);
-}
-.chapter-hall-container.active {
-    background-color: var(--theme-color-blue-dark);
-    color: var(--theme-color-yellow-light);
-}
-
-.chapter-hall-name {
-    flex: 1;
-    margin-left: 15px;
-    text-align: left;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.chapter-hall-name a {
-    text-decoration: none;
-}
-
 .chapter-hall-logo-container {
-    height: 43px;
+    height: 100%;
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -71,9 +33,6 @@
 
 @media (max-height: 700px) and (min-width: 850px) {
     
-    .chapter-hall-logo-container {
-        height: 32px;
-    }
     .chapter-hall-logo {
         width: 32px;
     }
