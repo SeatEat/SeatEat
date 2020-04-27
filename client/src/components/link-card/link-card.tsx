@@ -2,7 +2,7 @@ import React, { FC, ReactNode} from 'react';
 import { NavLink } from 'react-router-dom';
 import './link-card.css';
 
-const LinkCard: FC<{onClick: Function, path: string, key?: string, left?: ReactNode, light?: boolean}> = (props) => {
+const LinkCard: FC<{onClick: Function, path: string, key?: string, right?: ReactNode, light?: boolean}> = (props) => {
     return (
         <NavLink 
             exact
@@ -14,7 +14,7 @@ const LinkCard: FC<{onClick: Function, path: string, key?: string, left?: ReactN
             <div className='link-card-text'>
                 {props.children}
             </div>
-            {props.left}
+            {props.right}
         </NavLink>
     );
 }
