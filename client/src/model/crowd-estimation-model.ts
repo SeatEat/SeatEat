@@ -243,7 +243,7 @@ export class ProgramCohort {
     }
 
     public getCrowdednessHourly(dateStart: Date) {
-        let estimationData: Array < Array < number >> = [];
+        let estimationData: number[][] = [];
         let lectureListDay = this.getLecturesDaily(dateStart);
 
         for (let day in lectureListDay) {
@@ -269,19 +269,29 @@ export class CrowdEstimationData {
     constructor(
         private programCohorts: Array < ProgramCohort > ,
         private startDateOfEstimation: Date,
+        numberOfEstimationDays: number
     ) {
+        this.daysOfEstimation = numberOfEstimationDays;
         this.estimation = this.mergeCrowdEstimationData();
-        this.daysOfEstimation = this.estimation.length;
+    }
+
+    private generateEmptyEstimationMatrix() {
+        let estimationMatrix: number[][] = [];
+        for (let day = 0; day < this.daysOfEstimation; day++) {
+            if (estimationMatrix[day] === undefined) estimationMatrix[day] = [];
+            for (let hour = 0; hour < 24; hour ++) {
+                estimationMatrix[day][hour] = 0;
+            }
+        }
+        return estimationMatrix;
     }
 
     private mergeCrowdEstimationData(): number[][] {
-        let mergedEstimationData: number[][] = [];
+        let mergedEstimationData = this.generateEmptyEstimationMatrix();
         for (var i = 0; i < this.programCohorts.length; i++) {
             let estimationData = this.programCohorts[i].getCrowdednessHourly(this.startDateOfEstimation);
             for (var day = 0; day < estimationData.length; day++) {
-                if (mergedEstimationData[day] === undefined) mergedEstimationData[day] = [];
                 for (var hour = 0; hour < estimationData[day].length; hour++) {
-                    if (mergedEstimationData[day][hour] === undefined) mergedEstimationData[day][hour] = 0;
                     mergedEstimationData[day][hour] += estimationData[day][hour];
                 }
             }
@@ -315,10 +325,6 @@ export class CrowdEstimationData {
             return 4;
         }
 
-    }
-
-    public getEstimationData(): number[][] {
-        return this.estimation;
     }
 
     public getEstimationDay(day: number) {
@@ -386,7 +392,7 @@ export default class CrowdEstimationModel {
 
     private static async getCourseSchedule(course: any, isElective: boolean, startDate: Date, endDate: Date): Promise < CourseSchedule > {
 
-        // Add inital ednpoint
+        // Add initial endpoint
         var endpoint: string = '/kth/schema/course/' + course.Code
 
         // Limit API call to start term and course round code
@@ -406,7 +412,7 @@ export default class CrowdEstimationModel {
             endpoint += '/' + startTerm + '/' + courseRoundCode
         }
 
-        // Add start and endtime getting courses
+        // Add start and end time getting courses
         endpoint +=
             '?startTime=' + startDate.toISOString().split('T')[0] +
             '&endTime=' + endDate.toISOString().split('T')[0]
@@ -451,6 +457,7 @@ export default class CrowdEstimationModel {
         createCancelCallback: (arg0: Function) => void,
         ): Promise < CrowdEstimationData | null> {
 
+        const numberOfEstimationDays = 7;
         const studyYear = CrowdEstimationModel.getActiveYearCodes();
 
         // Creates a cancel callback
@@ -462,7 +469,7 @@ export default class CrowdEstimationModel {
         //Ugly code, want to do this better
         const startDate = new Date(startDateOfEstimation)
         var endDate = new Date(startDate)
-        endDate.setDate(endDate.getDate() + 7);
+        endDate.setDate(endDate.getDate() + numberOfEstimationDays);
 
         let programCohorts: ProgramCohort[] = [];
         for (const chapter of chapterData) {
@@ -502,7 +509,7 @@ export default class CrowdEstimationModel {
                     }
 
                     // First we need to skip all the courses that already is added, this same course
-                    // is occuring multiple times in the spec array
+                    // is occurring multiple times in the spec array
                     let filteredCourses = courses.filter((course) => {
                         if (this.courseScheduleExist(courseSchedules, course.Code)) {
                             return false;
@@ -511,7 +518,7 @@ export default class CrowdEstimationModel {
                     });
 
                     // We want to get all the schedules in parallel, otherwise we have to wait for each
-                    // course loading witch can take alot of time
+                    // course loading witch can take a lot of time
                     let courseSchedulePromises: Promise<CourseSchedule>[] = filteredCourses.map(course => {
                         return this.getCourseSchedule(
                             course,
@@ -537,7 +544,8 @@ export default class CrowdEstimationModel {
 
         return new CrowdEstimationData(
             programCohorts,
-            startDateOfEstimation
+            startDateOfEstimation,
+            numberOfEstimationDays
         );
     }
 }
