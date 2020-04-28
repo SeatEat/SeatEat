@@ -20,7 +20,7 @@ const ConfirmCheckOutPresentational: FC<ConfirmCheckOutProps> = (props) => {
             <Button onClick={props.onSubmit}>
                     Yes
             </Button>
-            <Button onClick={() => props.onCancel()}>
+            <Button onClick={props.onCancel}>
                 No
             </Button>
         </div>
