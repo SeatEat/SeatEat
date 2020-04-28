@@ -1,11 +1,10 @@
 import React, { FC } from "react";
-import Button from "../button/button";
 
 import './confirm-check-out.css';
 import { requestUserCheckOut } from "../../model/redux/checkInState";
 import { connect } from "react-redux";
 import { Dispatch } from "../../model/redux/store";
-
+import ConfirmCheckOutPresentational from "./confirm-check-out-presentational";
 
 interface ConfirmCheckOutDispatch {
     onSubmit: () => void
@@ -23,20 +22,11 @@ const ConfirmCheckOut: FC<ConfirmCheckOutProps & ConfirmCheckOutDispatch > = (pr
         props.onSubmit()
     }
 
-    return <div className="confirm-check-out-container">
-        <h2>
-            Are you sure you want to <br/> check out from {props.currentChapterHall}?
-        </h2>
-        <br/>
-        <div className="check-out-button-container">
-            <Button onClick={() => checkOut()}>
-                    Yes
-            </Button>
-            <Button onClick={() => props.closeDialog()}>
-                No
-            </Button>
-        </div>
-    </div>
+    return <ConfirmCheckOutPresentational
+                currentChapterHall={props.currentChapterHall}
+                onSubmit={() => checkOut()}
+                onCancel={() => props.closeDialog()}
+                />
 }
 
 export default connect(
