@@ -14,14 +14,10 @@ type CrowdCurrentProps = {
 }
 
 const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
-    const logos = props.chapterHall?.logos ? props.chapterHall?.logos : []
-    const name = props.chapterHall?.name ? props.chapterHall?.name : []
-    const rate = props.estimationData?.getCurrentCrowdedness(props.chapterHall?.capacity ?? 100) ?? 0
-
     return <CrowdCurrentPresentational
-                logos={logos}
-                name={name}
-                rate={rate}/>
+                logos={props.chapterHall?.logos ? props.chapterHall?.logos : []}
+                name={props.chapterHall?.name ?? ''}
+                rate={props.estimationData?.getCurrentCrowdedness(props.chapterHall?.capacity ?? 100) ?? 0}/>
 }
 
 const mapStateToProps = (state: AppState): CrowdCurrentProps => ({

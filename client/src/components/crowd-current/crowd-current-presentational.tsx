@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import './crowd-current.css';
 
 interface CrowdCurrentProps {
-    logos: Array<string>,
-    name: string | never[]
+    logos: string[],
+    name: string,
     rate: number
 }
 
