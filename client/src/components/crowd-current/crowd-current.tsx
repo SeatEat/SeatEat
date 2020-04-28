@@ -15,7 +15,7 @@ type CrowdCurrentProps = {
 
 const CrowdCurrent: FC<CrowdCurrentProps> = (props) => {
     return <CrowdCurrentPresentational
-                logos={props.chapterHall?.logos ? props.chapterHall?.logos : []}
+                logos={props.chapterHall?.logos ?? []}
                 name={props.chapterHall?.name ?? ''}
                 rate={props.estimationData?.getCurrentCrowdedness(props.chapterHall?.capacity ?? 100) ?? 0}/>
 }
