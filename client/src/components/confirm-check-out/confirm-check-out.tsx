@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 
-import './confirm-check-out.css';
 import { requestUserCheckOut } from "../../model/redux/checkInState";
 import { connect } from "react-redux";
 import { Dispatch } from "../../model/redux/store";
