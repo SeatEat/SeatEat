@@ -34,8 +34,13 @@
 }
 
 @media (max-width: 850px) {
+    .view-card-content {
+        flex-direction: column;
+    }
+
     .view-card-title {
-        display: none;
+        padding: 5px;
+        font-size: 10px;
     }
 
     .view-card svg {
@@ -45,6 +50,9 @@
     .view-card.active svg {
         fill: var(--theme-color-yellow); 
     }
- 
+
+    .view-card.active .view-card-title {
+        color: var(--theme-color-yellow);
+    }
 }
 
