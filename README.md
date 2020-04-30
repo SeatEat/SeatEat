@@ -63,6 +63,8 @@ Used to open a dialog (modal) window.
 Contains FC:s for form elements such as input and select.
 * **hamburger-button**  
 Returns a hamburger button used to show the navbar on mobile.
+* **link-card**  
+A generic container for a NavLink to be used in the navbar.
 * **navbar**  
 The navbar provides links to each chapter hall. Uses `NavLink` from `react-router-dom`.
 * **view-card-description**  
