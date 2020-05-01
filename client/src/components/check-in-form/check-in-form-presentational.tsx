@@ -11,6 +11,7 @@ interface CheckInFormProps {
     currentChapter: ChapterHall | null,
     nameError: string | null,
     checkInOK: boolean,
+    userCheckedIn: boolean,
     onNameInputChange: (value: string) => void
     onActivityInputChange: (value: CheckInActivityIDs) => void,
     onCancel: () => void,
@@ -42,7 +43,7 @@ const CheckInFormPresentational: FC<CheckInFormProps> = (props) => {
                 })}
                 onSelect={value => props.onActivityInputChange(value)}/>
             <div className="check-in-form-actions">
-                <Button disabled={!props.checkInOK} onClick={() => props.onSubmit()}>
+                <Button disabled={!props.checkInOK || props.userCheckedIn} onClick={() => props.onSubmit()}>
                     Check in
                 </Button>
                 <Button onClick={() => props.onCancel()}>
