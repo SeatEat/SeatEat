@@ -14,7 +14,7 @@ interface CheckInFormDispatch {
 
 interface CheckInFormProps {
     currentChapter: ChapterHall | null, 
-    closeDialog: Function
+    closeDialog: Function,
 }
 
 const CheckInForm: FC<CheckInFormProps & CheckInFormDispatch> = (props) => {
@@ -23,6 +23,7 @@ const CheckInForm: FC<CheckInFormProps & CheckInFormDispatch> = (props) => {
     const [checkInOK, setCheckInOK] = useState<boolean>(false);
     const [nameValue, setNameValue] = useState<string>('');
     const [typeValue, setTypeValue] = useState<CheckInActivityIDs>('food');
+    const [checkedInPressed, setCheckedInPressed] = useState(false);
 
     useEffect(() => {
         if (nameError === null && nameValue !== '') {
@@ -62,6 +63,7 @@ const CheckInForm: FC<CheckInFormProps & CheckInFormDispatch> = (props) => {
 
     return <CheckInFormPresentational
         checkInOK={checkInOK}
+        userCheckedIn={checkedInPressed}
         currentChapter={props.currentChapter}
         nameError={nameError}
         onNameInputChange={(inputValue) => {
@@ -69,7 +71,10 @@ const CheckInForm: FC<CheckInFormProps & CheckInFormDispatch> = (props) => {
             checkForNameErrors(inputValue);
         }}
         onActivityInputChange={(value) => setTypeValue(value)}
-        onSubmit={() => tryCheckIn()}
+        onSubmit={() => {
+            tryCheckIn();
+            setCheckedInPressed(true);
+        }}
         onCancel={() => props.closeDialog()}
     />
 }
