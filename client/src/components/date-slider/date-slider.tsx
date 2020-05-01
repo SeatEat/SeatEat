@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState, useRef } from "react";
-import Slider from 'rc-slider';
 import './date-slider.css';
 import { SlideState } from "../../model/redux/crowdDataSliderState";
-import MobileSlider from "../mobile-slider/mobile-slider";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import DateSliderPresentational from "./date-slider-presentational";
 
 export type DateSliderProps = {
     values: number[], 
-    stepTextBuilder: (arg0: number) => string,
+    stepTextBuilder: (value: number) => string,
     onValueChange: (activeView: string, value: number) => void
     activeView: string,
     crowdDataSlideState: SlideState,
@@ -59,53 +58,14 @@ const DateSlider: FC<DateSliderProps> = (props) => {
         }
     };
 
-    const generateStepElement = (value: number, text: string) => {
-        return (
-            <div className={'date-slider-text ' + (value === activeValue ? 'date-slider-text-active' : '')}>
-                {text}
-            </div>
-        );
-    }
-
-    const mobileSlider = (
-        <MobileSlider 
-            disableDecrease={activeValue === Math.min(...props.values)} 
-            disableIncrease={activeValue === Math.max(...props.values)} 
-            onDecrease={() => handleChange(activeValue-1)} 
-            onIncrease={()=>handleChange(activeValue+1)}> 
-            {generateStepElement(activeValue, props.stepTextBuilder(activeValue))}
-        </MobileSlider>
-    )
-
-    return ( 
-        <div className="date-slider"> {onMobile ? mobileSlider :
-            <Slider
-                railStyle={{
-                    backgroundColor: 'var(--theme-color-green)'
-                }}
-                trackStyle={{
-                    backgroundColor: 'rgba(0, 0, 0, 0)'
-                }}
-                dotStyle={{
-                    borderColor: 'var(--theme-color-blue-dark)',
-                    backgroundColor: 'var(--theme-color-blue-dark)'
-                }}
-                handleStyle={{
-                    animation: 'pulsing',
-                    animationDuration: '1s',
-                    animationIterationCount: 'infinite',
-                    backgroundColor: 'var(--theme-color-yellow)',
-                    borderColor: 'var(--theme-color-yellow)',
-                    boxShadow: 'none'
-                }}
-                min={Math.min(...props.values)} 
-                max={Math.max(...props.values)}
-                marks={props.values.reduce(
-                    (a: any, b: number) => (a[b] = generateStepElement(b, props.stepTextBuilder(b)), a),
-                {})}
-                value={activeValue}
-                onChange={handleChange} />}
-            </div>);
+    return <DateSliderPresentational
+        activeValue={activeValue}
+        activeView={activeView}
+        handleChange={handleChange}
+        onMobile={onMobile}
+        stepTextBuilder={props.stepTextBuilder}
+        values={props.values}
+    />
 }
 
 export default DateSlider;
