@@ -46,7 +46,7 @@ const CrowdDataSlider: FC<CrowdDataSliderPropsState & CrowdDataSliderPropsAction
         onValueChange={props.onSliderChange}
         activeView={props.activeView}
         crowdDataSlideState={props.crowdDataSlideState}
-        />
+    />
 }
 
 const mapStateToProps = (state: AppState): CrowdDataSliderPropsState => ({
