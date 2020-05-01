@@ -11,7 +11,6 @@
     max-width: 100%;
     margin: auto;
     text-align: left;
-
     color: var(--theme-color-blue-dark);
     line-height: 1.25;
 }
@@ -30,8 +29,8 @@
 
 @media (max-width: 850px) {
     .homepage-container {
-        margin-top: 35px;
         margin-bottom: 35px;
+        height: auto;
 
     }
     .view-description {

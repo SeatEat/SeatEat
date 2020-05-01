@@ -11,6 +11,7 @@ import MainContentConnect from './pages/main-content/main-content-connect';
 import Navbar from './components/navbar/navbar';
 import CookieMessage from './components/cookie-message/cookie-message';
 import ErrorDialog from './components/error-dialog/error-dialog';
+import Banner from './components/banner/banner';
 
 function App() {
     return (

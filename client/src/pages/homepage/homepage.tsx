@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import './homepage.css';
-import ContentPadding from '../../components/content-padding';
+import ContentPadding from '../../components/content-padding/content-padding';
 import PageContainer from '../../components/page-container';
 import ViewCardDescription from '../../components/view-card-description/view-card-description';
 import CurrentIcon from '../../assets/icons/dynamic/current-icon';
 import Clock24Icon from '../../assets/icons/dynamic/clock-24-icon';
 import CalendarIcon from '../../assets/icons/dynamic/calendar-icon';
+import Banner from '../../components/banner/banner';
 
 const Homepage: FC = (props) => {
     return (
         <PageContainer>
+            <Banner/>
             <ContentPadding>
                 <div className='homepage-container'>
                     <div className='homepage'>

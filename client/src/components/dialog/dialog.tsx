@@ -1,5 +1,5 @@
 import React, { FC, createContext } from "react";
-import ContentPadding from "../content-padding";
+import ContentPadding from "../content-padding/content-padding";
 import './dialog.css';
 
 interface DialogOptions {

@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import './check-in-card.css';
+import ContentPadding from "../content-padding/content-padding";
+import ClockIcon from '../../assets/icons/clock.svg';
 import CheckInCardPresentational from './check-in-card-presentational';
 
 interface CheckInCardProps {
