@@ -67,8 +67,8 @@ const CheckInStatusPresentational: FC<CheckInStatusPresentationalProps> = (props
                     :
                         props.checkedInUsers.map((person) => {
                             const checkInActivity = getCheckInActivityByID(person.type);
-                            return <CheckInCard 
-                                key={person.name}
+                            return <CheckInCard
+                                key={person.docID}
                                 name={person.name}
                                 checkInDate={person.date}
                                 checkInActivityLogo={checkInActivity.logo}
