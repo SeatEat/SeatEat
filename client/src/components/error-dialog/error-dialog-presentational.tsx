@@ -1,11 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import './error-dialog.css';
-import { connect } from 'react-redux';
-import { AppState } from '../../model/redux/store';
-import { useDialogService } from '../dialog/dialog'
 import ContentPadding from '../content-padding';
 import Button from '../button/button';
-import ErrorTypes from '../../model/errorTypes';
 
 interface ErrorDialogProps {
     errorText: string,
