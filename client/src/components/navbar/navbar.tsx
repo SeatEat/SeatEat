@@ -5,10 +5,13 @@ import seatEatLogo from '../../assets/logo/seateat_transparent.png'
 
 import HamburgerButton from '../hamburger-button/hamburger-button';
 import ChapterHallCard from '../chapter-hall-card/chapter-hall-card';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import LinkCard from '../link-card/link-card';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Navbar = () => {
 
+    const windowDimensions = useWindowDimensions();
     const [mobileMenuOpen, toogleMobileMenuOpen] = useState(false);
 
     return (
@@ -31,6 +34,13 @@ const Navbar = () => {
             </div>
             <div className={`navbar-content navbar-padding ${mobileMenuOpen ? 'active' : ''}`}>
                 <div className='navbar-links'>
+                    { 
+                        windowDimensions.width < 850 ? 
+                            <LinkCard light path='/' onClick={() => toogleMobileMenuOpen(!mobileMenuOpen)}>
+                                Home
+                            </LinkCard> 
+                        : <></> 
+                    }
                     {
                         ChapterData.map((chapter) => {
                             return <ChapterHallCard 
