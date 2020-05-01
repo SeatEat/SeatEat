@@ -18,7 +18,6 @@ function App() {
         <Router>
             <div className="App flex-container">
                 <Navbar/>
-                <Banner/>
                 <ErrorDialog/>
                 <Switch>
                     <Route exact path="/">

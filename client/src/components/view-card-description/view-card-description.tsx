@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import './view-card-description.css';
-import ContentPadding from "../content-padding";
+import ContentPadding from "../content-padding/content-padding";
 
 interface ViewCardDescriptionProps {
     icon: React.ReactNode,
