@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import './error-dialog.css';
-import ContentPadding from '../content-padding';
+import ContentPadding from '../content-padding/content-padding';
 import Button from '../button/button';
 
 interface ErrorDialogProps {
