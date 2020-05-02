@@ -32,7 +32,7 @@ const CheckInForm: FC<CheckInFormProps & CheckInFormDispatch> = (props) => {
         else {
             setCheckInOK(false);
         }
-    }, [nameError])
+    }, [nameError, nameValue])
 
     const checkForNameErrors = (value: string) => {
         let nameError = null;
