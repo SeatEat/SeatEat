@@ -4,7 +4,7 @@ import { PersonCheckIn } from '../../model/check-in-model';
 import { ChapterHall } from '../../model/chapter-hall-model';
 import PeopleIcon from '../../assets/icons/person.svg';
 import CheckInCard from '../check-in-card/check-in-card';
-import { checkInActivities, getCheckInActivityByID } from '../../data/check-in-activities';
+import { getCheckInActivityByID } from '../../data/check-in-activities';
 import Button from '../button/button';
 import './check-in-status.css';
 

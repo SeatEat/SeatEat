@@ -5,7 +5,7 @@ import seatEatLogo from '../../assets/logo/seateat_transparent.png'
 
 import HamburgerButton from '../hamburger-button/hamburger-button';
 import ChapterHallCard from '../chapter-hall-card/chapter-hall-card';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LinkCard from '../link-card/link-card';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 

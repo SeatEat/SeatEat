@@ -1,4 +1,4 @@
-import store, { AppActions, AppState } from "./store";
+import { AppActions, AppState } from "./store";
 import { Dispatch } from "react";
 import { addCheckIn, removeCheckIn, PersonCheckIn, addCheckInListener } from "../check-in-model";
 import { CheckInActivityIDs } from "../../data/check-in-activities";
