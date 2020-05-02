@@ -4,7 +4,7 @@ import './main-content.css'
 
 import ViewNavbar from '../../components/view-navbar/view-navbar'
 import CircularProgressIndicator from '../../components/circular-progress-indicator/circular-progress-indicator';
-import CrowdDataSlider from '../../components/crowd-data-slider/crowd-data-slider-connect';
+import CrowdDataSlider from '../../components/crowd-data-slider/crowd-data-slider';
 import ContentPadding from '../../components/content-padding/content-padding';
 import { useEffect } from 'react';
 
