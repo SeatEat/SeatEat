@@ -60,8 +60,7 @@ const Homepage: FC<HomepageProps> = (props) => {
                                 ? 
                                     <div>
                                         <br/>
-                                        <b>Ready to go?</b>
-                                        <Button onClick={() => props.openMobileMenu()}>Choose your chapter hall</Button>
+                                        <Button onClick={() => props.openMobileMenu()}>Ready to go? Choose your chapter hall</Button>
                                         <br/>
                                     </div>
                                 :
