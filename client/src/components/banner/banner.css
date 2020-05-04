@@ -12,6 +12,7 @@
 
 .banner-content {
     display: flex;
+    align-items: center;
     color: var(--theme-text-bright);
     padding: 15px;
 }
