@@ -22,9 +22,13 @@
     gap: 20px;
 }
 
-.homepage-check-in-title {
+.homepage-subtitle {
     color: var(--theme-color-pink);
     font-weight: bold;
+}
+
+.contact {
+    font-size: small;
 }
 
 @media (max-width: 850px) {
