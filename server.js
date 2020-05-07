@@ -13,13 +13,11 @@ if (app.get('env') === 'development') {
 
 app.use('/kth/kopps/', (req, res) => {
   const url = `https://api.kth.se/api/kopps/v2${req.url.replace('kth/kopps', '')}`;
-  console.log(url);
   request(url).pipe(res);
 })
 
 app.use('/kth/schema', (req, res) => {
   const url = `https://www.kth.se/api/schema/v2${req.url.replace('kth/schema', '')}`;
-  console.log(url);
   request(url).pipe(res);
 })
 

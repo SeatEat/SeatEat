@@ -39,6 +39,7 @@ const CheckInStatus: FC<CheckInStatusProps> = (props) => {
                 )
             )
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.personsCheckedIn])
 
     const openCheckInDialog = () => {

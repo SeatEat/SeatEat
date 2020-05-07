@@ -33,6 +33,7 @@ const MainContent: FC<MainContentActionProps & MainContentStateProps> = (props) 
         if (nameOfChapter) {
             props.onRequestEstimation(nameOfChapter);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nameOfChapter]);
 
     useEffect(() => {

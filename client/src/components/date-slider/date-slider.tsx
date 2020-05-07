@@ -29,7 +29,8 @@ const DateSlider: FC<DateSliderProps> = (props) => {
             fn();
           else
             didMountRef.current = true;
-        }, inputs);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, []);
     }
 
     useDidUpdateEffect(() => {
@@ -46,6 +47,7 @@ const DateSlider: FC<DateSliderProps> = (props) => {
         } else{
             props.onValueChange(activeView, activeValue);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeValue]);
 
     useEffect(() => {

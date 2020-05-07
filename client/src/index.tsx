@@ -10,12 +10,6 @@ import store, { persistor } from './model/redux/store';
 import DialogServiceProvider from './components/dialog/dialog';
 import { PersistGate } from 'redux-persist/integration/react';
 
-store.subscribe(() => {
-    console.groupCollapsed("State change");
-    console.log(store.getState());
-    console.groupEnd();
-});
-
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

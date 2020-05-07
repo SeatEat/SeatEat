@@ -19,6 +19,7 @@ const ErrorDialog: FC<ErrorDialogProps> = (props) => {
             openErrorDialog();
             setDialogIsOpen(true);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.errorText])
 
     const confirm = useDialogService()

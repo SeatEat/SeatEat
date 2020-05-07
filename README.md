@@ -29,6 +29,8 @@ Assets contain images such as the logotype.
 ### components
 
 Here we have functional components that can be used in different parts of the app. 
+* **banner** 
+A banner located at the top of the page that can be used for providing information to the user.
 * **bar-graph**  
 The bar graph that can be used for both the daily and weekly views by providing it with different props. 
 * **button**  
@@ -47,6 +49,8 @@ A page that show what people is checked in in the current state as well as the c
 A circular "spinner", used to track loading progress.
 * **clickable**  
 Used to surround clickable buttons.
+* **confirm-check-out** 
+Used to make the user confirm or cancel the action that they want to check out from the chapter hall they are checked in at.
 * **cookie-message**  
 A bar that informs the user that SeatEat is using cookies.
 * **crowd-current**  

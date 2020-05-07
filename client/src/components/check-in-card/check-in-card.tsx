@@ -23,6 +23,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return () => {
             clearTimeout(showCardTimeout);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -32,6 +33,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return () => {
             clearInterval(timeoutID);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [minutesFromCheckIn]);
 
 

@@ -56,6 +56,7 @@ const DateSliderPresentational: FC<DateSliderPresentationalProps> = (props) => {
                 min={Math.min(...props.values)} 
                 max={Math.max(...props.values)}
                 marks={props.values.reduce(
+                    // eslint-disable-next-line no-sequences
                     (a: any, b: number) => (a[b] = generateStepElement(b, props.stepTextBuilder(b)), a),
                 {})}
                 value={props.activeValue}

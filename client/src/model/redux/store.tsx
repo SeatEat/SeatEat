@@ -7,6 +7,7 @@ import { viewReducer, ViewActions } from './viewState'
 import { estmiationReducer, EstimationActions } from './estimationState';
 import { CrowdDataActions, crowdDataSliderReducer } from './crowdDataSliderState';
 import { checkInReducer, CheckInActions } from './checkInState';
+import { ToogleMobileMenu, mobileMenuReducer } from './mobilMenuState';
 
 const persistConfig = {
     key: 'checkInState',
@@ -21,13 +22,15 @@ const rootReducer = combineReducers({
     estimationState: estmiationReducer,
     crowdDataSlideState: crowdDataSliderReducer,
     checkInState: persistedCheckInStateReducer,
+    mobileMenuState: mobileMenuReducer,
 });
 
 export type AppActions = 
     EstimationActions | 
     CrowdDataActions |
     ViewActions |
-    CheckInActions;
+    CheckInActions | 
+    ToogleMobileMenu;
 
 export type AppState = ReturnType<typeof rootReducer>
 

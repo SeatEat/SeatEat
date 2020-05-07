@@ -19,6 +19,7 @@ const CircularProgressIndicator: FC<CircularProgressIndicatorProps> = (props) =>
     useEffect(() => {
         setAlreadyLoaded(props.loadingIsDone);
         setDisplayNone(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.dataKey]);
 
     useEffect(() => {
