@@ -1,7 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import './check-in-card.css';
-import ContentPadding from "../content-padding/content-padding";
-import ClockIcon from '../../assets/icons/clock.svg';
 import CheckInCardPresentational from './check-in-card-presentational';
 
 interface CheckInCardProps {
@@ -25,6 +23,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return () => {
             clearTimeout(showCardTimeout);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -34,6 +33,7 @@ const CheckInCard: FC<CheckInCardProps> = (props) => {
         return () => {
             clearInterval(timeoutID);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [minutesFromCheckIn]);
 
 

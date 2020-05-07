@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 import './check-in-form.css';
 
 import Input from "../form/input/input";

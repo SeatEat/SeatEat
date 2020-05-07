@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import './error-dialog.css';
 import ContentPadding from '../content-padding/content-padding';
 import Button from '../button/button';

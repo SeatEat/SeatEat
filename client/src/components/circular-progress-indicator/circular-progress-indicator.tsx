@@ -3,7 +3,6 @@ import './circular-progress-indicator.css';
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { ChapterHall } from '../../model/chapter-hall-model';
 
 type CircularProgressIndicatorProps = {
     progress: number,
@@ -20,6 +19,7 @@ const CircularProgressIndicator: FC<CircularProgressIndicatorProps> = (props) =>
     useEffect(() => {
         setAlreadyLoaded(props.loadingIsDone);
         setDisplayNone(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.dataKey]);
 
     useEffect(() => {

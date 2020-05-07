@@ -3,8 +3,6 @@ import './error-dialog.css';
 import { connect } from 'react-redux';
 import { AppState } from '../../model/redux/store';
 import { useDialogService } from '../dialog/dialog'
-import ContentPadding from '../content-padding/content-padding';
-import Button from '../button/button';
 import ErrorTypes from '../../model/errorTypes';
 import ErrorDialogPresentational from './error-dialog-presentational';
 
@@ -21,6 +19,7 @@ const ErrorDialog: FC<ErrorDialogProps> = (props) => {
             openErrorDialog();
             setDialogIsOpen(true);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.errorText])
 
     const confirm = useDialogService()
