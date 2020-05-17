@@ -1,6 +1,7 @@
 # SeatEat
 
-<h4>App: <a href='http://85.229.110.237:5000/'>http://85.229.110.237:5000/</a></h4>
+<h4>App: <a href='http://gilau.fr:5000/'>http://gilau.fr:5000/</a></h4>
+<h5>Alternative link: <a href='http://85.229.110.237:5000/'>http://85.229.110.237:5000/</a></h4>
 <h4>Git Repository: <a href='https://gits-15.sys.kth.se/adajon/SeatEat/'>https://gits-15.sys.kth.se/adajon/SeatEat/</a></h4>
 
 SeatEat is an app that provides estimation of crowdedness at KTH’s different chapter halls. It fetches data about different programmes' schedules to estimate the number of people at a time. KTH students can view the current crowdedness of their respective chapter halls as well as daily and weekly. It is also possible to check in to a chapter hall. Other students can see where and when you checked in as well as what you are doing. 
