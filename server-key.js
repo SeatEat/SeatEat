@@ -3,6 +3,11 @@ module.exports = function getServerKey () {
         return JSON.parse(process.env.FIREBASE_SERVER_KEY);
     }
     else {
-        return require('./firebaseServerKey.json');
+        var serverKey = "";
+        try {
+            serverKey = require('./firebaseServerKey.json');
+        } catch (error) {
+        }
+        return serverKey;
     }
 }
