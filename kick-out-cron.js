@@ -1,7 +1,8 @@
 const admin = require('firebase-admin');
-let serviceAccount = require('./firebaseServerKey.json');
+const getServerKey = require('./server-key.js');
+let serviceAccount = getServerKey();
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
 });
 
 module.exports = function () {
