@@ -17,7 +17,7 @@
   "dependencies": {
     "@types/react-redux": "^7.1.7",
     "cron": "^1.8.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-http-proxy": "^1.6.0",
     "firebase-admin": "^8.10.0",
     "http-proxy-middleware": "^1.0.1",
