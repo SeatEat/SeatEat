@@ -19,7 +19,7 @@
     "cron": "^1.8.2",
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.0",
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^11.4.1",
     "http-proxy-middleware": "^1.0.1",
     "request": "^2.88.2"
   }
